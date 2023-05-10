@@ -1,0 +1,9 @@
+@import "@/common.styles/variables.module.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $primary-color;
+}
