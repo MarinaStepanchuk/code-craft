@@ -1,9 +1,9 @@
 interface IUser {
-  email: string
+  email: string;
 }
 
 interface IArticle {
-  title: string
+  title: string;
 }
 
-export type { IUser, IArticle }
+export type { IUser, IArticle };

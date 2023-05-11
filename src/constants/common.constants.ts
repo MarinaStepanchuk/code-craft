@@ -1,10 +1,10 @@
 const Patch = {
   main: '/',
-  profile: '/profile'
+  profile: '/profile',
 };
 
 const ErrorMessages = {
-  unknown: 'Something went wrong, send your request later.'
-}
+  unknown: 'Something went wrong, send your request later.',
+};
 
-export { Patch, ErrorMessages }
+export { Patch, ErrorMessages };
