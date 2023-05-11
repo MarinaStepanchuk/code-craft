@@ -5,7 +5,7 @@ export const metadata = {
   title: '[user] of Code Craft',
 }
 
-export default function Profile() {
+export default function Profile(): JSX.Element {
   return (
     <main>
       <h1 className={styles.title}>Profile</h1>

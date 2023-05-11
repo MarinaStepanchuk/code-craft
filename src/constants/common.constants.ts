@@ -1,3 +1,10 @@
-const REG_EMAIL = '';
+const Patch = {
+  main: '/',
+  profile: '/profile'
+};
 
-export { REG_EMAIL }
+const ErrorMessages = {
+  unknown: 'Something went wrong, send your request later.'
+}
+
+export { Patch, ErrorMessages }
