@@ -1,7 +1,8 @@
 'use client'
 
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface ILoginForm {
@@ -11,6 +12,7 @@ interface ILoginForm {
 }
 
 const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
+  const { data: session } = useSession();
 
   const { registration } = props;
 
@@ -30,17 +32,33 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
 
   const onSubmitForm = async (data: ILoginForm): Promise<void> => {
     const { email, password } = data;
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: '/'
-    })
+
+    if(!registration) {
+      const result =  await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      })
+    }
+  };
+
+  useEffect(() => {
+    console.log(session?.user)
+  }, [session])
+
+  const signInWithGoogle = async (): Promise<void> => {
+    await signIn('google');
+    console.log(session?.user)
+    
+  };
+
+  const signInWithGithub = async (): Promise<void> => {
+    await signIn('github');
   };
 
   return (
     <div>
-      <h2>Sign up</h2>
+      <h2>{registration  ? 'Sign up' : 'Sign In'}</h2>
       <form>
         <div>
           <label htmlFor="email">Email address</label>
@@ -79,6 +97,8 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
         {errors.repeatPassword && <span>{errors.repeatPassword.message}</span>}
         <button onClick={handleSubmit(onSubmitForm)}>{registration ? 'Sign Up' : 'Sign In'}</button>
       </form>
+      <button onClick={signInWithGoogle}>Sign In with Google</button>
+      <button onClick={signInWithGithub}>Sign In with Github</button>
       {registration ? (
         <div>
           <span>Already have an account?</span>
