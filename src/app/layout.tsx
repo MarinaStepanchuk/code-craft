@@ -1,5 +1,6 @@
-import './globals.scss';
+import Header from '@/layout/Header/Header';
 import { Montserrat } from 'next/font/google';
+import './globals.scss';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -13,7 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={montserrat.className}>
+        <Header />
+        <main>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }

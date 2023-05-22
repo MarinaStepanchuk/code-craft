@@ -5,11 +5,11 @@ export const metadata = {
   title: '[user] of Code Craft',
 };
 
-export default function Profile(): JSX.Element {
-  return (
-    <main>
-      <h1 className={styles.title}>Profile</h1>
-      <User />
-    </main>
-  );
-}
+const Profile = (): JSX.Element => (
+  <main>
+    <h1 className={styles.title}>Profile</h1>
+    <User />
+  </main>
+)
+
+export default Profile;

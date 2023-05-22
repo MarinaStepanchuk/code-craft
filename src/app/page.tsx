@@ -1,9 +1,9 @@
 import styles from './home.module.scss';
 
-export default function Home(): JSX.Element {
-  return (
-    <main className={styles.main}>
-      <h1>Home page</h1>
-    </main>
-  );
-}
+const Home = (): JSX.Element => (
+  <div className={styles.main}>
+    <h1>Home page</h1>
+  </div>
+)
+
+export default Home;
