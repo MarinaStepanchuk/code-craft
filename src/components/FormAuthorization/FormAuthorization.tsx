@@ -1,5 +1,6 @@
 'use client'
 
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -27,8 +28,14 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
     reValidateMode: 'onSubmit',
   });
 
-  const onSubmitForm = (data: ILoginForm): void => {
+  const onSubmitForm = async (data: ILoginForm): Promise<void> => {
     const { email, password } = data;
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: true,
+      callbackUrl: '/'
+    })
   };
 
   return (
@@ -79,7 +86,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
         </div>
       ) : (
         <div>
-          <span>New to GraphQL Playground?</span>
+          <span>Don`t have an account?</span>
           <Link href="/signup">Create an account.</Link>
         </div>
       )}
@@ -87,4 +94,4 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
   );
 };
 
-export { FormAuthorization };
+export default FormAuthorization;

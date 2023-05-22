@@ -1,9 +1,9 @@
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const LoginMenu = ():JSX.Element => (
   <div>
-    <Link href="/signin">SignIn</Link>
-    <Link href="/signup">SignIn</Link>
+    <button onClick={():Promise<undefined> => signIn()}>SignIn
+    </button>
   </div>
 );
 
