@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 // import GitHubProvider from "next-auth/providers/github";
 
-const authOptions:NextAuthOptions = {
+export const authOptions:NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'email',
@@ -65,9 +65,10 @@ const authOptions:NextAuthOptions = {
       activeSession.user = token;
       return session;
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 }
 
 const handler = NextAuth(authOptions)
 
-export { handler as GET, handler as POST, authOptions };
+export { handler as GET, handler as POST };

@@ -1,9 +1,11 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { ErrorMessages, regEmail, regPassword } from '@/constants/common.constants';
+import { useState } from 'react';
+import styles from "./formAuthorization.module.scss";
 
 interface ILoginForm {
   email: string;
@@ -12,13 +14,15 @@ interface ILoginForm {
 }
 
 const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
-  const { data: session } = useSession();
-
   const { registration } = props;
+  const [ emailLabel, setEmailLabel ] = useState(false);
+  const [ passwordLabel, setPasswordLabel ] = useState(false);
+  const [ repeatPasswordLabel, setRepeatPasswordLabel ] = useState(false);
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -26,15 +30,13 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
       password: '',
       repeatPassword: '',
     },
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
   });
 
   const onSubmitForm = async (data: ILoginForm): Promise<void> => {
     const { email, password } = data;
 
     if(!registration) {
-      const result =  await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
         redirect: false,
@@ -42,14 +44,8 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
     }
   };
 
-  useEffect(() => {
-    console.log(session?.user)
-  }, [session])
-
   const signInWithGoogle = async (): Promise<void> => {
     await signIn('google');
-    console.log(session?.user)
-    
   };
 
   const signInWithGithub = async (): Promise<void> => {
@@ -57,59 +53,73 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
   };
 
   return (
-    <div>
+    <div className={styles.formWrapper}>
       <h2>{registration  ? 'Sign up' : 'Sign In'}</h2>
-      <form>
-        <div>
-          <label htmlFor="email">Email address</label>
+      <div className={styles.formBox}>
+        <form className="space-y-6">
+        <div className={styles.inputContainer}>
           <input
             type="text"
+            onClick={():void => setEmailLabel(true)}
             placeholder="Email"
             {...register('email', {
-              required: 'empty',
+              required: ErrorMessages.fieldIsEmpty,
+              pattern: { value: regEmail, message: ErrorMessages.invalidEmail },
             })}
           />
+          <label className={`${emailLabel && styles.labelClick}`} htmlFor="email">Email address</label>
         </div>
         {errors.email && <span>{errors.email.message}</span>}
-        <div>
-          <label htmlFor="password">Password</label>
+        <div className={styles.inputContainer}>
           <input
             type="text"
+            onClick={():void => setPasswordLabel(true)}
             placeholder="Password"
             {...register('password', {
-              required: 'empty',
+              required: ErrorMessages.fieldIsEmpty,
+              pattern: { value: regPassword, message: ErrorMessages.invalidPassword },
             })}
           />
+          <label htmlFor="password" className={`${passwordLabel && styles.labelClick}`}>Password</label>
         </div>
         {errors.password && <span>{errors.password.message}</span>}
         {registration && (
-          <div>
-            <label htmlFor="repeatPassword">Repeat password</label>
+          <div className={styles.inputContainer}>
             <input
               type="text"
               placeholder="Repeat Password"
+              onClick={():void => setRepeatPasswordLabel(true)}
               {...register('repeatPassword', {
-                required: 'empty',
+                required: ErrorMessages.fieldIsEmpty,
+                validate: (value) => value === watch('password') || ErrorMessages.passwordMismatch,
               })}
             />
+            <label htmlFor="repeatPassword" className={`${repeatPasswordLabel && styles.labelClick}`}>Repeat Password</label>
           </div>
         )}
         {errors.repeatPassword && <span>{errors.repeatPassword.message}</span>}
-        <button onClick={handleSubmit(onSubmitForm)}>{registration ? 'Sign Up' : 'Sign In'}</button>
+        <button onClick={handleSubmit(onSubmitForm)}>
+          {registration ? 'Sign Up With Email' : 'Sign In With Email'}
+        </button>
       </form>
-      <button onClick={signInWithGoogle}>Sign In with Google</button>
-      <button onClick={signInWithGithub}>Sign In with Github</button>
+      <button onClick={signInWithGoogle}>
+        Sign In with Google
+      </button>
+      <button onClick={signInWithGithub}>
+        Sign In with Github
+      </button>
       {registration ? (
-        <div>
-          <span>Already have an account?</span>
-          <Link href="/signin">Sign in →</Link>
-        </div>
+        <p>
+        Don`t have an account? 
+        <Link href="/signin"> Sign in →</Link>
+        </p>
       ) : (
-        <div>
-          <span>Don`t have an account?</span>
-          <Link href="/signup">Create an account.</Link>
-        </div>
+        <p>
+          Don`t have an account? 
+          <Link href="/signup"> Create an account.</Link>
+        </p>
       )}
+    </div>
     </div>
   );
 };

@@ -1,19 +1,13 @@
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import styles from './userMenu.module.scss';
 
-const UserMenu = ():JSX.Element => {
-  const { data: session } = useSession();
-
-  // console.log(session)
-
-  return (
-    <div>
+const UserMenu = ():JSX.Element => (
+    <div className={styles.container}>
       <Link href="/new-post">Write</Link>
       <div>Profile</div>
-      <button onClick={():Promise<undefined> => signOut()}>SignOut</button>
-      <p>{session?.user?.email}</p>
+      <button className={styles.signOut} onClick={():Promise<undefined> => signOut()}>SignOut</button>
     </div>
-  )
-};
+);
 
 export default UserMenu;

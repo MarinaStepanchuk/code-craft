@@ -1,0 +1,10 @@
+@import '@/common.styles/mixins.module.scss';
+
+.container {
+  @include flex();
+  font-size: 2rem;
+
+  .signOut {
+    @include button();
+  }
+}
