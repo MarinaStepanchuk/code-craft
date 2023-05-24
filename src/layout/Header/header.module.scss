@@ -1,0 +1,25 @@
+@import '@/common.styles/variables.module.scss';
+@import '@/common.styles/mixins.module.scss';
+
+@keyframes logo {
+  from {
+    transform: rotateY(0);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.containerLogo {
+  @include flex($gap: 3rem);
+
+  .logo {
+    @include flex($gap: 3rem);
+    font-size: 3rem;
+
+    & img {
+      animation: logo 2s linear;
+    }
+  }
+}
+
