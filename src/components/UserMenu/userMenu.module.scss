@@ -1,0 +1,15 @@
+@import '@/common.styles/mixins.module.scss';
+
+.container {
+  @include flex();
+  font-size: 2rem;
+
+  a {
+    @include flex();
+  }
+
+  .signOut {
+    @include button($h:4rem, $w: 8rem);
+    @include flex();
+  }
+}
