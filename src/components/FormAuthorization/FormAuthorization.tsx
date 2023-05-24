@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ErrorMessages, regEmail, regPassword } from '@/constants/common.constants';
 import { useState } from 'react';
+import Image from 'next/image';
+import googleIcon from '@/assets/icon-google.svg';
+import githubIcon from '@/assets/icon-github.svg';
 import styles from "./formAuthorization.module.scss";
 
 interface ILoginForm {
@@ -91,7 +94,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
               onClick={():void => setRepeatPasswordLabel(true)}
               {...register('repeatPassword', {
                 required: ErrorMessages.fieldIsEmpty,
-                validate: (value) => value === watch('password') || ErrorMessages.passwordMismatch,
+                validate: (value: string) => value === watch('password') || ErrorMessages.passwordMismatch,
               })}
             />
             <label htmlFor="repeatPassword" className={`${repeatPasswordLabel && styles.labelClick}`}>Repeat Password</label>
@@ -103,9 +106,11 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
         </button>
       </form>
       <button onClick={signInWithGoogle}>
+      <Image width={30} height={30} src={googleIcon} alt='register by google'  />
         Sign In with Google
       </button>
       <button onClick={signInWithGithub}>
+      <Image width={30} height={30} src={githubIcon} alt='register by google'  />
         Sign In with Github
       </button>
       {registration ? (

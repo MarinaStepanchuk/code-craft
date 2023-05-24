@@ -91,7 +91,9 @@
   }
 
   button {
-    @include button($w:100%, $h:4rem);
+    @include button($w:100%, $h:5rem);
+    @include center-content;
+    gap: 1rem;
     border-radius: 1rem;
   }
 

@@ -4,13 +4,13 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import UserMenu from "@/components/UserMenu/UserMenu";
 import LoginMenu from "@/components/LoginMenu/LoginMenu";
-import { useSession } from "next-auth/react";
 import Image from 'next/image';
+import { Session } from "next-auth";
 import logo from '../../assets/logo.svg';
 import styles from './header.module.scss';
 
-const Header = (): JSX.Element => { 
-  const { data: session } = useSession();
+const Header = ({ session }: {session: Session | null}): JSX.Element => { 
+  console.log(session)
 
   return (
     <header>

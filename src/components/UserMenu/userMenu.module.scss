@@ -4,7 +4,12 @@
   @include flex();
   font-size: 2rem;
 
+  a {
+    @include flex();
+  }
+
   .signOut {
-    @include button();
+    @include button($h:4rem, $w: 8rem);
+    @include flex();
   }
 }
