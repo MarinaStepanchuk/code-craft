@@ -24,16 +24,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await getSession();
   return (
     <html lang="en">
-      <body className={montserrat.className}>
-        <NextAuthProvider>
+      <NextAuthProvider>
           <RootStyleRegistry>
+      <body className={montserrat.className}>
           <Header session={session} />
             <main>
               {children}
             </main>
-          </RootStyleRegistry>
-        </NextAuthProvider>
+
       </body>
+      </RootStyleRegistry>
+        </NextAuthProvider>
     </html>
   );
 }
