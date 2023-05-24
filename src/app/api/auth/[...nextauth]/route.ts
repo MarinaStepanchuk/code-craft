@@ -23,6 +23,7 @@ export const authOptions:NextAuthOptions = {
           headers: { "Content-Type": "application/json" }
         })
         const user = await res.json()
+        console.log(res.status, user)
 
         if (res.ok && user) {
           return user

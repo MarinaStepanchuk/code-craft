@@ -1,10 +1,10 @@
 import Header from '@/layout/Header/Header';
 import { Montserrat } from 'next/font/google';
 import './globals.scss';
-import { GetServerSideProps } from 'next';
 import { Session, getServerSession } from 'next-auth';
 import NextAuthProvider from './providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
+import RootStyleRegistry from './emotion';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -26,10 +26,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={montserrat.className}>
         <NextAuthProvider>
+          <RootStyleRegistry>
           <Header session={session} />
-          <main>
-            {children}
-          </main>
+            <main>
+              {children}
+            </main>
+          </RootStyleRegistry>
         </NextAuthProvider>
       </body>
     </html>

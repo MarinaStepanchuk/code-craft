@@ -5,9 +5,9 @@ import LoginMenu from "@/components/LoginMenu/LoginMenu";
 import Image from 'next/image';
 import { Session } from "next-auth";
 import logo from '../../assets/logo.svg';
-import styles from './header.module.scss';
+// import styles from './header.module.scss';
 
-const Header = ({ session }: {session: Session | null}): JSX.Element => { 
+const UserIcon = ({ session }: {session: Session | null}): JSX.Element => { 
   console.log(session)
 
   return (
@@ -28,4 +28,4 @@ const Header = ({ session }: {session: Session | null}): JSX.Element => {
   )
 };
 
-export default Header;
+export default UserIcon;

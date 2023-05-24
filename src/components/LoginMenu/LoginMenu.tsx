@@ -1,3 +1,5 @@
+'use client'
+
 import { signIn } from "next-auth/react";
 import styles from "./loginMenu.module.scss";
 

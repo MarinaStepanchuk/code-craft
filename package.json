@@ -10,6 +10,11 @@
     "lint-fix": "next lint --fix"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/server": "^11.11.0",
+    "@mantine/core": "^6.0.11",
+    "@mantine/hooks": "^6.0.11",
+    "@mantine/next": "^6.0.11",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.1.2",
     "@types/react": "18.2.6",
