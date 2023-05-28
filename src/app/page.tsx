@@ -1,7 +1,7 @@
-import styles from './home.module.scss';
+// import styles from './home.module.scss';
 
 const Home = (): JSX.Element => (
-  <div className={styles.main}>
+  <div>
     <h1>Home page</h1>
   </div>
 )

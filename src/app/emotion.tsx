@@ -19,7 +19,12 @@ export default function RootStyleRegistry({ children }: { children: React.ReactN
 
   return (
     <CacheProvider value={cache}>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
+      <MantineProvider withNormalizeCSS theme={{
+        colors: {
+          brand: ["#d4331e", "#86a1ae", "#05386B", "#05386B", "#dee2d9", "#dee6e7", "#d4331e", "#d4331e", "#d4331e"]
+        },
+        primaryColor: "brand"
+      }}>
         {children}
       </MantineProvider>
     </CacheProvider>

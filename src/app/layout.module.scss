@@ -1,0 +1,19 @@
+@import '@/common.styles/variables.module.scss';
+
+.html {
+  font-size: 10px;
+}
+
+.body {
+  background-color: #dee6e7;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

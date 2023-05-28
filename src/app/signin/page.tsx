@@ -10,7 +10,7 @@ const SignIn = async (): Promise<JSX.Element> => {
     redirect('/')
   }
 
-  return <FormAuthorization registration={true} />
+  return <FormAuthorization registration={false} />
 };
 
 export default SignIn;

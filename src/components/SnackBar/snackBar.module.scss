@@ -1,0 +1,22 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.snackBar {
+  position: fixed;
+  bottom: 3rem;
+  right: -50%;
+  transition: 1s;
+  max-width: 30rem;
+  @include flex($jc: flex-start);
+  padding-left: 1rem;
+
+  &.active {
+    right: 3rem;
+  }
+
+  .content {
+    width: 100%;
+    background-color: #fff;
+    padding: 1.5rem;
+  }
+}

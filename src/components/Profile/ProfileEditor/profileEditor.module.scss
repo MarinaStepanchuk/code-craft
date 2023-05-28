@@ -1,0 +1,19 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.form {
+  width: 90%;
+  color: $text-dark;
+  @include flex($dir: column);
+  margin: 2rem auto;
+}
+
+.container {
+  @include flex($ai: flex-start, $gap: 4rem);
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.submit {
+  @include button($w: 30rem, $h: 4rem); 
+}

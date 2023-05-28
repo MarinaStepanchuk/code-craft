@@ -8,6 +8,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import googleIcon from '@/assets/icon-google.svg';
 import githubIcon from '@/assets/icon-github.svg';
+import { useRegisterUserMutation } from '@/redux/services/userApi';
 import styles from "./formAuthorization.module.scss";
 
 interface ILoginForm {
@@ -21,6 +22,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
   const [ emailLabel, setEmailLabel ] = useState(false);
   const [ passwordLabel, setPasswordLabel ] = useState(false);
   const [ repeatPasswordLabel, setRepeatPasswordLabel ] = useState(false);
+  const [registerUser, { data: user, isLoading, isError }] = useRegisterUserMutation();
 
   const {
     register,
@@ -44,6 +46,9 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
         password,
         redirect: false,
       })
+    } else {
+      await registerUser({ email, password });
+      console.log( user, isLoading, isError)
     }
   };
 
@@ -59,7 +64,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
     <div className={styles.formWrapper}>
       <h2>{registration  ? 'Sign up' : 'Sign In'}</h2>
       <div className={styles.formBox}>
-        <form className="space-y-6">
+        <form>
         <div className={styles.inputContainer}>
           <input
             type="text"
