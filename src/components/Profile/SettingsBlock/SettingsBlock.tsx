@@ -43,7 +43,7 @@ const SettingsBlock = (): JSX.Element => {
     </Tabs.Panel>
 
     <Tabs.Panel value="notifications" pt="xs">
-      Messages tab content
+      Messages
     </Tabs.Panel>
 
     <Tabs.Panel value="settings" pt="xs">

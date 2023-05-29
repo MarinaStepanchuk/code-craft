@@ -24,7 +24,7 @@ const ProfileBio = ({register, watch}: IProfileBioProps): JSX.Element => {
           <div className={styles.descriptionInput}>
             <p>Displayed as a header and in your responses.</p>
             <p>
-              <span>{nameValue.length}</span>/50
+              <span>{nameValue?.length}</span>/50
             </p>
           </div>
         </div>
@@ -36,7 +36,7 @@ const ProfileBio = ({register, watch}: IProfileBioProps): JSX.Element => {
           <div className={styles.descriptionInput}>
             <p>Appears on your profile and next to your stories.</p>
             <p>
-              <span>{watch('bio').length}</span>/160
+              <span>{watch('bio')?.length}</span>/160
             </p>
           </div>
         </div>

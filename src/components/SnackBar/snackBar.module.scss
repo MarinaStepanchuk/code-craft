@@ -9,6 +9,8 @@
   max-width: 30rem;
   @include flex($jc: flex-start);
   padding-left: 1rem;
+  font-size: 1.4rem;
+  z-index: 50;
 
   &.active {
     right: 3rem;
@@ -17,6 +19,7 @@
   .content {
     width: 100%;
     background-color: #fff;
+    opacity: 0.8;
     padding: 1.5rem;
   }
 }

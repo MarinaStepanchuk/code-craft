@@ -7,9 +7,7 @@ import { Session } from "next-auth";
 import logo from '../../assets/logo.svg';
 import styles from './header.module.scss';
 
-const Header = ({ session }: {session: Session | null}): JSX.Element => {
-  console.log(session?.user)
-  return (
+const Header = ({ session }: {session: Session | null}): JSX.Element => (
     <header className={styles.header}>
       <div className={styles.containerLogo}>
         <Link href="/" className={styles.logo}>
@@ -24,6 +22,6 @@ const Header = ({ session }: {session: Session | null}): JSX.Element => {
         }
       </div>
     </header>
-  )};
+  );
 
 export default Header;

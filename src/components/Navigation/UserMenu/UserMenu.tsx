@@ -25,7 +25,7 @@ const UserMenu = ({session} : { session: Session}):JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <Link href="/new-post">
+      <Link href="/new-post" className={styles.write}>
         <IconPencilPlus size={35} strokeWidth="1.2" />
         Write
       </Link>

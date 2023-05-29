@@ -10,6 +10,7 @@ const ErrorMessages = {
   passwordMismatch: "the passwords don't match",
   fieldIsEmpty: "field is empty",
   tooBigPhoto: 'File size should not exceed 400kb',
+  errorUserUpdate: 'Failed to update user data, try again later'
 };
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;

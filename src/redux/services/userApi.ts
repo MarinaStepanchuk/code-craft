@@ -6,6 +6,7 @@ const baseUrl = process.env.API_URL;
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
+  tagTypes: ['User'],
   endpoints: (build) => ({
     registerUser: build.mutation<IUser, {email: string, password: string}>({
       query: ({email, password}) => ({
@@ -24,18 +25,21 @@ export const userApi = createApi({
         //   [Headers.key]: ApiKey,
         // },
       }),
+      providesTags: ['User']
     }),
     getUserByEmail: build.query<IUser, string>({
       query: (email) => ({
         url: `/user/email/${email}`,
       }),
+      providesTags: ['User']
     }),
     updateUser: build.mutation<IUser, FormData>({
       query: (data) => ({
         url: '/user',
         method: 'PUT',
         body: data,
-      })
+      }),
+      invalidatesTags: ['User']
     })
   }),
 });

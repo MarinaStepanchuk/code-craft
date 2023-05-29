@@ -15,5 +15,6 @@
 }
 
 .submit {
-  @include button($w: 30rem, $h: 4rem); 
+  @include button($w: 30rem, $h: 4rem);
+  @include flex();
 }

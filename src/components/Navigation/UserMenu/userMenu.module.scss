@@ -18,4 +18,8 @@
     background-color: $primary-color;
     border-radius: 50%;
   }
+
+  .write:hover {
+    transform: scale(1.05);
+  }
 }
