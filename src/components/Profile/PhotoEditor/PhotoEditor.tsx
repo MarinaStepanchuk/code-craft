@@ -64,7 +64,7 @@ const PhotoEditor = ({ register, setValue }: IPhotoEditorProps): JSX.Element => 
           <input
               type="file"
               {...register('photo')}
-              accept={'.jpg,.jpeg,.png'}
+              accept={'.jpg,.jpeg,.png, .webp'}
               className={styles.inputFile}
               onChange={(event): void => checkPhotoSize(event)}
             />

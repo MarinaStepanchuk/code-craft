@@ -44,7 +44,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
       })
     } else {
       await registerUser({ email, password });

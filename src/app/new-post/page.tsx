@@ -1,6 +1,9 @@
+import PostCreator from "@/components/PostEditor/PostCreator/PostCreator";
+import styles from './page.module.scss';
+
 const NewPost = (): JSX.Element => (
-  <div>
-    <h1>Create post</h1>
+  <div className={styles.pageContainer}>
+    <PostCreator />
   </div>
 )
 

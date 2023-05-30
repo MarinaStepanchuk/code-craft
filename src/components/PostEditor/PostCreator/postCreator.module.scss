@@ -1,0 +1,46 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.creator {
+  @include flex($dir: column, $gap: 2rem, $ai: flex-start);
+  background-color: #fff;
+  padding: 3rem 6rem;
+  width: 80%;
+  margin-top: 2rem;
+
+  .divider {
+    @include flex();
+    align-self: center;
+
+    div {
+      width: 5px;
+      border-radius: 50%;
+      height: 5px;
+      background-color: $secondary-color;
+    }
+  }
+
+  .buttonContainer {
+    @include flex($gap: 2rem);
+    
+    .publish,
+    .cancel {
+      @include button($w: 10rem, $h: 4rem);
+      background-color: inherit;
+      border: 1px solid $secondary-dark;
+      color: $secondary-dark;
+    }
+
+    .publish:hover {
+      background-color: $secondary-dark;
+      border: none;
+      color: #fff;
+    }
+
+    .cancel:hover {
+      background-color: $primary-color;
+      border: none;
+      color: #fff;
+    }
+  }
+}
