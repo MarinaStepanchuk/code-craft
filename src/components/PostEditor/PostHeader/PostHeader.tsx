@@ -31,7 +31,7 @@ const PostHeader = ({ photo, setPhoto, title, setTitle }:IPostHeaderProps):JSX.E
         }
          <input type="file" accept={'.jpg,.jpeg,.png,.webp'} className={styles.banner} value={photo} onChange={(e):void => handleBannerChange(e)}/>
       </label>      
-      <input type="text" autoFocus={true} className={styles.title} placeholder='Title...'  value={title} onChange={(e):void  => setTitle(e.target.value)}/>
+      <textarea autoFocus={true} className={styles.title} placeholder='Title...' maxLength={100} value={title} onChange={(e):void  => setTitle(e.target.value)}/>
     </div>
   )
 }

@@ -30,7 +30,14 @@ export const postsApi = createApi({
         // },
       }),
     }),
+    saveImageForPost: build.mutation<string | null, FormData>({
+      query: (data) => ({
+        url: '/save-image',
+        method: 'POST',
+        body: data,
+      })
+    })
   }),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery } = postsApi;
+export const { useGetPostsQuery, useGetPostByIdQuery, useSaveImageForPostMutation } = postsApi;
