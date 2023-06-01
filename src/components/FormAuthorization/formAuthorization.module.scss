@@ -6,7 +6,7 @@
   margin: 5rem auto;
   padding: 2rem 3rem;
   background-color: $secondary-color;
-  max-width: 40rem;
+  width: 40rem;
   border-radius: 2rem;
   color: #fff;
   font-size: 1.8rem;
@@ -49,6 +49,13 @@
       outline: none;
       background: transparent;
       margin-bottom: 0;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active{ 
+      -webkit-box-shadow: 0 0 0 30px $secondary-color inset !important;
     }
 
     label {

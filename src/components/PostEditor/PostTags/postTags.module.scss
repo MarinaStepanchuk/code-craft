@@ -1,0 +1,46 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.tagsContainer {
+  @include flex($wr: wrap);
+  color: $text-dark;
+  font-size: 1.4rem;
+
+  .tagsInputContainer {
+    @include flex($gap: 1.5rem);
+    position: relative;
+  }
+
+  .tagsInput {
+    width: 15rem;
+    appearance: none;
+    border: none;
+    background-color: inherit;
+    outline: none;
+    border: 1px solid $secondary-color;
+    border-radius: 5px;
+    color: $text-dark;
+    padding: 0.3rem  2rem 0.3rem 1rem;
+
+    &::placeholder {
+      color: rgb(133, 130, 130);
+    }
+  }
+
+  .plus {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    z-index: 2;
+    cursor: pointer;
+    background-color: $secondary-dark;
+    padding: 2px;
+  }
+
+  .badges {
+    @include flex($wr: wrap);
+    font-size: 1.2rem;
+  }
+}

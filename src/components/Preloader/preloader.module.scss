@@ -1,0 +1,12 @@
+.preloaderImage {
+  position: absolute;
+  z-index: 4;
+  text-align: center;
+  animation: preloader-rotate 2s infinite linear;
+}
+
+@keyframes preloader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -47,15 +47,39 @@ export const authOptions:NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if(account?.provider === 'google') {
-        await fetch("http://localhost:3001/api/register-google", {
+        const result = await fetch("http://localhost:3001/api/register-provider", {
           method: 'POST',
           body: JSON.stringify({
-            email: user.email,
-            id: user.id
+            email: encodeURIComponent(user.email as string),
+            id: user.id,
+            avatarUrl: user.image,
+            provider: account?.provider
           }),
           headers: { "Content-Type": "application/json" }
         })
+
+        if (result.status !== 200) {
+          return false;
+        }
       }
+
+      // if (account?.provider === 'github') {
+      //   const result = await fetch("http://localhost:3001/api/register-provider", {
+      //     method: 'POST',
+      //     body: JSON.stringify({
+      //       email: encodeURIComponent(user.email as string),
+      //       id: user.id,
+      //       avatarUrl: user.image,
+      //       provider: account?.provider
+      //     }),
+      //     headers: { "Content-Type": "application/json" }
+      //   })
+
+      //   if (result.status !== 200) {
+      //     return false;
+      //   }
+      // }
+      
       return true;
     },
     async jwt({ token, user }) {

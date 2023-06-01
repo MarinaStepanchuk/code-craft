@@ -1,6 +1,6 @@
-import User from '@/components/User/User';
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth';
+import SettingsBlock from '@/components/Profile/SettingsBlock/SettingsBlock';
 import styles from './profile.module.scss';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
@@ -16,10 +16,10 @@ const Profile = async (): Promise<JSX.Element> => {
   }
 
   return (
-  <main>
-    <h1 className={styles.title}>Profile</h1>
-    <User />
-  </main>
+  <>
+    <h2 className={styles.title}>Settings</h2>
+    <SettingsBlock />
+  </>
 )
   }
 

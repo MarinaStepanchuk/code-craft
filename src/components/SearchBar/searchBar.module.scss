@@ -5,16 +5,21 @@
   width: fit-content;
   height: fit-content;
   position: relative;
+
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
 }
 
 .inputSearch {
-  height: 5rem;
-  width: 5rem;
+  height: 4rem;
+  width: 4rem;
   border-style: none;
   font-size: 1.8rem;
   letter-spacing: 2px;
   outline: none;
-  border-radius: 25px;
+  border-radius: 2.5rem;
   transition: width 1s ease-in-out;
   background-color: $primary-color;
   color: $primary-color;
@@ -28,8 +33,8 @@
 }
 
 .btnSearch {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   @include center-content;
   border-style: none;
   font-size: 2rem;
@@ -38,10 +43,10 @@
   cursor: pointer;
   border-radius: 50%;
   position: absolute;
-  right: 0px;
-  color:$secondary-color ;
+  right: 2px;
+  color: $secondary-color ;
   background-color:transparent;
-  pointer-events: painted;  
+  pointer-events: painted;
 }
 
 .btnSearch:focus ~ .inputSearch {
@@ -54,12 +59,22 @@
 }
 
 .btnSearch:focus ~ .inputSearch::placeholder {
-  color:$text-light;
+  color:$text-dark;
+}
+
+.btnSearch:focus {
+  svg {
+    fill: $primary-color;
+  }
 }
 
 .inputSearch:focus{
   width: 20rem;
   border-radius: 0px;
   background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
+  border-bottom:1px solid $text-dark;
+}
+
+.inputSearch:focus svg {
+  fill: $primary-color;
 }

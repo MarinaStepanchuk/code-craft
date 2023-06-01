@@ -1,3 +1,11 @@
+@import '@/common.styles/mixins.module.scss';
+
 .title {
-  color: red;
+  width: 80%;
+  text-align: left;
+  color: $secondary-dark;
+  font-size: 3rem;
+  font-weight: 400;
+  margin-top: 3rem;
+  padding-left: 1rem;
 }
