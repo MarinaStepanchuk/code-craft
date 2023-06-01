@@ -5,8 +5,44 @@
   @include flex($dir: column, $gap: 2rem, $ai: flex-start);
   background-color: #fff;
   padding: 3rem 6rem;
-  width: 80%;
+  width: 68rem;
   margin-top: 2rem;
+
+  @media screen and (max-width: 700px) {
+    max-width: 68rem;
+    width: auto;
+    padding: 2rem 2rem;
+  }
+
+  .postImage {
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .labelImage {
+    position: relative;
+    width: 1.9rem;
+    height: 1.91rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.0625rem solid #ced4da;
+    border-right: none;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #f7f9fb;
+    }
+  
+    input[type=file] {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
 
   .divider {
     @include flex();

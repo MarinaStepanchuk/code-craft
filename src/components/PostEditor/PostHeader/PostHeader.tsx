@@ -1,20 +1,36 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import Image, { StaticImageData } from 'next/image';
 import defaultBanner from '@/assets/default_banner.png';
+import { Textarea, createStyles } from "@mantine/core";
 import styles from './postHeader.module.scss';
 
 interface IPostHeaderProps {
-  photo: string,
-  setPhoto: Dispatch<SetStateAction<string>>,
+  banner: string,
+  setBanner: Dispatch<SetStateAction<string>>,
   title: string,
   setTitle: Dispatch<SetStateAction<string>>,
 }
 
-const PostHeader = ({ photo, setPhoto, title, setTitle }:IPostHeaderProps):JSX.Element => {
+const useStyles = createStyles((theme) => ({
+  title: {
+    width: '100%',
+
+    'textarea': {
+      border: 'none',
+      outline: 'none',
+      fontSize: '3rem',
+      color: theme.colors.brand[2],
+      fontWeight: 'bold',
+    }
+  },
+}))
+
+const PostHeader = ({ banner, setBanner, title, setTitle }:IPostHeaderProps):JSX.Element => {
   const [imagePreview, setImagePreview] = useState(defaultBanner);
+  const { classes } = useStyles();
 
   const handleBannerChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setPhoto(e.target.value);
+    setBanner(e.target.value);
     if(e.target.files) {
       const url = URL.createObjectURL(e.target.files[0]) as unknown as StaticImageData;
       setImagePreview(url)
@@ -29,9 +45,17 @@ const PostHeader = ({ photo, setPhoto, title, setTitle }:IPostHeaderProps):JSX.E
           : 
           <Image fill src={imagePreview} alt='banner post' className={styles.bannerImg} />
         }
-         <input type="file" accept={'.jpg,.jpeg,.png,.webp'} className={styles.banner} value={photo} onChange={(e):void => handleBannerChange(e)}/>
-      </label>      
-      <textarea autoFocus={true} className={styles.title} placeholder='Title...' maxLength={100} value={title} onChange={(e):void  => setTitle(e.target.value)}/>
+         <input type="file" accept={'.jpg,.jpeg,.png,.webp'} className={styles.banner} value={banner} onChange={(e):void => handleBannerChange(e)}/>
+      </label>
+      <Textarea
+      placeholder="Title..."
+      withAsterisk
+      value={title}
+      autosize
+      onChange={(e):void  => setTitle(e.target.value)}
+      maxLength={100}
+      className={classes.title}
+      />
     </div>
   )
 }
