@@ -31,6 +31,5 @@
   color: $text-dark;
   padding: 1.5rem 2rem;
   border-bottom: 2px solid $secondary-color;
-  @include flex($jc: space-between)
+  @include flex($jc: space-between);
 }
-

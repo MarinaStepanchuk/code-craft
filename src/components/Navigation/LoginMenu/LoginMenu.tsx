@@ -1,11 +1,12 @@
-'use client'
+'use client';
 
-import { signIn } from "next-auth/react";
-import styles from "./loginMenu.module.scss";
+import { signIn } from 'next-auth/react';
+import styles from './loginMenu.module.scss';
 
-const LoginMenu = ():JSX.Element => (
+const LoginMenu = (): JSX.Element => (
   <div>
-    <button className={styles.signIn} onClick={():Promise<undefined> => signIn()}>SignIn
+    <button className={styles.signIn} onClick={(): Promise<undefined> => signIn()}>
+      SignIn
     </button>
   </div>
 );

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/userSlice';
@@ -11,7 +11,8 @@ export const store = configureStore({
     [postsApi.reducerPath]: postsApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(postsApi.middleware, userApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(postsApi.middleware, userApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

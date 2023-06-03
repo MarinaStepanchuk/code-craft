@@ -12,10 +12,11 @@ interface IUser {
 interface IPost {
   id: number;
   title: string;
-  text: string;
+  content: string;
   banner: string;
+  tags: Array<string>;
+  date: number;
   viewCount: number;
-  likeCount: number;
 }
 
 interface IFormDataProfile {

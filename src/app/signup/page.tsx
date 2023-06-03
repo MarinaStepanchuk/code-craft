@@ -4,13 +4,13 @@ import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
 const SignUp = async (): Promise<JSX.Element> => {
-   const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
 
-  if(session) {
-    redirect('/')
+  if (session) {
+    redirect('/');
   }
 
-  return <FormAuthorization registration={true} />
+  return <FormAuthorization registration={true} />;
 };
 
 export default SignUp;

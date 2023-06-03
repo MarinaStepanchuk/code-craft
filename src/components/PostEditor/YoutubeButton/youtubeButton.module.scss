@@ -1,0 +1,46 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.videoButton {
+  position: relative;
+  width: 1.9rem;
+  height: 1.91rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.0625rem solid #ced4da;
+  border-right: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f7f9fb;
+  }
+}
+
+.popoverYoutubeContainer {
+  display: flex;
+  width: max-content;
+  top: -2rem !important;
+
+  .popoverYoutubeInput {
+    width: 100%;
+
+    input {
+      border-right: none;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  .saveYoutubeLink {
+    @include center-content;
+    font-size: 0.875rem;
+    background-color: #fff;
+    color: #000;
+    border: 0.0625rem solid #ced4da;
+    padding: 0 1.125rem;
+    border-radius: 0.25rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

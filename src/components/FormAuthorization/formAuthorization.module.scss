@@ -54,19 +54,19 @@
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
-    input:-webkit-autofill:active{ 
+    input:-webkit-autofill:active {
       -webkit-box-shadow: 0 0 0 30px $secondary-color inset !important;
     }
 
     label {
       position: absolute;
-      top:0;
+      top: 0;
       left: 0;
       padding: 1rem 2rem;
       font-size: 1.6rem;
       color: #fff;
       pointer-events: none;
-      transition: .5s;
+      transition: 0.5s;
     }
 
     .labelClick {
@@ -87,18 +87,18 @@
 
     label {
       position: absolute;
-      top:0;
+      top: 0;
       left: 0;
       padding: 1rem 0;
       font-size: 1.6rem;
       color: #fff;
       pointer-events: none;
-      transition: .5s;
+      transition: 0.5s;
     }
   }
 
   button {
-    @include button($w:100%, $h:5rem);
+    @include button($w: 100%, $h: 5rem);
     @include center-content;
     gap: 1rem;
     border-radius: 1rem;

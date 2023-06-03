@@ -6,11 +6,11 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 const SignIn = async (): Promise<JSX.Element> => {
   const session = await getServerSession(authOptions);
 
-  if(session) {
-    redirect('/')
+  if (session) {
+    redirect('/');
   }
 
-  return <FormAuthorization registration={false} />
+  return <FormAuthorization registration={false} />;
 };
 
 export default SignIn;
