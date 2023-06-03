@@ -11,7 +11,13 @@ const ErrorMessages = {
   fieldIsEmpty: "field is empty",
   tooBigPhoto: 'File size should not exceed 400kb',
   errorUserUpdate: 'Failed to update user data, try again later',
-  errorLoadingImage:'Error loading image, try again later or use another image'
+  errorLoadingImage:'Error loading image, try again later or use another image',
+  post: {
+    errorBanner: 'The post must contain a banner.',
+    errorTitle: 'The post must have a header of at least 3 characters in length.',
+    errorContent: 'The post text is missing.',
+    errorTags: 'The post must contain at least 1 tag.',
+  }
 };
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;

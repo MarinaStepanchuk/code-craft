@@ -65,18 +65,38 @@
       background-color: inherit;
       border: 1px solid $secondary-dark;
       color: $secondary-dark;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
     }
 
     .publish:hover {
       background-color: $secondary-dark;
       border: none;
       color: #fff;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
     }
 
     .cancel:hover {
       background-color: $primary-color;
       border: none;
       color: #fff;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
+    }
+  }
+
+  .errorMessage {
+    padding-bottom: 0.5rem;
+
+    &:last-child {
+      padding-bottom: 0;
     }
   }
 }

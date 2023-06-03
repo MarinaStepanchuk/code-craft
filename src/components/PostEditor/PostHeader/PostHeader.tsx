@@ -5,8 +5,7 @@ import { Textarea, createStyles } from "@mantine/core";
 import styles from './postHeader.module.scss';
 
 interface IPostHeaderProps {
-  banner: string,
-  setBanner: Dispatch<SetStateAction<string>>,
+  setBanner: Dispatch<SetStateAction<string | File>>,
   title: string,
   setTitle: Dispatch<SetStateAction<string>>,
 }
@@ -25,15 +24,16 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const PostHeader = ({ banner, setBanner, title, setTitle }:IPostHeaderProps):JSX.Element => {
+const PostHeader = ({ setBanner, title, setTitle }:IPostHeaderProps):JSX.Element => {
   const [imagePreview, setImagePreview] = useState(defaultBanner);
   const { classes } = useStyles();
 
   const handleBannerChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setBanner(e.target.value);
-    if(e.target.files) {
-      const url = URL.createObjectURL(e.target.files[0]) as unknown as StaticImageData;
-      setImagePreview(url)
+    if(e.currentTarget.files?.length) {
+      const files = e.currentTarget.files as unknown as FileList;
+      const url = URL.createObjectURL(files[0]) as unknown as StaticImageData;
+      setImagePreview(url);
+      setBanner(files[0]);
     }
   }
 
@@ -45,7 +45,7 @@ const PostHeader = ({ banner, setBanner, title, setTitle }:IPostHeaderProps):JSX
           : 
           <Image fill src={imagePreview} alt='banner post' className={styles.bannerImg} />
         }
-         <input type="file" accept={'.jpg,.jpeg,.png,.webp'} className={styles.banner} value={banner} onChange={(e):void => handleBannerChange(e)}/>
+         <input type="file" accept={'.jpg,.jpeg,.png,.webp'} className={styles.banner} onChange={(e):void => handleBannerChange(e)}/>
       </label>
       <Textarea
       placeholder="Title..."

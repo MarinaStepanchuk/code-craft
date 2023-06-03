@@ -3,6 +3,7 @@
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider } from '@mantine/core';
 import { useServerInsertedHTML } from 'next/navigation';
+import { Notifications } from '@mantine/notifications';
 
 export default function RootStyleRegistry({ children }: { children: React.ReactNode }): JSX.Element {
   const cache = useEmotionCache();
@@ -25,6 +26,7 @@ export default function RootStyleRegistry({ children }: { children: React.ReactN
         },
         primaryColor: "brand"
       }}>
+        <Notifications />
         {children}
       </MantineProvider>
     </CacheProvider>

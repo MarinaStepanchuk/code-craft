@@ -1,11 +1,11 @@
 'use client'
 
 import { ChangeEvent, useEffect, useState } from 'react';
-import SnackBar from '@/components/SnackBar/SnackBar';
 import { Divider, createStyles } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { ErrorMessages } from '@/constants/common.constants';
-import { useSaveImageForPostMutation } from '@/redux/services/postsApi';
+import { useCreatePostMutation, useRemoveUnusedImagesMutation, useSaveImageForPostMutation } from '@/redux/services/postsApi';
 import { RichTextEditor, Link } from '@mantine/tiptap';
 import { IconPhotoPlus } from '@tabler/icons-react';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
@@ -20,6 +20,8 @@ import Image from '@tiptap/extension-image';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { lowlight } from 'lowlight';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/huks/redux';
 import PostTags from '../PostTags/PostTags';
 import PostHeader from '../PostHeader/PostHeader';
 import styles from './postCreator.module.scss';
@@ -97,23 +99,23 @@ const useStyles = createStyles((theme) => ({
         fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace'
       }
     },
-    
   },
 }))
 
 const PostCreator = ():JSX.Element => {
-  
-  const [ banner, setBanner ] = useState('');
+  const [ banner, setBanner ] = useState<string | File>('');
   const [ title, setTitle ] = useState('');
   const [ tag, setTag ] = useState('');
   const [ tags, setTags ] = useState<Array<string>>([]);
-  const [ errorMessage, setErrorMessage ] = useState('');
-  const [ activeSnackBar, setActiveSnackBar ] = useState(false);
-  const [ contentPost, setContentPost ] = useState('');
   const [ images, setImages ] = useState<Array<string>>([]);
   const { classes } = useStyles();
-  const [saveImageForPost, result] = useSaveImageForPostMutation();
-  const [image, setImage] = useState('');
+  const [ saveImageForPost, resultSave ] = useSaveImageForPostMutation();
+  const [ removeUnusedImages ] = useRemoveUnusedImagesMutation();
+  const [ createPost, resultCreatePost ] = useCreatePostMutation();
+  const [ image, setImage ] = useState('');
+  const [ sendingInProgress, setSendingInProgress ] = useState(false);
+  const { push } = useRouter();
+  const { user } = useAppSelector((state) => state.userReducer);
 
   const editor = useEditor({
     extensions: [
@@ -148,30 +150,124 @@ const PostCreator = ():JSX.Element => {
   }
 
   useEffect(() => {
-    console.log(contentPost)
-  }, [contentPost])
-
-  useEffect(() => {
-    const { isError, data } = result;
+    const { isError, data } = resultSave;
   
     if(isError){
-      setErrorMessage(ErrorMessages.errorLoadingImage);
-      setActiveSnackBar(true);
+      notifications.show({
+        message: ErrorMessages.errorLoadingImage,
+        color: 'red',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      })
     }
 
     if(data) {
       editor?.chain().focus().setImage({ src: data }).run();
       setImages([...images, data]);
     }
-  }, [result])
+  }, [resultSave]);
 
-  const sendPost = (): void => {
+  useEffect(() => {
+    const { isError, data } = resultCreatePost;
+  
+    if(isError){
+      notifications.show({
+        message: ErrorMessages.errorLoadingImage,
+        color: 'red',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      })
+    }
 
+    if(data) {
+      push('/');
+    }
+  }, [resultCreatePost]);
+
+  const validationPost = (contentPost: string): Array<string> => {
+    const errors = [];
+
+    if(!banner) {
+      errors.push(ErrorMessages.post.errorBanner);
+    }
+
+    if(!title) {
+      errors.push(ErrorMessages.post.errorTitle);
+    }
+
+    if(contentPost.length < 100) {
+      errors.push(ErrorMessages.post.errorContent);
+    }
+
+    if(!tags.length) {
+      errors.push(ErrorMessages.post.errorTags);
+    }
+
+    return errors;
+  };
+
+  const sendPost = async (): Promise<void> => {
+    setSendingInProgress(true);
+    const contentPost = editor?.getHTML();
+    const errors = validationPost(contentPost || '');
+
+    if(errors.length > 0) {
+      errors.forEach((error) => {
+        notifications.show({
+          message: error,
+          color: 'red',
+          autoClose: 2000,
+          withBorder: true,
+          styles: () => ({
+            description: { fontSize: '1.4rem' },
+          }),
+        })
+      })
+      setTimeout(() => {
+        setSendingInProgress(false);
+      }, 3000)
+      return;
+    }
+
+    const newImage: Array<string> = [];
+    const removeImages = images.filter((item) => {
+      const url = item.split('?alt=media')[0].split('%2F')[1];
+      if(contentPost?.includes(url)) {
+        newImage.push(item)
+        return false; 
+      }
+      return true;
+    }).map((item) => 
+    item.split('?alt=media')[0].split('%2F')[1]);
+    await removeUnusedImages(removeImages);
+    setImages(newImage);
+
+    const form = new FormData();
+    form.append('creatorId', user.id);
+    form.append('title', title);
+    form.append('content', contentPost || '');
+    form.append('tags', JSON.stringify(tags));
+    form.append('date', JSON.stringify(new Date()));
+
+    if (banner) form.append('banner', banner as unknown as Blob);
+
+    await createPost(form);
+    setSendingInProgress(false);
+  }
+
+  const redirectToMainPage = (): void => {
+    push('/');
   }
 
   return (
     <section className={styles.creator}>
-      <PostHeader banner={banner} setBanner={setBanner} title={title} setTitle={setTitle}  />
+      <PostHeader setBanner={setBanner} title={title} setTitle={setTitle}  />
       <Divider size={10} sx={{width: '30%', margin: '0 auto'}}/>
       <RichTextEditor editor={editor}>
         <RichTextEditor.Toolbar sticky stickyOffset={60} className={classes.toolbar}>
@@ -227,12 +323,9 @@ const PostCreator = ():JSX.Element => {
       </RichTextEditor>
       <PostTags tag={tag} setTag={setTag} tags={tags} setTags={setTags}/>
       <div className={styles.buttonContainer}>
-        <button className={styles.publish} onClick={sendPost}>Publish</button>
-        <button className={styles.cancel}>Cancel</button>
+        <button className={sendingInProgress ? `${styles.publish} ${styles.disabledButton}` : `${styles.publish}`} onClick={sendPost} disabled={sendingInProgress}>Publish</button>
+        <button className={sendingInProgress ? `${styles.cancel} ${styles.disabledButton}` : `${styles.cancel}`} disabled={sendingInProgress} onClick={redirectToMainPage}>Cancel</button>
       </div>
-      <SnackBar active={activeSnackBar} setActive={setActiveSnackBar} timer={3000} type='alert'>
-          <div>{errorMessage}</div>
-      </SnackBar>
     </section>
   )
 }

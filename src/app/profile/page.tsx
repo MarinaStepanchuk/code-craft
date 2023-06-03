@@ -8,7 +8,7 @@ export const metadata = {
   title: '[user] of Code Craft',
 };
 
-const Profile = async (): Promise<JSX.Element> => {
+const Profile = async ():Promise<JSX.Element> => {
   const session = await getServerSession(authOptions);
 
   if(!session) {
@@ -16,11 +16,11 @@ const Profile = async (): Promise<JSX.Element> => {
   }
 
   return (
-  <>
-    <h2 className={styles.title}>Settings</h2>
-    <SettingsBlock />
-  </>
-)
-  }
+    <>
+      <h2 className={styles.title}>Settings</h2>
+      <SettingsBlock />
+    </>
+  )
+}
 
 export default Profile;

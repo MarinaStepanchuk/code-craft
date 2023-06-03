@@ -5,9 +5,8 @@ import Image from 'next/image';
 import { IFormDataProfile } from "@/types/interfaces";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { ErrorMessages } from "@/constants/common.constants";
-import SnackBar from "@/components/SnackBar/SnackBar";
+import { notifications } from '@mantine/notifications';
 import styles from './photoEditor.module.scss';
-
 
 interface IPhotoEditorProps {
   register: UseFormRegister<IFormDataProfile>,
@@ -18,36 +17,41 @@ const photoSizeLimit = 409600;
 
 const PhotoEditor = ({ register, setValue }: IPhotoEditorProps): JSX.Element => {
   const { avatarUrl } = useAppSelector((state) => state.userReducer.user);
-  const [photo, setPhoto] = useState(avatarUrl || '')
-  const [ errorPhoto, setErrorPhoto ] = useState('');
-  const [activeSnackBar, setActiveSnackBar] = useState(false);
+  const [photo, setPhoto] = useState(avatarUrl || '');
 
   const checkPhotoSize = (event: ChangeEvent<HTMLInputElement>): void => {
     const file = event.currentTarget.files as unknown as FileList;
 
     if (file[0]?.size > photoSizeLimit) {
-      setErrorPhoto(ErrorMessages.tooBigPhoto);
-      setActiveSnackBar(true);
+      notifications.show({
+        message: ErrorMessages.tooBigPhoto,
+        color: 'red',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      })
       setValue('photo', '');
       return;
     }
     
     if(file[0]) {
-      setPhoto(URL.createObjectURL(file[0] as Blob | MediaSource));
+      setPhoto(URL.createObjectURL(file[0]));
     }
-  }
+  };
 
   const removePhoto = (e: MouseEvent<HTMLButtonElement>): void => {
     e.preventDefault();
     setPhoto('');
     setValue('photo', '');
-  }
+  };
 
   useEffect(() => {
     if (avatarUrl) {
       setPhoto(avatarUrl);
     }
-  }, [avatarUrl])
+  }, [avatarUrl]);
   
   return (
     <div className={styles.containerPhoto}>
@@ -71,9 +75,6 @@ const PhotoEditor = ({ register, setValue }: IPhotoEditorProps): JSX.Element => 
             Load
         </label>
         <button className={styles.photoButtonRemove} onClick={(e):void  => removePhoto(e)}>Remove</button>
-        <SnackBar active={activeSnackBar} setActive={setActiveSnackBar} timer={3000} type='alert'>
-          <div>{errorPhoto}</div>
-        </SnackBar>
       </div>
     </div>
   )

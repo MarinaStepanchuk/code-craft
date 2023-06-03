@@ -10,9 +10,7 @@ interface IProfileBioProps {
 }
 
 const ProfileBio = ({register, watch}: IProfileBioProps): JSX.Element => {
-  const { email } = useAppSelector((state) => state.userReducer.user)
-
-  const nameValue = watch('name')
+  const { email } = useAppSelector((state) => state.userReducer.user);
 
   return (
     <div className={styles.containerBio}>
@@ -24,7 +22,7 @@ const ProfileBio = ({register, watch}: IProfileBioProps): JSX.Element => {
           <div className={styles.descriptionInput}>
             <p>Displayed as a header and in your responses.</p>
             <p>
-              <span>{nameValue?.length}</span>/50
+              <span>{watch('name')?.length}</span>/50
             </p>
           </div>
         </div>

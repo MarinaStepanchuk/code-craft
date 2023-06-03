@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import { IFormDataProfile } from '@/types/interfaces';
 import { useUpdateUserMutation } from '@/redux/services/userApi';
 import Preloader from '@/components/Preloader/Preloader';
-import SnackBar from '@/components/SnackBar/SnackBar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ErrorMessages } from '@/constants/common.constants';
+import { notifications } from '@mantine/notifications';
 import styles from './profileEditor.module.scss'
 import ProfileBio from '../ProfileBio/ProfileBio';
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
@@ -16,8 +16,6 @@ const ProfileEditor = (): JSX.Element => {
   const { user: userData } = useAppSelector((state) => state.userReducer);
   const { id } = userData;
   const [updateUser, result ] = useUpdateUserMutation();
-  const [activeSnackBar, setActiveSnackBar] = useState(false);
-  const [ errorMessage, setErrorMessage ] = useState('');
   const {
     register,
     handleSubmit,
@@ -38,8 +36,14 @@ const ProfileEditor = (): JSX.Element => {
 
   useEffect(() => {
     const { name, bio, mail, twitter, instagram } = userData;
-    reset({ name, bio, mail, twitter, instagram })
-  }, [userData])
+    reset({ 
+      name: name || '',
+      bio: bio || '',
+      mail: mail || '',
+      twitter: twitter || '',
+      instagram: instagram || ''
+    })
+  }, [userData]);
 
   const onSubmitForm = async (data: IFormDataProfile): Promise<void> => {
     const { name: nameUser, bio: bioUser, mail: mailUser, twitter: twitterUser, instagram: instagramUser, photo } = data;
@@ -55,8 +59,15 @@ const ProfileEditor = (): JSX.Element => {
     await updateUser(form);
 
     if(result.error) {
-      setErrorMessage(ErrorMessages.errorUserUpdate);
-      setActiveSnackBar(true);
+      notifications.show({
+        message: ErrorMessages.errorUserUpdate,
+        color: 'red',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      })
     }
   };
 
@@ -70,10 +81,6 @@ const ProfileEditor = (): JSX.Element => {
         {result.isLoading && <Preloader width='2.5rem' height='2.5rem'/>}
         SAVE
       </button>
-      {errorMessage && 
-      <SnackBar active={activeSnackBar} setActive={setActiveSnackBar} timer={3000} type='alert'>
-          <div>{errorMessage}</div>
-      </SnackBar>}
     </form>
   );
 }
