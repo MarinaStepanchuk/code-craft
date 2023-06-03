@@ -37,23 +37,29 @@ export const postsApi = createApi({
         url: '/save-image',
         method: 'POST',
         body: data,
-      })
+      }),
     }),
-    removeUnusedImages: build.mutation<Array<string>| null, Array<string>>({
+    removeUnusedImages: build.mutation<Array<string> | null, Array<string>>({
       query: (data) => ({
         url: '/remove-images',
         method: 'POST',
         body: data,
-      })
+      }),
     }),
     createPost: build.mutation<IPost, FormData>({
       query: (data) => ({
         url: '/posts',
         method: 'POST',
         body: data,
-      })
-    })
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery, useSaveImageForPostMutation, useRemoveUnusedImagesMutation, useCreatePostMutation } = postsApi;
+export const {
+  useGetPostsQuery,
+  useGetPostByIdQuery,
+  useSaveImageForPostMutation,
+  useRemoveUnusedImagesMutation,
+  useCreatePostMutation,
+} = postsApi;

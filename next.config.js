@@ -8,7 +8,7 @@ const nextConfig = {
     GOOGLE_CLIENT_SECRET: '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',
     GITHUB_ID: 'Iv1.b86ccebf83a5caae',
     GITHUB_SECRET: '728e5412933ef656f7a1c522be3d44d6935d8c3f',
-    API_URL: 'http://localhost:3001/api'
+    API_URL: 'http://localhost:3001/api',
   },
   typescript: {
     // !! WARN !!

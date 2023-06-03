@@ -8,15 +8,15 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl }),
   tagTypes: ['User'],
   endpoints: (build) => ({
-    registerUser: build.mutation<IUser, {email: string, password: string}>({
-      query: ({email, password}) => ({
+    registerUser: build.mutation<IUser, { email: string; password: string }>({
+      query: ({ email, password }) => ({
         url: '/register',
         method: 'POST',
         body: {
           email,
-          password
-        }
-      })
+          password,
+        },
+      }),
     }),
     getUserById: build.query<IUser, string>({
       query: (id) => ({
@@ -25,13 +25,13 @@ export const userApi = createApi({
         //   [Headers.key]: ApiKey,
         // },
       }),
-      providesTags: ['User']
+      providesTags: ['User'],
     }),
     getUserByEmail: build.query<IUser, string>({
       query: (email) => ({
         url: `/user/email/${email}`,
       }),
-      providesTags: ['User']
+      providesTags: ['User'],
     }),
     updateUser: build.mutation<IUser, FormData>({
       query: (data) => ({
@@ -39,9 +39,14 @@ export const userApi = createApi({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: ['User']
-    })
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
-export const { useGetUserByIdQuery, useGetUserByEmailQuery, useRegisterUserMutation, useUpdateUserMutation } = userApi;
+export const {
+  useGetUserByIdQuery,
+  useGetUserByEmailQuery,
+  useRegisterUserMutation,
+  useUpdateUserMutation,
+} = userApi;

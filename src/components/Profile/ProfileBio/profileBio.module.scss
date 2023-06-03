@@ -2,7 +2,7 @@
 @import '@/common.styles/variables.module.scss';
 
 .containerBio {
-  @include flex($ai: flex-start, $jc: flex-start, $gap: 1rem, $dir: column); 
+  @include flex($ai: flex-start, $jc: flex-start, $gap: 1rem, $dir: column);
   width: 70%;
   font-size: 1.6rem;
 }

@@ -18,7 +18,7 @@
     max-width: 300px;
     text-align: center;
   }
-  
+
   .labelImage {
     position: relative;
     width: 1.9rem;
@@ -29,12 +29,12 @@
     border: 0.0625rem solid #ced4da;
     border-right: none;
     cursor: pointer;
-  
+
     &:hover {
       background-color: #f7f9fb;
     }
-  
-    input[type=file] {
+
+    input[type='file'] {
       width: 0.1px;
       height: 0.1px;
       opacity: 0;
@@ -58,7 +58,7 @@
 
   .buttonContainer {
     @include flex($gap: 2rem);
-    
+
     .publish,
     .cancel {
       @include button($w: 10rem, $h: 4rem);

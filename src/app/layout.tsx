@@ -1,5 +1,5 @@
 import Header from '@/layout/Header/Header';
-import { Inter  } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.scss';
 import { Session, getServerSession } from 'next-auth';
 import ProviderToolkit from '@/redux/provider';
@@ -8,7 +8,7 @@ import NextAuthProvider from './providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import RootStyleRegistry from './emotion';
 
-const montserrat = Inter ({ subsets: ['latin'] });
+const montserrat = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Code Craft',
@@ -19,23 +19,25 @@ export const metadata = {
 
 export const getSession = async (): Promise<Session | null> => {
   const session = await getServerSession(authOptions);
-  return session
-}
+  return session;
+};
 
-export default async function RootLayout({ children }: { children: React.ReactNode }): Promise<JSX.Element> {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}): Promise<JSX.Element> {
   const session = await getSession();
   return (
-    <html lang="en"className={styles.html}>
+    <html lang="en" className={styles.html}>
       <NextAuthProvider>
         <RootStyleRegistry>
           <ProviderToolkit>
             <body className={`${styles.body} ${montserrat.className}`}>
               <Header session={session} />
-              <main className={styles.main}>
-                {children}
-              </main>
+              <main className={styles.main}>{children}</main>
             </body>
-          </ProviderToolkit> 
+          </ProviderToolkit>
         </RootStyleRegistry>
       </NextAuthProvider>
     </html>

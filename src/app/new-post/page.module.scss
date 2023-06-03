@@ -1,6 +1,6 @@
 @import '@/common.styles/mixins.module.scss';
 
 .pageContainer {
-    width: 100%;
-    @include flex($dir: column);
+  width: 100%;
+  @include flex($dir: column);
 }
