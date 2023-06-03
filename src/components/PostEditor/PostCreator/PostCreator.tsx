@@ -33,10 +33,10 @@ import YoutubeButton from '../YoutubeButton/YoutubeButton';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 
-const content =
-  '<h2 style="text-align: center;">Welcome to Mantine rich text editor</h2><p><code>RichTextEditor</code> component focuses on usability and is designed to be as simple as possible to bring a familiar editing experience to regular users. <code>RichTextEditor</code> is based on <a href="https://tiptap.dev/" rel="noopener noreferrer" target="_blank">Tiptap.dev</a> and supports all of its features:</p><ul><li>General text formatting: <strong>bold</strong>, <em>italic</em>, <u>underline</u>, <s>strike-through</s> </li><li>Headings (h1-h6)</li><li>Sub and super scripts (<sup>&lt;sup /&gt;</sup> and <sub>&lt;sub /&gt;</sub> tags)</li><li>Ordered and bullet lists</li><li>Text align&nbsp;</li><li>And all <a href="https://tiptap.dev/extensions" target="_blank" rel="noopener noreferrer">other extensions</a></li></ul>';
-
 const useStyles = createStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
   toolbar: {
     border: 'none',
     width: '100%',
@@ -144,7 +144,7 @@ const PostCreator = (): JSX.Element => {
         lowlight,
       }),
     ],
-    content,
+    content: '',
   });
 
   const saveImage = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
@@ -261,6 +261,7 @@ const PostCreator = (): JSX.Element => {
     form.append('content', contentPost || '');
     form.append('tags', JSON.stringify(tags));
     form.append('date', JSON.stringify(new Date()));
+    form.append('published', JSON.stringify(true));
 
     if (banner) form.append('banner', banner as unknown as Blob);
 
@@ -268,15 +269,29 @@ const PostCreator = (): JSX.Element => {
     setSendingInProgress(false);
   };
 
-  const redirectToMainPage = (): void => {
-    push('/');
+  const saveDraft = async (): Promise<void> => {
+    setSendingInProgress(true);
+    const contentPost = editor?.getHTML();
+
+    const form = new FormData();
+    form.append('creatorId', user.id);
+    form.append('title', title || 'Title');
+    form.append('content', contentPost || '');
+    form.append('tags', tags ? JSON.stringify(tags) : '');
+    form.append('date', JSON.stringify(new Date()));
+    form.append('published', JSON.stringify(false));
+
+    if (banner) form.append('banner', banner as unknown as Blob);
+
+    await createPost(form);
+    setSendingInProgress(false);
   };
 
   return (
     <section className={styles.creator}>
       <PostHeader setBanner={setBanner} title={title} setTitle={setTitle} />
       <Divider size={10} sx={{ width: '30%', margin: '0 auto' }} />
-      <RichTextEditor editor={editor}>
+      <RichTextEditor editor={editor} className={classes.root}>
         <RichTextEditor.Toolbar sticky stickyOffset={60} className={classes.toolbar}>
           <RichTextEditor.ControlsGroup>
             <RichTextEditor.Bold />
@@ -344,9 +359,9 @@ const PostCreator = (): JSX.Element => {
             sendingInProgress ? `${styles.cancel} ${styles.disabledButton}` : `${styles.cancel}`
           }
           disabled={sendingInProgress}
-          onClick={redirectToMainPage}
+          onClick={saveDraft}
         >
-          Cancel
+          Save as Draft
         </button>
       </div>
     </section>
