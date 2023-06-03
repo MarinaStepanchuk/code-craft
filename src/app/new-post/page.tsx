@@ -5,13 +5,9 @@ import styles from './page.module.scss';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
 const NewPost = async ():Promise<JSX.Element> => {
-  const session = await getServerSession(authOptions);
-
-  if(!session) {
+  const session = await getServerSession(authOptions); if(!session) {
     redirect('/signin')
-  }
-
-  return (
+  } return (
     <div className={styles.pageContainer}>
       <PostCreator />
     </div>
