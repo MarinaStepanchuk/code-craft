@@ -2,7 +2,7 @@ import PostCreator from "@/components/PostEditor/PostCreator/PostCreator";
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import styles from './page.module.scss';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import { authOption } from '../api/auth/[...nextauth]/route';
 
 const NewPost = async ():Promise<JSX.Element> => {
   const session = await getServerSession(authOptions);
