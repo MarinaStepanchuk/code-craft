@@ -61,7 +61,7 @@
 
     .publish,
     .cancel {
-      @include button($w: 10rem, $h: 4rem);
+      @include button($w: 14rem, $h: 4rem);
       background-color: inherit;
       border: 1px solid $secondary-dark;
       color: $secondary-dark;
