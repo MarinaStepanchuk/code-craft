@@ -3,4 +3,4 @@
 
 npx tsc --noEmit && npx eslint --fix . && npx prettier --write .
 
-git add .npm test
+git add .
