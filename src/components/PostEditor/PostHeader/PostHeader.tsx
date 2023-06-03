@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import Image, { StaticImageData } from 'next/image';
+import Image, { StaticImageData } from  "next/image";
 import defaultBanner from '@/assets/default_banner.png';
 import { Textarea, createStyles } from "@mantine/core";
 import styles from './postHeader.module.scss';
