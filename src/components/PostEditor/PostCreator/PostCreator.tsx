@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { Divider, createStyles } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
-import { ErrorMessages } from '@/constants/common.constants';
+import { ErrorMessages, Patch } from '@/constants/common.constants';
 import {
   useCreatePostMutation,
   useRemoveUnusedImagesMutation,
@@ -192,7 +192,7 @@ const PostCreator = (): JSX.Element => {
     }
 
     if (data) {
-      push('/');
+      push(`${Patch.me}${Patch.publications}`);
     }
   }, [resultCreatePost]);
 
@@ -260,8 +260,7 @@ const PostCreator = (): JSX.Element => {
     form.append('title', title);
     form.append('content', contentPost || '');
     form.append('tags', JSON.stringify(tags));
-    form.append('date', JSON.stringify(new Date()));
-    form.append('published', JSON.stringify(true));
+    form.append('status', 'published');
 
     if (banner) form.append('banner', banner as unknown as Blob);
 
@@ -273,13 +272,26 @@ const PostCreator = (): JSX.Element => {
     setSendingInProgress(true);
     const contentPost = editor?.getHTML();
 
+    const newImage: Array<string> = [];
+    const removeImages = images
+      .filter((item) => {
+        const url = item.split('?alt=media')[0].split('%2F')[1];
+        if (contentPost?.includes(url)) {
+          newImage.push(item);
+          return false;
+        }
+        return true;
+      })
+      .map((item) => item.split('?alt=media')[0].split('%2F')[1]);
+    await removeUnusedImages(removeImages);
+    setImages(newImage);
+
     const form = new FormData();
     form.append('creatorId', user.id);
     form.append('title', title || 'Title');
     form.append('content', contentPost || '');
     form.append('tags', tags ? JSON.stringify(tags) : '');
-    form.append('date', JSON.stringify(new Date()));
-    form.append('published', JSON.stringify(false));
+    form.append('status', 'draft');
 
     if (banner) form.append('banner', banner as unknown as Blob);
 
@@ -333,12 +345,12 @@ const PostCreator = (): JSX.Element => {
             <RichTextEditor.Unlink />
           </RichTextEditor.ControlsGroup>
 
-          <RichTextEditor.ControlsGroup>
+          {/* <RichTextEditor.ControlsGroup>
             <RichTextEditor.AlignLeft />
             <RichTextEditor.AlignCenter />
             <RichTextEditor.AlignJustify />
             <RichTextEditor.AlignRight />
-          </RichTextEditor.ControlsGroup>
+          </RichTextEditor.ControlsGroup> */}
         </RichTextEditor.Toolbar>
 
         <RichTextEditor.Content className={classes.content} />

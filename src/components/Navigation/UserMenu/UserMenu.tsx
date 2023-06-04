@@ -9,6 +9,7 @@ import { useAppDispatch } from '@/huks/redux';
 import { Flex } from '@mantine/core';
 import { Session } from 'next-auth';
 import { IconArrowBadgeDown, IconPencilPlus } from '@tabler/icons-react';
+import { Patch } from '@/constants/common.constants';
 import styles from './userMenu.module.scss';
 import NavigationUser from '../NavigationUser/NavigationUser';
 
@@ -27,7 +28,7 @@ const UserMenu = ({ session }: { session: Session }): JSX.Element => {
 
   return (
     <div className={styles.container}>
-      <Link href="/new-post" className={styles.write}>
+      <Link href={`${Patch.me}${Patch.newPost}`} className={styles.write}>
         <IconPencilPlus size={35} strokeWidth="1.2" />
         Write
       </Link>

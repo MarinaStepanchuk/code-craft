@@ -24,10 +24,19 @@ const useStyles = createStyles((theme) => ({
       backgroundColor: 'inherit',
       borderBottom: 'solid 1px rgb(190, 186, 186)',
     },
+
+    '&[data-active]': {
+      color: theme.colors.brand[0],
+      fontWeight: 600,
+
+      svg: {
+        strokeWidth: 1.8,
+      },
+    },
   },
 }));
 
-const SettingsBlock = (): JSX.Element => {
+const SettingsNavigation = (): JSX.Element => {
   const { classes } = useStyles();
 
   return (
@@ -71,4 +80,4 @@ const SettingsBlock = (): JSX.Element => {
   );
 };
 
-export default SettingsBlock;
+export default SettingsNavigation;

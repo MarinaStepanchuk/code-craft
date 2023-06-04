@@ -19,12 +19,9 @@ export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
-    getPosts: build.query<IPost[], string>({
-      query: (text) => ({
-        url: '',
-        params: {
-          name: text,
-        },
+    getPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
+      query: ({ userId, status }) => ({
+        url: `/posts?userId=${userId}&status=${status}`,
       }),
     }),
     getPostById: build.query<IPost, string>({
@@ -48,7 +45,7 @@ export const postsApi = createApi({
     }),
     createPost: build.mutation<IPost, FormData>({
       query: (data) => ({
-        url: '/posts',
+        url: '/post',
         method: 'POST',
         body: data,
       }),

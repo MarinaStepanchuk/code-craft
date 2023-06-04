@@ -1,0 +1,49 @@
+.content {
+  width: 'content';
+  display: 'flex';
+  background-color: 'inherit';
+  font-size: '1.6rem';
+
+  & p {
+    color: silver;
+  }
+  // img: {
+  //   maxWidth: '90%',
+  //   display: 'block',
+  //   margin: '1rem auto',
+  // },
+  // '& [data-youtube-video]': {
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   margin: 0,
+  //   width: '100%',
+  // },
+  // iframe: {
+  //   width: '480px',
+  //   height: '360px',
+
+  //   '@media (max-width: 700px)': {
+  //     width: '280px',
+  //     height: '210px',
+  //   },
+
+  //   '@media (max-width: 420px)': {
+  //     width: '220px',
+  //     height: '165px',
+  //   },
+  // },
+  // hr: {
+  //   width: '20%',
+  //   textAlign: 'center',
+  // },
+  pre {
+    color: #fff;
+    background-color: #000;
+
+    code {
+      font-size: 1.4rem;
+      font-family: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace';
+    }
+  }
+}

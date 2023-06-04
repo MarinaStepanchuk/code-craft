@@ -1,3 +1,4 @@
+import { Patch } from '@/constants/common.constants';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
@@ -42,7 +43,7 @@ export const authOptions: NextAuthOptions = {
     // })
   ],
   pages: {
-    signIn: '/signin',
+    signIn: Patch.signIn,
   },
   callbacks: {
     async signIn({ user, account }) {

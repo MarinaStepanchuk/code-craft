@@ -32,7 +32,7 @@ const ProfileBio = ({ register, watch }: IProfileBioProps): JSX.Element => {
         <div className={styles.inputContainer}>
           <input type="text" {...register('bio')} maxLength={160} />
           <div className={styles.descriptionInput}>
-            <p>Appears on your profile and next to your stories.</p>
+            <p>Appears on your profile and next to your publications.</p>
             <p>
               <span>{watch('bio')?.length}</span>/160
             </p>

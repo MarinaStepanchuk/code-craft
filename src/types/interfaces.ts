@@ -15,8 +15,10 @@ interface IPost {
   content: string;
   banner: string;
   tags: Array<string>;
-  date: number;
   viewCount: number;
+  createdDate: Date;
+  updatedDate: Date;
+  UserId: string;
 }
 
 interface IFormDataProfile {

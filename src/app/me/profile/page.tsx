@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
-import SettingsBlock from '@/components/Profile/SettingsBlock/SettingsBlock';
-import styles from './profile.module.scss';
-import { authOptions } from '../api/auth/[...nextauth]/route';
+import SettingsNavigation from '@/components/Profile/SettingsNavigation/SettingsNavigation';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Patch } from '@/constants/common.constants';
+import styles from './page.module.scss';
 
 export const metadata = {
   title: '[user] of Code Craft',
@@ -12,13 +13,13 @@ const Profile = async (): Promise<JSX.Element> => {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect('/signin');
+    redirect(Patch.signIn);
   }
 
   return (
     <>
       <h2 className={styles.title}>Settings</h2>
-      <SettingsBlock />
+      <SettingsNavigation />
     </>
   );
 };
