@@ -4,7 +4,7 @@ import defaultImage from '@/assets/default_banner.png';
 import { Popover, Text, Box } from '@mantine/core';
 import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react';
 import styles from './publicationCard.module.scss';
-import PostContent from '@/components/PostContent/PostContent';
+import getFirstParagraph from '@/utils/getFirstParagraph';
 
 const PublicationCard = ({
   post,
@@ -14,19 +14,28 @@ const PublicationCard = ({
   post: IPost;
   status: 'published' | 'draft';
 }): JSX.Element => {
-  const { banner, title, content, createdDate, updatedDate } = post;
-  const date = new Date(createdDate).getDay();
+  const { banner, title, content, updatedDate } = post;
+  const date = new Date(updatedDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  console.log(updatedDate);
   return (
     <article>
       <div className={styles.preview}>
         <Image src={banner || defaultImage} width={150} height={150} alt="post banner" />
         <div>
           <h3 className={styles.title}>{title}</h3>
-          <div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
+          <div className={styles.content}>{getFirstParagraph(content)}</div>
         </div>
       </div>
       <div className={styles.settings}>
-        <span>{date}</span>
+        <div>
+          <span>{status === 'draft' ? 'Last edited on' : 'Published on'}</span>
+          <span>{date}</span>
+        </div>
+
         <Popover width={200} position="bottom" withArrow shadow="md">
           <Popover.Target>
             <IconDots size={30} strokeWidth="1.2" fill="inherit" />

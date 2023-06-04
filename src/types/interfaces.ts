@@ -16,7 +16,6 @@ interface IPost {
   banner: string;
   tags: Array<string>;
   viewCount: number;
-  createdDate: Date;
   updatedDate: Date;
   UserId: string;
 }
