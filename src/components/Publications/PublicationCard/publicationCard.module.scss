@@ -1,49 +1,39 @@
-.content {
-  width: 'content';
-  display: 'flex';
-  background-color: 'inherit';
-  font-size: '1.6rem';
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
 
-  & p {
-    color: silver;
-  }
-  // img: {
-  //   maxWidth: '90%',
-  //   display: 'block',
-  //   margin: '1rem auto',
-  // },
-  // '& [data-youtube-video]': {
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   margin: 0,
-  //   width: '100%',
-  // },
-  // iframe: {
-  //   width: '480px',
-  //   height: '360px',
+.publication {
+  @include flex($dir: column);
+  width: 100%;
+  color: $text-dark;
 
-  //   '@media (max-width: 700px)': {
-  //     width: '280px',
-  //     height: '210px',
-  //   },
+  .preview {
+    @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
+    width: 100%;
 
-  //   '@media (max-width: 420px)': {
-  //     width: '220px',
-  //     height: '165px',
-  //   },
-  // },
-  // hr: {
-  //   width: '20%',
-  //   textAlign: 'center',
-  // },
-  pre {
-    color: #fff;
-    background-color: #000;
+    .publicationContainer {
+      @include flex($dir: column, $ai: flex-start, $jc: flex-start);
+      font-size: 1.6rem;
+      word-break: break-word;
 
-    code {
-      font-size: 1.4rem;
-      font-family: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace';
+      .title {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .content {
+        overflow: hidden;
+        max-height: 7.2rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+      }
     }
+  }
+
+  .footer {
+    @include flex($jc: flex-start, $gap: 2rem);
+    width: 100%;
+    font-size: 1.4rem;
   }
 }

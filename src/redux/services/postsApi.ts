@@ -3,18 +3,6 @@ import { IPost } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
-// interface IPostCreate {
-//   creatorId: string;
-//   post: {
-//     title: string;
-//     content: string;
-//     banner: string | File;
-//     date: number;
-//     viewCount?: number;
-//     tags: Array<string>;
-//   }
-// }
-
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
@@ -28,8 +16,9 @@ export const postsApi = createApi({
     }),
     getPostById: build.query<IPost, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/post/${id}`,
       }),
+      providesTags: ['Posts'],
     }),
     saveImageForPost: build.mutation<string | null, FormData>({
       query: (data) => ({
@@ -53,6 +42,14 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ['Posts'],
     }),
+    updatePost: build.mutation<IPost, FormData>({
+      query: (data) => ({
+        url: '/post',
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Posts'],
+    }),
   }),
 });
 
@@ -62,4 +59,5 @@ export const {
   useSaveImageForPostMutation,
   useRemoveUnusedImagesMutation,
   useCreatePostMutation,
+  useUpdatePostMutation,
 } = postsApi;

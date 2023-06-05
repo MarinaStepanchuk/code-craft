@@ -11,11 +11,11 @@ interface IUser {
 
 interface IPost {
   id: number;
-  title: string;
-  content: string;
-  banner: string;
-  tags: Array<string>;
-  viewCount: number;
+  title: string | null;
+  content: string | null;
+  banner: string | null;
+  tags: Array<string> | null;
+  viewCount: number | null;
   updatedDate: Date;
   UserId: string;
 }

@@ -14,7 +14,7 @@ const NewPost = async (): Promise<JSX.Element> => {
 
   return (
     <div className={styles.pageContainer}>
-      <PostCreator />
+      <PostCreator type="create" />
     </div>
   );
 };

@@ -1,11 +1,12 @@
 'use client';
 
-import { Loader, Tabs, createStyles } from '@mantine/core';
+import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell } from '@tabler/icons-react';
 import { useGetPostsQuery } from '@/redux/services/postsApi';
 import { ErrorMessages } from '@/constants/common.constants';
 import { useAppSelector } from '@/huks/redux';
 import { IPost } from '@/types/interfaces';
+import Preloader from '@/components/Preloader/Preloader';
 import PublicationList from '../PublicationsList/PublicationList';
 
 const useStyles = createStyles((theme) => ({
@@ -61,7 +62,7 @@ const PublicationsNavigation = (): JSX.Element => {
   } = useGetPostsQuery({ userId: user.id, status: 'draft' });
 
   if (isLoadingDrafts || isLoadingPublished) {
-    return <Loader variant="dots" />;
+    return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
   return (
