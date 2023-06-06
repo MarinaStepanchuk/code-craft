@@ -32,7 +32,7 @@ const ProfileBio = ({ register, watch }: IProfileBioProps): JSX.Element => {
         <div className={styles.inputContainer}>
           <input type="text" {...register('bio')} maxLength={160} />
           <div className={styles.descriptionInput}>
-            <p>Appears on your profile and next to your stories.</p>
+            <p>Appears on your profile and next to your publications.</p>
             <p>
               <span>{watch('bio')?.length}</span>/160
             </p>
@@ -42,15 +42,15 @@ const ProfileBio = ({ register, watch }: IProfileBioProps): JSX.Element => {
       <h4 className={styles.title}>Contacts:</h4>
       <div className={styles.formItemContacts}>
         <IconBrandTwitter size="1.8rem" strokeWidth="1.2" />
-        <input type="text" {...register('twitter')} maxLength={160} />
+        <input type="text" {...register('twitter')} maxLength={60} />
       </div>
       <div className={styles.formItemContacts}>
         <IconAt size="1.8rem" strokeWidth="1.2" />
-        <input type="text" {...register('mail')} maxLength={160} />
+        <input type="text" {...register('mail')} maxLength={60} />
       </div>
       <div className={styles.formItemContacts}>
         <IconBrandInstagram size="1.8rem" strokeWidth="1.2" />
-        <input type="text" {...register('instagram')} maxLength={160} />
+        <input type="text" {...register('instagram')} maxLength={60} />
       </div>
     </div>
   );

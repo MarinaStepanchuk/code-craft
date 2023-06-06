@@ -13,6 +13,7 @@ import {
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Patch } from '@/constants/common.constants';
 import styles from './navigationUser.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -29,7 +30,11 @@ const NavigationUser = (): JSX.Element => {
   const { push } = useRouter();
 
   const redirectToProfile = (): void => {
-    push('/profile');
+    push(`${Patch.me}${Patch.profile}`);
+  };
+
+  const redirectToPublications = (): void => {
+    push(`${Patch.me}${Patch.publications}`);
   };
 
   return (
@@ -65,8 +70,12 @@ const NavigationUser = (): JSX.Element => {
         >
           Profile
         </Menu.Item>
-        <Menu.Item icon={<IconWritingSign size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
-          Stories
+        <Menu.Item
+          icon={<IconWritingSign size={30} strokeWidth="1" />}
+          sx={{ fontSize: '1.5rem' }}
+          onClick={redirectToPublications}
+        >
+          Publications
         </Menu.Item>
         <Menu.Item icon={<IconBookmarks size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
           Bookmarks

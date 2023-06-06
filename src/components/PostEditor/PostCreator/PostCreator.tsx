@@ -1,17 +1,16 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
-import { Divider, createStyles } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { Divider } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
-import { ErrorMessages } from '@/constants/common.constants';
+import { ErrorMessages, Patch } from '@/constants/common.constants';
 import {
   useCreatePostMutation,
+  useGetPostByIdQuery,
   useRemoveUnusedImagesMutation,
-  useSaveImageForPostMutation,
+  useUpdatePostMutation,
 } from '@/redux/services/postsApi';
-import { RichTextEditor, Link } from '@mantine/tiptap';
-import { IconPhotoPlus } from '@tabler/icons-react';
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import Highlight from '@tiptap/extension-highlight';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -26,98 +25,39 @@ import StarterKit from '@tiptap/starter-kit';
 import { lowlight } from 'lowlight';
 import { useRouter } from 'next/navigation';
 import { useAppSelector } from '@/huks/redux';
+import Link from '@tiptap/extension-link';
 import PostTags from '../PostTags/PostTags';
 import PostHeader from '../PostHeader/PostHeader';
 import styles from './postCreator.module.scss';
-import YoutubeButton from '../YoutubeButton/YoutubeButton';
+import PostContentCreator from '../PostContentCreator/PostContentCreator';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 
-const useStyles = createStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  toolbar: {
-    border: 'none',
-    width: '100%',
-    button: {
-      width: '2rem',
-      height: '2rem',
+interface IPostCreatorProps {
+  initialBanner?: string;
+  initialTitle?: string;
+  initialContent?: string;
+  initialTags?: string[];
+  type: 'edit' | 'create';
+  postId?: string;
+}
 
-      '&[data-active]': {
-        backgroundColor: theme.colors.brand[3],
-        color: '#fff',
-      },
-
-      svg: {
-        width: '1.7rem',
-        height: '1.7rem',
-        strokeWidth: '1.2',
-      },
-    },
-  },
-  content: {
-    width: 'content',
-    display: 'flex',
-    backgroundColor: 'inherit',
-    fontSize: '1.6rem',
-
-    '& p': {
-      color: 'silver',
-    },
-    img: {
-      maxWidth: '90%',
-      display: 'block',
-      margin: '1rem auto',
-    },
-    '& [data-youtube-video]': {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      margin: 0,
-      width: '100%',
-    },
-    iframe: {
-      width: '480px',
-      height: '360px',
-
-      '@media (max-width: 700px)': {
-        width: '280px',
-        height: '210px',
-      },
-
-      '@media (max-width: 420px)': {
-        width: '220px',
-        height: '165px',
-      },
-    },
-    hr: {
-      width: '20%',
-      textAlign: 'center',
-    },
-    pre: {
-      color: '#fff',
-      backgroundColor: '#000',
-
-      code: {
-        fontSize: '1.4rem',
-        fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
-      },
-    },
-  },
-}));
-
-const PostCreator = (): JSX.Element => {
-  const [banner, setBanner] = useState<string | File>('');
-  const [title, setTitle] = useState('');
+const PostCreator = ({
+  initialBanner = '',
+  initialTitle = '',
+  initialContent = '',
+  initialTags = [],
+  type,
+  postId,
+}: IPostCreatorProps): JSX.Element => {
+  const [banner, setBanner] = useState<string | File>(initialBanner);
+  const [title, setTitle] = useState(initialTitle);
   const [tag, setTag] = useState('');
-  const [tags, setTags] = useState<Array<string>>([]);
+  const [tags, setTags] = useState<Array<string>>(initialTags);
   const [images, setImages] = useState<Array<string>>([]);
-  const { classes } = useStyles();
-  const [saveImageForPost, resultSave] = useSaveImageForPostMutation();
   const [removeUnusedImages] = useRemoveUnusedImagesMutation();
   const [createPost, resultCreatePost] = useCreatePostMutation();
-  const [image, setImage] = useState('');
+  const [updatePost, resultUpdatePost] = useUpdatePostMutation();
   const [sendingInProgress, setSendingInProgress] = useState(false);
   const { push } = useRouter();
   const { user } = useAppSelector((state) => state.userReducer);
@@ -144,23 +84,15 @@ const PostCreator = (): JSX.Element => {
         lowlight,
       }),
     ],
-    content: '',
+    content: initialContent,
   });
 
-  const saveImage = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
-    setImage(e.target.value);
-    const file = e.currentTarget.files as unknown as FileList;
-    const form = new FormData();
-    form.append('image', file[0] as unknown as Blob);
-    await saveImageForPost(form);
-  };
-
   useEffect(() => {
-    const { isError, data } = resultSave;
+    const { isError, data } = type === 'edit' ? resultUpdatePost : resultCreatePost;
 
     if (isError) {
       notifications.show({
-        message: ErrorMessages.errorLoadingImage,
+        message: ErrorMessages.errorPostLoading,
         color: 'red',
         autoClose: 2000,
         withBorder: true,
@@ -171,30 +103,9 @@ const PostCreator = (): JSX.Element => {
     }
 
     if (data) {
-      editor?.chain().focus().setImage({ src: data }).run();
-      setImages([...images, data]);
+      push(`${Patch.me}${Patch.publications}`);
     }
-  }, [resultSave]);
-
-  useEffect(() => {
-    const { isError, data } = resultCreatePost;
-
-    if (isError) {
-      notifications.show({
-        message: ErrorMessages.errorLoadingImage,
-        color: 'red',
-        autoClose: 2000,
-        withBorder: true,
-        styles: () => ({
-          description: { fontSize: '1.4rem' },
-        }),
-      });
-    }
-
-    if (data) {
-      push('/');
-    }
-  }, [resultCreatePost]);
+  }, [resultCreatePost, resultUpdatePost]);
 
   const validationPost = (contentPost: string): Array<string> => {
     const errors = [];
@@ -218,7 +129,7 @@ const PostCreator = (): JSX.Element => {
     return errors;
   };
 
-  const sendPost = async (): Promise<void> => {
+  const publishPost = async (): Promise<void> => {
     setSendingInProgress(true);
     const contentPost = editor?.getHTML();
     const errors = validationPost(contentPost || '');
@@ -235,9 +146,7 @@ const PostCreator = (): JSX.Element => {
           }),
         });
       });
-      setTimeout(() => {
-        setSendingInProgress(false);
-      }, 3000);
+      setSendingInProgress(false);
       return;
     }
 
@@ -256,16 +165,22 @@ const PostCreator = (): JSX.Element => {
     setImages(newImage);
 
     const form = new FormData();
-    form.append('creatorId', user.id);
     form.append('title', title);
-    form.append('content', contentPost || '');
+    form.append('content', contentPost as string);
     form.append('tags', JSON.stringify(tags));
-    form.append('date', JSON.stringify(new Date()));
-    form.append('published', JSON.stringify(true));
+    form.append('status', 'published');
 
-    if (banner) form.append('banner', banner as unknown as Blob);
+    if (typeof banner === 'string') form.append('banner', banner);
+    if (banner && typeof banner !== 'string') form.append('banner', banner as unknown as Blob);
 
-    await createPost(form);
+    if (type === 'create') {
+      form.append('creatorId', user.id);
+      await createPost(form);
+    } else {
+      form.append('id', postId as string);
+      await updatePost(form);
+    }
+
     setSendingInProgress(false);
   };
 
@@ -273,83 +188,57 @@ const PostCreator = (): JSX.Element => {
     setSendingInProgress(true);
     const contentPost = editor?.getHTML();
 
+    const newImage: Array<string> = [];
+    const removeImages = images
+      .filter((item) => {
+        const url = item.split('?alt=media')[0].split('%2F')[1];
+        if (contentPost?.includes(url)) {
+          newImage.push(item);
+          return false;
+        }
+        return true;
+      })
+      .map((item) => item.split('?alt=media')[0].split('%2F')[1]);
+    await removeUnusedImages(removeImages);
+    setImages(newImage);
+
     const form = new FormData();
-    form.append('creatorId', user.id);
-    form.append('title', title || 'Title');
+    form.append('title', title);
     form.append('content', contentPost || '');
     form.append('tags', tags ? JSON.stringify(tags) : '');
-    form.append('date', JSON.stringify(new Date()));
-    form.append('published', JSON.stringify(false));
+    form.append('status', 'draft');
 
-    if (banner) form.append('banner', banner as unknown as Blob);
+    if (typeof banner === 'string') form.append('banner', banner);
+    if (banner && typeof banner !== 'string') form.append('banner', banner as unknown as Blob);
 
-    await createPost(form);
+    if (type === 'create') {
+      form.append('creatorId', user.id);
+      await createPost(form);
+    } else {
+      form.append('id', postId as string);
+      await updatePost(form);
+    }
+
     setSendingInProgress(false);
   };
 
   return (
     <section className={styles.creator}>
-      <PostHeader setBanner={setBanner} title={title} setTitle={setTitle} />
+      <PostHeader
+        setBanner={setBanner}
+        title={title}
+        setTitle={setTitle}
+        initialBanner={initialBanner}
+      />
       <Divider size={10} sx={{ width: '30%', margin: '0 auto' }} />
-      <RichTextEditor editor={editor} className={classes.root}>
-        <RichTextEditor.Toolbar sticky stickyOffset={60} className={classes.toolbar}>
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.Bold />
-            <RichTextEditor.Italic />
-            <RichTextEditor.Underline />
-            <RichTextEditor.Strikethrough />
-            <RichTextEditor.ClearFormatting />
-            <RichTextEditor.Highlight />
-            <RichTextEditor.CodeBlock />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.H2 />
-            <RichTextEditor.H3 />
-            <RichTextEditor.H4 />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.Blockquote />
-            <RichTextEditor.Hr />
-            <RichTextEditor.BulletList />
-            <RichTextEditor.OrderedList />
-            <RichTextEditor.Subscript />
-            <RichTextEditor.Superscript />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.Link />
-            <label className={styles.labelImage} title="add image">
-              <IconPhotoPlus size={15} strokeWidth="1.2" />
-              <input
-                type="file"
-                value={image}
-                accept={'.jpg,.jpeg,.png, .webp'}
-                onChange={(e): Promise<void> => saveImage(e)}
-              />
-            </label>
-            <YoutubeButton editor={editor} />
-            <RichTextEditor.Unlink />
-          </RichTextEditor.ControlsGroup>
-
-          <RichTextEditor.ControlsGroup>
-            <RichTextEditor.AlignLeft />
-            <RichTextEditor.AlignCenter />
-            <RichTextEditor.AlignJustify />
-            <RichTextEditor.AlignRight />
-          </RichTextEditor.ControlsGroup>
-        </RichTextEditor.Toolbar>
-
-        <RichTextEditor.Content className={classes.content} />
-      </RichTextEditor>
+      <PostContentCreator editor={editor} images={images} setImages={setImages} />
       <PostTags tag={tag} setTag={setTag} tags={tags} setTags={setTags} />
       <div className={styles.buttonContainer}>
         <button
           className={
             sendingInProgress ? `${styles.publish} ${styles.disabledButton}` : `${styles.publish}`
           }
-          onClick={sendPost}
+          onClick={publishPost}
           disabled={sendingInProgress}
         >
           Publish

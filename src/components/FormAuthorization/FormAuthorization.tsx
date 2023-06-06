@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { ErrorMessages, regEmail, regPassword } from '@/constants/common.constants';
+import { ErrorMessages, Patch, regEmail, regPassword } from '@/constants/common.constants';
 import { useState } from 'react';
 import Image from 'next/image';
 import googleIcon from '@/assets/icon-google.svg';
@@ -131,12 +131,12 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
         {registration ? (
           <p>
             Don`t have an account?
-            <Link href="/signin"> Sign in →</Link>
+            <Link href={Patch.signIn}> Sign in →</Link>
           </p>
         ) : (
           <p>
             Don`t have an account?
-            <Link href="/signup"> Create an account.</Link>
+            <Link href={Patch.signUp}> Create an account.</Link>
           </p>
         )}
       </div>

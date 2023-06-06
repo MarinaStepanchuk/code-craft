@@ -4,10 +4,10 @@ import { useAppSelector } from '@/huks/redux';
 import { useForm } from 'react-hook-form';
 import { IFormDataProfile } from '@/types/interfaces';
 import { useUpdateUserMutation } from '@/redux/services/userApi';
-import Preloader from '@/components/Preloader/Preloader';
 import { useEffect } from 'react';
 import { ErrorMessages } from '@/constants/common.constants';
 import { notifications } from '@mantine/notifications';
+import { Loader } from '@mantine/core';
 import styles from './profileEditor.module.scss';
 import ProfileBio from '../ProfileBio/ProfileBio';
 import PhotoEditor from '../PhotoEditor/PhotoEditor';
@@ -68,6 +68,16 @@ const ProfileEditor = (): JSX.Element => {
           description: { fontSize: '1.4rem' },
         }),
       });
+    } else {
+      notifications.show({
+        message: 'Data saved successfully',
+        color: 'green',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      });
     }
   };
 
@@ -82,7 +92,7 @@ const ProfileEditor = (): JSX.Element => {
         disabled={result.isLoading}
         onClick={handleSubmit(onSubmitForm)}
       >
-        {result.isLoading && <Preloader width="2.5rem" height="2.5rem" />}
+        {result.isLoading && <Loader variant="dots" color="white" />}
         SAVE
       </button>
     </form>

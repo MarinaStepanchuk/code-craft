@@ -19,31 +19,6 @@
     text-align: center;
   }
 
-  .labelImage {
-    position: relative;
-    width: 1.9rem;
-    height: 1.91rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0.0625rem solid #ced4da;
-    border-right: none;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #f7f9fb;
-    }
-
-    input[type='file'] {
-      width: 0.1px;
-      height: 0.1px;
-      opacity: 0;
-      overflow: hidden;
-      position: absolute;
-      z-index: -1;
-    }
-  }
-
   .divider {
     @include flex();
     align-self: center;

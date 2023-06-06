@@ -8,6 +8,7 @@ interface IPostHeaderProps {
   setBanner: Dispatch<SetStateAction<string | File>>;
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
+  initialBanner: string;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -24,8 +25,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const PostHeader = ({ setBanner, title, setTitle }: IPostHeaderProps): JSX.Element => {
-  const [imagePreview, setImagePreview] = useState(defaultBanner);
+const PostHeader = ({
+  setBanner,
+  title,
+  setTitle,
+  initialBanner,
+}: IPostHeaderProps): JSX.Element => {
+  const [imagePreview, setImagePreview] = useState(initialBanner || defaultBanner);
   const { classes } = useStyles();
 
   const handleBannerChange = (e: ChangeEvent<HTMLInputElement>): void => {
