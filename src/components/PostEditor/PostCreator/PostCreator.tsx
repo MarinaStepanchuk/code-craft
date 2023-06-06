@@ -7,7 +7,6 @@ import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import {
   useCreatePostMutation,
-  useGetPostByIdQuery,
   useRemoveUnusedImagesMutation,
   useUpdatePostMutation,
 } from '@/redux/services/postsApi';

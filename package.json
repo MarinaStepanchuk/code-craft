@@ -19,6 +19,8 @@
     "@mantine/notifications": "^6.0.13",
     "@mantine/tiptap": "^6.0.11",
     "@reduxjs/toolkit": "^1.9.5",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^0.9.358",
     "@tabler/icons-react": "^2.20.0",
     "@tiptap/extension-code-block-lowlight": "^2.0.3",
     "@tiptap/extension-highlight": "^2.0.3",

@@ -1,0 +1,5 @@
+@import '@/common.styles/mixins.module.scss';
+
+.container {
+  @include flex($dir: column);
+}

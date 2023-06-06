@@ -5,7 +5,10 @@ import { Popover, Text, Flex, createStyles, Divider } from '@mantine/core';
 import { IconDots, IconPencil, IconTrash, IconShare } from '@tabler/icons-react';
 import getFirstParagraph from '@/utils/getFirstParagraph';
 import { useRouter } from 'next/navigation';
-import { Patch } from '@/constants/common.constants';
+import { ErrorMessages, Patch } from '@/constants/common.constants';
+import { useDeletePostMutation } from '@/redux/services/postsApi';
+import { notifications } from '@mantine/notifications';
+import { useEffect } from 'react';
 import styles from './publicationCard.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -48,6 +51,7 @@ const PublicationCard = ({
   const { id, banner, title, content, updatedDate } = post;
   const { classes } = useStyles();
   const { push } = useRouter();
+  const [deletePost, resultDelete] = useDeletePostMutation();
 
   const date = new Date(updatedDate).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -58,6 +62,38 @@ const PublicationCard = ({
   const editPublication = (): void => {
     push(`${Patch.me}${Patch.newPost}/${id}`);
   };
+
+  const deletePublication = async (): Promise<void> => {
+    await deletePost(id);
+  };
+
+  useEffect(() => {
+    const { isError, data } = resultDelete;
+
+    if (isError) {
+      notifications.show({
+        message: ErrorMessages.unknown,
+        color: 'red',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      });
+    }
+
+    if (data) {
+      notifications.show({
+        message: 'The post was successfully deleted',
+        color: 'green',
+        autoClose: 2000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      });
+    }
+  }, [resultDelete]);
 
   return (
     <article className={styles.publication}>
@@ -92,6 +128,7 @@ const PublicationCard = ({
               align="center"
               className={classes.dropdownItem}
               sx={{ color: 'red' }}
+              onClick={deletePublication}
             >
               <IconTrash size={17} strokeWidth="1.2" />
               <Text>{status === 'draft' ? 'Remove Draft' : 'Remove post'}</Text>

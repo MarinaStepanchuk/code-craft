@@ -1,0 +1,72 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.section {
+  position: relative;
+  width: 100%;
+  @include flex($gap: 0, $ai: flex-start);
+  flex-wrap: wrap;
+  color: $text-dark;
+  background-color: #212832;
+  height: calc(100vh - 8rem);
+
+  .content {
+    position: absolute;
+    @include center-content();
+    top: 50%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5rem 0;
+    transform: translateY(-50%);
+
+    .text {
+      width: 60%;
+      @include flex($dir: column, $gap: 0.5rem);
+    }
+
+    .title {
+      color: $primary-color;
+      font-size: 4rem;
+      text-align: start;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .title:nth-child(2) {
+      text-align: end;
+      margin-left: 5rem;
+      margin-bottom: 1rem;
+    }
+
+    .greeting {
+      font-size: 1.6rem;
+      line-height: 2.5rem;
+      color: $text-light;
+      text-align: center;
+      margin: 0.5rem;
+    }
+
+    button {
+      @include button($w: 16rem, $h: 5rem);
+      background-color: $secondary-dark;
+      margin-top: 1rem;
+
+      &:hover {
+        background-color: $primary-color;
+        box-shadow: rgba(212, 51, 30, 0.35) 0 -25px 18px -14px inset,
+          rgba(212, 51, 30, 0.25) 0 1px 2px, rgba(212, 51, 30, 0.25) 0 2px 4px,
+          rgba(212, 51, 30, 0.25) 0 4px 8px, rgba(212, 51, 30, 0.25) 0 8px 16px,
+          rgba(212, 51, 30, 0.25) 0 16px 32px;
+      }
+    }
+  }
+
+  .animationContainer {
+    width: 100%;
+
+    canvas {
+      height: 100vw;
+      height: calc(100vh - 8rem);
+    }
+  }
+}

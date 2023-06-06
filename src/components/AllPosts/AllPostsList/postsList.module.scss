@@ -1,0 +1,5 @@
+@import '@/common.styles/mixins.module.scss';
+
+.postList {
+  @include flex($dir: column, $jc: flex-start);
+}

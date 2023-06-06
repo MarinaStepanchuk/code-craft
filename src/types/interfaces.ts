@@ -29,4 +29,9 @@ interface IFormDataProfile {
   photo: string;
 }
 
-export type { IUser, IPost, IFormDataProfile };
+interface IPostWithUser {
+  post: IPost;
+  user: IUser;
+}
+
+export type { IUser, IPost, IFormDataProfile, IPostWithUser };

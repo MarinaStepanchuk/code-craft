@@ -1,5 +1,5 @@
 import Header from '@/layout/Header/Header';
-import { Inter } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import './globals.scss';
 import { getServerSession } from 'next-auth';
 import ProviderToolkit from '@/redux/provider';
@@ -8,7 +8,7 @@ import NextAuthProvider from './providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import RootStyleRegistry from './emotion';
 
-const montserrat = Inter({ subsets: ['latin'] });
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Code Craft',
