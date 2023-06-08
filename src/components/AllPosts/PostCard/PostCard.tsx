@@ -12,7 +12,7 @@ const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
       <div className={styles.userContainer}>
         <Image src={user.avatarUrl || defaultUserImage} width={30} height={30} alt="user photo" />
         {user.name && <p>{user.name}</p>}
-        <p>{` on ${post.updatedDate}`}</p>
+        <p>{` on ${post.updatedAt}`}</p>
       </div>
       <div className={styles.postContainer}>
         <Image src={post.banner || defaultBanner} width={100} height={100} alt="post banner" />

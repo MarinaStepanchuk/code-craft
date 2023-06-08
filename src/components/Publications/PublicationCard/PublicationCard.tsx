@@ -48,12 +48,13 @@ const PublicationCard = ({
   post: IPost;
   status: 'published' | 'draft';
 }): JSX.Element => {
-  const { id, banner, title, content, updatedDate } = post;
+  const { id, banner, title, content, updatedAt } = post;
+  console.log(id);
   const { classes } = useStyles();
   const { push } = useRouter();
   const [deletePost, resultDelete] = useDeletePostMutation();
 
-  const date = new Date(updatedDate).toLocaleDateString('en-US', {
+  const date = new Date(updatedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
