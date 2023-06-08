@@ -9,14 +9,20 @@ interface IUser {
   instagram?: string;
 }
 
+interface ITag {
+  id: number;
+  name: string;
+  count?: number;
+}
+
 interface IPost {
   id: number;
   title: string | null;
   content: string | null;
   banner: string | null;
-  tags: Array<string> | null;
+  Tags: Array<ITag> | null;
   viewCount: number | null;
-  updatedDate: Date;
+  updatedAt: Date;
   UserId: string;
 }
 
@@ -29,4 +35,9 @@ interface IFormDataProfile {
   photo: string;
 }
 
-export type { IUser, IPost, IFormDataProfile };
+interface IPostWithUser {
+  post: IPost;
+  user: IUser;
+}
+
+export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag };

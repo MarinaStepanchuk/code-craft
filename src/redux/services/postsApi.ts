@@ -8,7 +8,7 @@ export const postsApi = createApi({
   tagTypes: ['Posts'],
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (build) => ({
-    getPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
+    getUserPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
       query: ({ userId, status }) => ({
         url: `/posts?userId=${userId}&status=${status}`,
       }),
@@ -50,14 +50,22 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ['Posts'],
     }),
+    deletePost: build.mutation<IPost, number>({
+      query: (id) => ({
+        url: `/post/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Posts'],
+    }),
   }),
 });
 
 export const {
-  useGetPostsQuery,
+  useGetUserPostsQuery,
   useGetPostByIdQuery,
   useSaveImageForPostMutation,
   useRemoveUnusedImagesMutation,
   useCreatePostMutation,
   useUpdatePostMutation,
+  useDeletePostMutation,
 } = postsApi;

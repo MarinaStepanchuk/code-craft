@@ -22,14 +22,14 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
     return <p>error</p>;
   }
 
-  const { banner, title, content, tags } = post;
+  const { banner, title, content, Tags } = post;
 
   return (
     <PostCreator
       initialBanner={banner || ''}
       initialTitle={title || ''}
       initialContent={content || ''}
-      initialTags={tags || []}
+      initialTags={Tags || []}
       type={'edit'}
       postId={id}
     />

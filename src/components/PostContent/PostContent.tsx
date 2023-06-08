@@ -24,7 +24,8 @@ const useStyles = createStyles(() => ({
     width: 'content',
     display: 'flex',
     backgroundColor: 'inherit',
-    fontSize: '1.6rem',
+    fontSize: '1.8rem',
+    wordBreak: 'break-word',
 
     a: {
       cursor: 'pointer',

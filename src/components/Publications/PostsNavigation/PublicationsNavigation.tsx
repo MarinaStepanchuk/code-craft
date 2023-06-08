@@ -2,7 +2,7 @@
 
 import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell } from '@tabler/icons-react';
-import { useGetPostsQuery } from '@/redux/services/postsApi';
+import { useGetUserPostsQuery } from '@/redux/services/postsApi';
 import { ErrorMessages } from '@/constants/common.constants';
 import { useAppSelector } from '@/huks/redux';
 import { IPost } from '@/types/interfaces';
@@ -54,12 +54,12 @@ const PublicationsNavigation = (): JSX.Element => {
     data: publications,
     isLoading: isLoadingPublished,
     isError: isErrorPublished,
-  } = useGetPostsQuery({ userId: user.id, status: 'published' });
+  } = useGetUserPostsQuery({ userId: user.id, status: 'published' });
   const {
     data: drafts,
     isLoading: isLoadingDrafts,
     isError: isErrorDrafts,
-  } = useGetPostsQuery({ userId: user.id, status: 'draft' });
+  } = useGetUserPostsQuery({ userId: user.id, status: 'draft' });
 
   if (isLoadingDrafts || isLoadingPublished) {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;

@@ -16,6 +16,7 @@ const useStyles = createStyles((theme) => ({
   toolbar: {
     border: 'none',
     width: '100%',
+    backgroundColor: 'rgb(33 40 50 / 56%)',
     button: {
       width: '2rem',
       height: '2rem',
@@ -36,7 +37,8 @@ const useStyles = createStyles((theme) => ({
     width: 'content',
     display: 'flex',
     backgroundColor: 'inherit',
-    fontSize: '1.6rem',
+    fontSize: '1.8rem',
+    wordBreak: 'break-word',
 
     '& p': {
       color: 'silver',

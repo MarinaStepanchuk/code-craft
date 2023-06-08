@@ -7,7 +7,6 @@ import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import {
   useCreatePostMutation,
-  useGetPostByIdQuery,
   useRemoveUnusedImagesMutation,
   useUpdatePostMutation,
 } from '@/redux/services/postsApi';
@@ -26,6 +25,7 @@ import { lowlight } from 'lowlight';
 import { useRouter } from 'next/navigation';
 import { useAppSelector } from '@/huks/redux';
 import Link from '@tiptap/extension-link';
+import { ITag } from '@/types/interfaces';
 import PostTags from '../PostTags/PostTags';
 import PostHeader from '../PostHeader/PostHeader';
 import styles from './postCreator.module.scss';
@@ -37,7 +37,7 @@ interface IPostCreatorProps {
   initialBanner?: string;
   initialTitle?: string;
   initialContent?: string;
-  initialTags?: string[];
+  initialTags?: ITag[];
   type: 'edit' | 'create';
   postId?: string;
 }
@@ -53,7 +53,7 @@ const PostCreator = ({
   const [banner, setBanner] = useState<string | File>(initialBanner);
   const [title, setTitle] = useState(initialTitle);
   const [tag, setTag] = useState('');
-  const [tags, setTags] = useState<Array<string>>(initialTags);
+  const [tags, setTags] = useState<Array<string>>(initialTags.map((item) => item.name));
   const [images, setImages] = useState<Array<string>>([]);
   const [removeUnusedImages] = useRemoveUnusedImagesMutation();
   const [createPost, resultCreatePost] = useCreatePostMutation();
@@ -89,6 +89,7 @@ const PostCreator = ({
 
   useEffect(() => {
     const { isError, data } = type === 'edit' ? resultUpdatePost : resultCreatePost;
+    console.log(data);
 
     if (isError) {
       notifications.show({

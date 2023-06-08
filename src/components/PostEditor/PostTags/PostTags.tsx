@@ -14,6 +14,11 @@ const PostTags = ({ tag, setTag, tags, setTags }: IPostTagsProps): JSX.Element =
   const theme = useMantineTheme();
 
   const addTag = (): void => {
+    if (tags.includes(tag)) {
+      setTag('');
+      return;
+    }
+
     if (tag.length >= 2) {
       setTags([...tags, tag]);
       setTag('');
