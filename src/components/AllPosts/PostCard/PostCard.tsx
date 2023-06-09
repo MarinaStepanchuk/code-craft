@@ -1,24 +1,39 @@
+'use client';
+
 import { IPostWithUser } from '@/types/interfaces';
 import Image from 'next/image';
 import defaultBanner from '@/assets/default_banner.png';
-import defaultUserImage from '@/assets/profile_default.png';
 import getFirstParagraph from '@/utils/getFirstParagraph';
+import PostCardHeader from '@/components/PostCardHeader/PostCardHeader';
+import { useRouter } from 'next/navigation';
+import { Patch } from '@/constants/common.constants';
 import styles from './PostCard.module.scss';
 
 const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
-  const { post, user } = card;
+  const { id, title, banner, content, updatedDate, user } = card;
+  const { push } = useRouter();
+
+  const readPost = (): void => {
+    push(`${Patch.post}/${id}`);
+  };
+
   return (
     <article className={styles.container}>
-      <div className={styles.userContainer}>
-        <Image src={user.avatarUrl || defaultUserImage} width={30} height={30} alt="user photo" />
-        {user.name && <p>{user.name}</p>}
-        <p>{` on ${post.updatedAt}`}</p>
+      <div className={styles.bannerContainer} onClick={readPost}>
+        <Image
+          src={banner || defaultBanner}
+          width={180}
+          height={180}
+          quality={100}
+          style={{ objectFit: 'cover', borderRadius: '1rem' }}
+          alt="post banner"
+        />
       </div>
-      <div className={styles.postContainer}>
-        <Image src={post.banner || defaultBanner} width={100} height={100} alt="post banner" />
-        <div className={styles.contentContainer}>
-          <h3 className={styles.title}>{post.title}</h3>
-          <div className={styles.content}>{getFirstParagraph(post.content || '')}</div>
+      <div className={styles.contentContainer}>
+        <PostCardHeader user={user} updatedDate={updatedDate} />
+        <div className={styles.postContainer} onClick={readPost}>
+          <h3 className={styles.title}>{title}</h3>
+          <div className={styles.content}>{getFirstParagraph(content || '')}</div>
         </div>
       </div>
     </article>

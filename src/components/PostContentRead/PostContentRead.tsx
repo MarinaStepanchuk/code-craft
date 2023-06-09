@@ -1,3 +1,5 @@
+'use client';
+
 import { createStyles } from '@mantine/core';
 import tsLanguageSyntax from 'highlight.js/lib/languages/typescript';
 import { RichTextEditor, Link } from '@mantine/tiptap';
@@ -76,7 +78,7 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const PostContent = ({ content }: { content: string }): JSX.Element => {
+const PostContentRead = ({ content }: { content: string }): JSX.Element => {
   const { classes } = useStyles();
 
   const editor = useEditor({
@@ -112,4 +114,4 @@ const PostContent = ({ content }: { content: string }): JSX.Element => {
   );
 };
 
-export default PostContent;
+export default PostContentRead;

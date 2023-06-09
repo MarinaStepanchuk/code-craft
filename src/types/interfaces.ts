@@ -20,9 +20,9 @@ interface IPost {
   title: string | null;
   content: string | null;
   banner: string | null;
-  Tags: Array<ITag> | null;
+  tags: Array<ITag> | null;
   viewCount: number | null;
-  updatedAt: Date;
+  updatedDate: Date;
   UserId: string;
 }
 
@@ -35,8 +35,7 @@ interface IFormDataProfile {
   photo: string;
 }
 
-interface IPostWithUser {
-  post: IPost;
+interface IPostWithUser extends IPost {
   user: IUser;
 }
 

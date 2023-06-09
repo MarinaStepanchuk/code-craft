@@ -1,8 +1,10 @@
 // import styles from './home.module.scss';
 
 import AllPostsList from '@/components/AllPosts/AllPostsList/PostsList';
+import Aside from '@/components/Aside/Aside';
 import GreetingSection from '@/components/GreetingSection/GreetingSection';
 import { IPostWithUser } from '@/types/interfaces';
+import styles from './home.module.scss';
 
 export const getAllPosts = async (): Promise<IPostWithUser[] | null> => {
   try {
@@ -26,7 +28,10 @@ const Home = async (): Promise<JSX.Element> => {
   return (
     <>
       <GreetingSection />
-      <AllPostsList cards={cards} />
+      <div className={styles.postsContainer}>
+        <AllPostsList cards={cards} />
+        <Aside />
+      </div>
     </>
   );
 };

@@ -9,6 +9,7 @@ import { ErrorMessages, Patch } from '@/constants/common.constants';
 import { useDeletePostMutation } from '@/redux/services/postsApi';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
+import getFormattedDate from '@/utils/getFormattedDate';
 import styles from './publicationCard.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -48,17 +49,12 @@ const PublicationCard = ({
   post: IPost;
   status: 'published' | 'draft';
 }): JSX.Element => {
-  const { id, banner, title, content, updatedAt } = post;
-  console.log(id);
+  const { id, banner, title, content, updatedDate } = post;
   const { classes } = useStyles();
   const { push } = useRouter();
   const [deletePost, resultDelete] = useDeletePostMutation();
 
-  const date = new Date(updatedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const date = getFormattedDate(updatedDate);
 
   const editPublication = (): void => {
     push(`${Patch.me}${Patch.newPost}/${id}`);
@@ -99,7 +95,17 @@ const PublicationCard = ({
   return (
     <article className={styles.publication}>
       <div className={styles.preview}>
-        <Image src={banner || defaultImage} width={100} height={100} alt="post banner" />
+        <div className={styles.bannerContainer}>
+          <Image
+            src={banner || defaultImage}
+            width={100}
+            height={100}
+            quality={100}
+            style={{ objectFit: 'cover' }}
+            alt="post banner"
+          />
+        </div>
+
         <div className={styles.publicationContainer}>
           <h3 className={styles.title}>{title}</h3>
           <div className={styles.content}>{getFirstParagraph(content || '')}</div>

@@ -89,7 +89,6 @@ const PostCreator = ({
 
   useEffect(() => {
     const { isError, data } = type === 'edit' ? resultUpdatePost : resultCreatePost;
-    console.log(data);
 
     if (isError) {
       notifications.show({
