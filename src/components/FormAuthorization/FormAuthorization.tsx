@@ -48,7 +48,6 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
       });
     } else {
       await registerUser({ email, password });
-      console.log(user, isLoading, isError);
     }
   };
 

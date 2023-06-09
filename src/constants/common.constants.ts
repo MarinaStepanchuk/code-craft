@@ -6,6 +6,7 @@ const Patch = {
   signIn: '/signin',
   signUp: '/signup',
   newPost: '/new-post',
+  post: '/post',
 };
 
 const ErrorMessages = {

@@ -1,7 +1,7 @@
 @import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
 
-.postList {
+.aside {
   @include flex($dir: column, $jc: flex-start);
-  width: 60%;
-  margin: 2rem;
+  width: 40%;
 }

@@ -1,3 +1,4 @@
+import PostContentRead from '@/components/PostContentRead/PostContentRead';
 import PostCreator from '@/components/PostEditor/PostCreator/PostCreator';
 import { IPost } from '@/types/interfaces';
 
@@ -25,13 +26,8 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
   const { banner, title, content, tags } = post;
 
   return (
-    <PostCreator
-      initialBanner={banner || ''}
-      initialTitle={title || ''}
-      initialContent={content || ''}
-      initialTags={tags || []}
-      type={'edit'}
-      postId={id}
-    />
+    <div>
+      <PostContentRead content={content || ''} />
+    </div>
   );
 }
