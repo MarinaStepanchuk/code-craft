@@ -45,6 +45,10 @@
 
     p {
       margin: 0;
+
+      &:first-of-type {
+        opacity: 0.8;
+      }
     }
   }
 }

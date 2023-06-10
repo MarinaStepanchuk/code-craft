@@ -27,6 +27,14 @@ export default function RootStyleRegistry({
       <MantineProvider
         withNormalizeCSS
         theme={{
+          fontFamily: 'Montserrat, sans-serif',
+          fontSizes: {
+            xs: '12px',
+            sm: '12px',
+            md: '14px',
+            lg: '16px',
+            xl: '14px',
+          },
           colors: {
             brand: [
               '#d4331e',

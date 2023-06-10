@@ -9,9 +9,10 @@ import { useSaveImageForPostMutation } from '@/redux/services/postsApi';
 import YoutubeButton from '../YoutubeButton/YoutubeButton';
 import styles from './postContentCreator.module.scss';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles(() => ({
   root: {
     width: '100%',
+    fontFamily: 'Montserrat',
   },
   toolbar: {
     border: 'none',
@@ -22,7 +23,7 @@ const useStyles = createStyles((theme) => ({
       height: '2rem',
 
       '&[data-active]': {
-        backgroundColor: theme.colors.brand[3],
+        backgroundColor: 'theme.colors.brand[3]',
         color: '#fff',
       },
 
@@ -41,7 +42,7 @@ const useStyles = createStyles((theme) => ({
     wordBreak: 'break-word',
 
     '& p': {
-      color: 'silver',
+      color: '#4a4a4a',
     },
     img: {
       maxWidth: '90%',
@@ -74,13 +75,32 @@ const useStyles = createStyles((theme) => ({
       textAlign: 'center',
     },
     pre: {
-      color: '#fff',
+      color: '#000',
       backgroundColor: '#000',
+      padding: '1rem',
 
       code: {
-        fontSize: '1.4rem',
+        fontSize: '1.6rem',
         fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
+        color: '#fff',
+        backgroundColor: '#000',
       },
+    },
+    code: {
+      fontSize: '1.6rem',
+      fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
+      color: '#fff',
+      backgroundColor: '#000',
+    },
+    a: {
+      color: '#212832',
+      cursor: 'pointer',
+    },
+    strong: {
+      fontWeight: 800,
+    },
+    h2: {
+      fontSize: '2.5rem',
     },
   },
 }));

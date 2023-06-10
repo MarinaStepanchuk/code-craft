@@ -39,4 +39,8 @@ interface IPostWithUser extends IPost {
   user: IUser;
 }
 
-export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag };
+interface IExpandedPost extends IPostWithUser {
+  likes: number;
+}
+
+export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost };
