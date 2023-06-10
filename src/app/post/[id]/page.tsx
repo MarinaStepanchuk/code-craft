@@ -1,12 +1,11 @@
-import PostContentRead from '@/components/PostContentRead/PostContentRead';
-import PostCreator from '@/components/PostEditor/PostCreator/PostCreator';
-import { IPost } from '@/types/interfaces';
+import ExpandedPost from '@/components/ExpandedPost/ExpandedPost';
+import { IExpandedPost } from '@/types/interfaces';
 
 interface IPageProps {
   params: { id: string };
 }
 
-export const getPost = async (id: string): Promise<IPost | null> => {
+export const getPost = async (id: string): Promise<IExpandedPost | null> => {
   try {
     const response = await fetch(`${process.env.API_URL}/post/${id}`);
     const data = await response.json();
@@ -17,17 +16,15 @@ export const getPost = async (id: string): Promise<IPost | null> => {
 };
 
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
-  const post = await getPost(id);
+  const data = await getPost(id);
 
-  if (!post) {
+  if (!data) {
     return <p>error</p>;
   }
 
-  const { banner, title, content, tags } = post;
-
   return (
     <div>
-      <PostContentRead content={content || ''} />
+      <ExpandedPost data={data} />
     </div>
   );
 }

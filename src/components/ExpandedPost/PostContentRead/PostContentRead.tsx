@@ -14,27 +14,33 @@ import Youtube from '@tiptap/extension-youtube';
 import Image from '@tiptap/extension-image';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import FontFamily from '@tiptap/extension-font-family';
 import { lowlight } from 'lowlight';
+import { useAppSelector } from '@/huks/redux';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 
 const useStyles = createStyles(() => ({
   root: {
     width: '100%',
+    border: 'none',
+    borderBottom: '0.0625rem solid #ced4da',
   },
   content: {
     width: 'content',
     display: 'flex',
-    backgroundColor: 'inherit',
+    backgroundColor: 'none',
     fontSize: '1.8rem',
     wordBreak: 'break-word',
+    padding: '2rem',
 
     a: {
       cursor: 'pointer',
+      color: '#212832',
     },
 
     '& p': {
-      color: 'silver',
+      color: '#4a4a4a',
     },
     img: {
       maxWidth: '90%',
@@ -66,20 +72,40 @@ const useStyles = createStyles(() => ({
       width: '20%',
       textAlign: 'center',
     },
-    pre: {
+    div: {
+      pre: {
+        // color: '#000',
+        backgroundColor: '#000',
+        padding: '1rem',
+
+        code: {
+          width: '100%',
+          fontSize: '1.6rem',
+          fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
+          color: '#fff',
+          backgroundColor: '#000',
+        },
+      },
+    },
+    code: {
+      width: '100%',
+      fontSize: '1.6rem',
+      fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
       color: '#fff',
       backgroundColor: '#000',
-
-      code: {
-        fontSize: '1.4rem',
-        fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
-      },
+    },
+    strong: {
+      fontWeight: 800,
+    },
+    h2: {
+      fontSize: '2.5rem',
     },
   },
 }));
 
-const PostContentRead = ({ content }: { content: string }): JSX.Element => {
+const PostContentRead = (): JSX.Element => {
   const { classes } = useStyles();
+  const { content } = useAppSelector((state) => state.postReducer.post);
 
   const editor = useEditor({
     extensions: [
@@ -102,13 +128,14 @@ const PostContentRead = ({ content }: { content: string }): JSX.Element => {
       CodeBlockLowlight.configure({
         lowlight,
       }),
+      FontFamily,
     ],
     content,
     editable: false,
   });
 
   return (
-    <RichTextEditor editor={editor} className={classes.root}>
+    <RichTextEditor editor={editor} className={classes.root} style={{ fontFamily: 'Montserrat' }}>
       <RichTextEditor.Content className={classes.content} />
     </RichTextEditor>
   );

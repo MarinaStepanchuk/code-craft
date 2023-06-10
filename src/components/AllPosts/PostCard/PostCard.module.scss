@@ -2,7 +2,7 @@
 @import '@/common.styles/variables.module.scss';
 
 .container {
-  @include flex($jc: space-between, $ai: flex-start, $gap: 2rem);
+  @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
   width: 100%;
   border-bottom: 1px solid rgb(33, 40, 50, 0.5);
   padding: 2rem 0;
@@ -17,6 +17,7 @@
   .contentContainer {
     @include flex($dir: column, $ai: flex-start);
     margin-top: 1.5rem;
+    width: 100%;
 
     .postContainer {
       cursor: pointer;

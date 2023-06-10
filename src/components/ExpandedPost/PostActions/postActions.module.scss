@@ -1,0 +1,17 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.actionsBlock {
+  @include flex($jc: space-between, $gap: 2rem);
+}
+
+.aboutButton {
+  @include darkButton($w: 16rem, $h: 4.5rem);
+}
+
+.likeButton {
+  @include center-content();
+  @include darkButton($w: 14rem, $h: 4.5rem);
+  background-color: #fff;
+  color: $text-dark;
+}

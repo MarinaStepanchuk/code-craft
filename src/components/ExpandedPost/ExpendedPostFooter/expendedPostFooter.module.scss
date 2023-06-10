@@ -1,0 +1,8 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.actionContainer {
+  @include flex($jc: space-between);
+  padding: 1.5rem 3rem;
+  // border-bottom: 0.0625rem solid #ced4da;
+}

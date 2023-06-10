@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { IPost } from '@/types/interfaces';
 import defaultImage from '@/assets/default_banner.png';
 import { Popover, Text, Flex, createStyles, Divider } from '@mantine/core';
-import { IconDots, IconPencil, IconTrash, IconShare } from '@tabler/icons-react';
+import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react';
 import getFirstParagraph from '@/utils/getFirstParagraph';
 import { useRouter } from 'next/navigation';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
@@ -10,6 +10,7 @@ import { useDeletePostMutation } from '@/redux/services/postsApi';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
 import getFormattedDate from '@/utils/getFormattedDate';
+import ShareLinkButton from '@/components/ShareLinkButton/ShareLinkButton';
 import styles from './publicationCard.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -142,9 +143,7 @@ const PublicationCard = ({
             </Flex>
           </Popover.Dropdown>
         </Popover>
-        {status === 'published' && (
-          <IconShare size={20} strokeWidth="1.2" className={classes.iconButton} />
-        )}
+        {status === 'published' && <ShareLinkButton />}
       </div>
       <Divider size={3} className={classes.divider} />
     </article>

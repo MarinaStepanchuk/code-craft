@@ -1,7 +1,5 @@
-'use client';
-
 import { Tooltip, createStyles } from '@mantine/core';
-import { IconAlbum } from '@tabler/icons-react';
+import { IconShare } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   iconButton: {
@@ -15,14 +13,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Bookmark = (): JSX.Element => {
+const ShareLinkButton = (): JSX.Element => {
   const { classes } = useStyles();
-  const addBookmark = (): void => {};
   return (
-    <Tooltip label="Save" withArrow>
-      <IconAlbum size={30} strokeWidth="0.8" onClick={addBookmark} className={classes.iconButton} />
+    <Tooltip label="Share" withArrow>
+      <IconShare size={23} strokeWidth="1.2" className={classes.iconButton} />
     </Tooltip>
   );
 };
 
-export default Bookmark;
+export default ShareLinkButton;
