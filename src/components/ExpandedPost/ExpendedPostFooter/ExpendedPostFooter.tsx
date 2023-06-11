@@ -53,7 +53,7 @@ const ExpendedPostFooter = (): JSX.Element => {
             </Tooltip>
           </AccordionControl>
 
-          <Accordion.Panel>
+          <Accordion.Panel sx={{ borderTop: '1px solid #ced4da' }}>
             <CommentsList />
           </Accordion.Panel>
         </Accordion.Item>

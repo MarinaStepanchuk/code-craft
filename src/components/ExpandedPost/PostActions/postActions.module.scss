@@ -11,7 +11,8 @@
 
 .likeButton {
   @include center-content();
-  @include darkButton($w: 14rem, $h: 4.5rem);
+  gap: 0.5rem;
+  @include darkButton($w: 9rem, $h: 4.5rem);
   background-color: #fff;
   color: $text-dark;
 }

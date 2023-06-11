@@ -26,7 +26,7 @@ const PostActions = (): JSX.Element => {
         </button>
         <button className={styles.likeButton}>
           <IconThumbUp size={23} strokeWidth="1.2" />
-          LIKE POST
+          <span>{'0'}</span>
         </button>
       </div>
     </div>

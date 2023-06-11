@@ -41,11 +41,11 @@ const ExpendedPostHeader = (): JSX.Element => {
             {user.avatarUrl ? (
               <Image
                 src={user.avatarUrl}
-                width={60}
-                height={60}
+                width={70}
+                height={70}
                 alt="author photo"
                 onClick={goToAuthorPage}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', borderRadius: '50%' }}
               />
             ) : (
               <div className={styles.userIcon} onClick={goToAuthorPage}>
@@ -53,7 +53,7 @@ const ExpendedPostHeader = (): JSX.Element => {
               </div>
             )}
           </div>
-          <span className={styles.name} onClick={goToAuthorPage}>
+          <span className={`${styles.name} ${amatic.className}`} onClick={goToAuthorPage}>
             {user.name || getNameFromEmail(user.email)}
           </span>
         </div>

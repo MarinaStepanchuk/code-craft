@@ -1,0 +1,98 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.bioWrapper {
+  @include flex($jc: flex-start);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 300;
+
+  p {
+    margin: 0;
+  }
+}
+
+.authorWrapper {
+  width: 10rem;
+  height: 100%;
+  background-color: #dee6e7;
+  @include flex($jc: flex-end);
+}
+
+.authorPhotoContainer {
+  width: max-content;
+  border-radius: 50%;
+  border: 5px solid #dee6e7;
+  position: relative;
+  left: 5rem;
+  z-index: 15;
+
+  .userIcon {
+    @include center-content;
+    width: 10rem;
+    height: 10rem;
+    color: $text-light;
+    font-size: 5rem;
+    background-color: $header-background;
+    border-radius: 50%;
+  }
+}
+
+.bioContainer {
+  @include flex($dir: column, $gap: 2rem, $ai: flex-start);
+  padding: 3rem 2rem 2rem 5rem;
+  background-color: $text-dark;
+  border-radius: 1rem;
+
+  .flexContainerNameFollow {
+    @include flex($jc: space-between);
+    border-bottom: 1px solid #fff;
+
+    .name {
+      font-size: 3rem;
+      font-weight: 600;
+      padding-bottom: 0.2rem;
+    }
+  }
+
+  .bio {
+    padding-bottom: 1rem;
+  }
+}
+
+.contacts {
+  @include flex($jc: flex-start);
+  font-weight: 300;
+  align-self: center;
+  padding-right: 4rem;
+
+  .link {
+    @include center-content;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.statisticContainer {
+  @include flex($wr: wrap);
+  align-self: center;
+  padding-right: 4rem;
+
+  .statisticItem {
+    font-size: 2rem;
+    padding: 0 1rem;
+  }
+}
+
+.divider {
+  border: 0;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  height: auto;
+  border-left-width: 0.0625rem;
+  border-left-color: #ced4da;
+  border-left-style: solid;
+}

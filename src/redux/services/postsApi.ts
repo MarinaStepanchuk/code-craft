@@ -14,12 +14,18 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    getPostById: build.query<IPost, string>({
-      query: (id) => ({
-        url: `/post/${id}`,
-      }),
-      providesTags: ['Posts'],
-    }),
+    // getPostById: build.query<IPost, string>({
+    //   query: (id) => ({
+    //     url: `/post/${id}`,
+    //   }),
+    //   providesTags: ['Posts'],
+    // }),
+    // getDraft: build.query<IPost, string>({
+    //   query: (id) => ({
+    //     url: `/post/draft/${id}`,
+    //   }),
+    //   providesTags: ['Posts'],
+    // }),
     saveImageForPost: build.mutation<string | null, FormData>({
       query: (data) => ({
         url: '/save-image',
@@ -62,7 +68,8 @@ export const postsApi = createApi({
 
 export const {
   useGetUserPostsQuery,
-  useGetPostByIdQuery,
+  // useGetPostByIdQuery,
+  // useGetDraftQuery,
   useSaveImageForPostMutation,
   useRemoveUnusedImagesMutation,
   useCreatePostMutation,
