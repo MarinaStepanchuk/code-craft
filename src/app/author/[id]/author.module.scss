@@ -1,0 +1,10 @@
+@import '@/common.styles/mixins.module.scss';
+
+.mainContainer {
+  @include flex($gap: 2rem, $ai: flex-start);
+  margin: 2rem;
+}
+
+.userContainer {
+  width: 70%;
+}

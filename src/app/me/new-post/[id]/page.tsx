@@ -1,37 +1,31 @@
 import PostCreator from '@/components/PostEditor/PostCreator/PostCreator';
-import { IPost } from '@/types/interfaces';
+import { notFound } from 'next/navigation';
 
 interface IPageProps {
   params: { id: string };
 }
 
-export const getPost = async (id: string): Promise<IPost | null> => {
-  try {
-    const response = await fetch(`${process.env.API_URL}/post/${id}`);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return null;
-  }
-};
-
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
-  const post = await getPost(id);
+  try {
+    const response = await fetch(`${process.env.API_URL}/post/draft/${id}`);
+    const post = await response.json();
+    const { banner, title, content, tags } = post;
 
-  if (!post) {
-    return <p>error</p>;
+    if (!post) {
+      notFound();
+    }
+
+    return (
+      <PostCreator
+        initialBanner={banner || ''}
+        initialTitle={title || ''}
+        initialContent={content || ''}
+        initialTags={tags || []}
+        type={'edit'}
+        postId={id}
+      />
+    );
+  } catch (error) {
+    notFound();
   }
-
-  const { banner, title, content, tags } = post;
-
-  return (
-    <PostCreator
-      initialBanner={banner || ''}
-      initialTitle={title || ''}
-      initialContent={content || ''}
-      initialTags={tags || []}
-      type={'edit'}
-      postId={id}
-    />
-  );
 }

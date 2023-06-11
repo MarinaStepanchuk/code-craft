@@ -59,7 +59,7 @@
 .actions {
   font-size: 1.6rem;
   @include flex($jc: space-between, $wr: wrap);
-  padding: 1rem 2rem 1rem 3rem;
+  padding: 0rem 2rem 0rem 3rem;
   border-bottom: 0.0625rem solid #ced4da;
 
   .authorPhotoContainer {
@@ -67,15 +67,15 @@
     border-radius: 50%;
     border: 5px solid #fff;
     position: relative;
-    top: -1.5rem;
+    top: -2rem;
     z-index: 15;
 
     .userIcon {
       @include center-content;
-      width: 6rem;
-      height: 6rem;
+      width: 7rem;
+      height: 7rem;
       color: $text-light;
-      font-size: 3rem;
+      font-size: 3.5rem;
       background-color: $header-background;
       border-radius: 50%;
       cursor: pointer;
@@ -88,6 +88,8 @@
     max-width: 23rem;
     overflow: hidden;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 2.5rem;
   }
 
   .actionsBlock {
