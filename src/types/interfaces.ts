@@ -40,7 +40,8 @@ interface IPostWithUser extends IPost {
 }
 
 interface IExpandedPost extends IPostWithUser {
-  likes: number;
+  countLikes: number;
+  isLiked: boolean;
 }
 
 export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost };

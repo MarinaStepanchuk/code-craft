@@ -1,30 +1,25 @@
 import ExpandedPost from '@/components/ExpandedPost/ExpandedPost';
-import { IExpandedPost } from '@/types/interfaces';
+import { notFound } from 'next/navigation';
 
 interface IPageProps {
   params: { id: string };
 }
 
-export const getPost = async (id: string): Promise<IExpandedPost | null> => {
+export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
     const response = await fetch(`${process.env.API_URL}/post/${id}`);
     const data = await response.json();
-    return data;
+
+    if (!data) {
+      notFound();
+    }
+
+    return (
+      <div>
+        <ExpandedPost data={data} />
+      </div>
+    );
   } catch (error) {
-    return null;
+    notFound();
   }
-};
-
-export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
-  const data = await getPost(id);
-
-  if (!data) {
-    return <p>error</p>;
-  }
-
-  return (
-    <div>
-      <ExpandedPost data={data} />
-    </div>
-  );
 }
