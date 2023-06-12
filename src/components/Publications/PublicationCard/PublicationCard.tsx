@@ -143,7 +143,7 @@ const PublicationCard = ({
             </Flex>
           </Popover.Dropdown>
         </Popover>
-        {status === 'published' && <ShareLinkButton />}
+        {status === 'published' && <ShareLinkButton post={post} />}
       </div>
       <Divider size={3} className={classes.divider} />
     </article>

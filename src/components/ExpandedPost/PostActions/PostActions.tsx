@@ -19,6 +19,7 @@ const PostActions = (): JSX.Element => {
   } = useAppSelector((state) => state.postReducer.post);
   const { status } = useSession();
   const { user } = useAppSelector((state) => state.userReducer);
+  const { post } = useAppSelector((state) => state.postReducer);
   const { push } = useRouter();
   const [addLike, resultAddLike] = useAddLikeMutation();
   const [removeLike, resultRemoveLike] = useRemoveLikeMutation();
@@ -53,7 +54,7 @@ const PostActions = (): JSX.Element => {
     <div className={styles.actionsBlock}>
       <div className={styles.actionsBlock}>
         {author.id !== user.id && <Bookmark postId={id} />}
-        <ShareLinkButton />
+        <ShareLinkButton post={post} />
       </div>
       <div className={styles.actionsBlock}>
         <button className={styles.aboutButton} onClick={goToAuthorPage}>

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost } from '@/types/interfaces';
+import { IPost, IPostWithUser } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -83,6 +83,11 @@ export const postsApi = createApi({
           userId,
           postId,
         },
+      }),
+    }),
+    getBookmarksPosts: build.query<IPostWithUser[], string>({
+      query: (userId) => ({
+        url: `/bookmarks?userId=${userId}`,
       }),
     }),
   }),
