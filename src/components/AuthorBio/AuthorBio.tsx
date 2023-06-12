@@ -7,6 +7,7 @@ import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
 import styles from './authorBio.module.scss';
 import EmailButton from '../EmailButton/EmailButton';
 import FollowButton from '../FollowButton/FollowButton';
+import getNameFromEmail from '@/utils/getNameFromEmail';
 
 const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
@@ -33,7 +34,9 @@ const AuthorBio = ({ user, postsCount }: { user: IUser; postsCount: number }): J
       </div>
       <div className={styles.bioContainer}>
         <div className={styles.flexContainerNameFollow}>
-          <p className={`${styles.name} ${amatic.className}`}>{name}</p>
+          <p className={`${styles.name} ${amatic.className}`}>
+            {user.name || getNameFromEmail(user.email)}
+          </p>
           <FollowButton />
         </div>
         <p className={styles.bio}>{bio}</p>
