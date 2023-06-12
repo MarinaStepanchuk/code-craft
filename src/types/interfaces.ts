@@ -7,6 +7,7 @@ interface IUser {
   twitter?: string;
   mail?: string;
   instagram?: string;
+  bookmarks?: string;
 }
 
 interface ITag {

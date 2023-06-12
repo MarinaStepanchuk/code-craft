@@ -27,6 +27,7 @@ const ErrorMessages = {
     errorTags: 'The post must contain at least 1 tag.',
   },
   errorPostLoading: 'Loading error. Reload the page or try again later.',
+  errorBookmarks: 'Failed to save bookmark.',
 };
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;

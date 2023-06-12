@@ -41,6 +41,17 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    updateBookmarks: build.mutation<IUser, { bookmarks: string; userId: string }>({
+      query: ({ bookmarks, userId }) => ({
+        url: `/bookmarks`,
+        method: 'PUT',
+        body: {
+          bookmarks,
+          userId,
+        },
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
@@ -49,4 +60,5 @@ export const {
   useGetUserByEmailQuery,
   useRegisterUserMutation,
   useUpdateUserMutation,
+  useUpdateBookmarksMutation,
 } = userApi;

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useAddLikeMutation, useRemoveLikeMutation } from '@/redux/services/postsApi';
 import { useEffect } from 'react';
 import { postSlice } from '@/redux/store/reducers/postSlice';
+import { useSession } from 'next-auth/react';
 import styles from './postActions.module.scss';
 
 const PostActions = (): JSX.Element => {
@@ -16,6 +17,7 @@ const PostActions = (): JSX.Element => {
     isLiked,
     countLikes,
   } = useAppSelector((state) => state.postReducer.post);
+  const { status } = useSession();
   const { user } = useAppSelector((state) => state.userReducer);
   const { push } = useRouter();
   const [addLike, resultAddLike] = useAddLikeMutation();
@@ -27,11 +29,11 @@ const PostActions = (): JSX.Element => {
     push(`${Patch.author}/${author.id}`);
   };
 
-  const handleLike = (): void => {
+  const handleLike = async (): Promise<void> => {
     if (isLiked) {
-      removeLike({ userId: user.id, postId: id });
+      await removeLike({ userId: user.id, postId: id });
     } else {
-      addLike({ userId: user.id, postId: id });
+      await addLike({ userId: user.id, postId: id });
     }
   };
 
@@ -50,15 +52,23 @@ const PostActions = (): JSX.Element => {
   return (
     <div className={styles.actionsBlock}>
       <div className={styles.actionsBlock}>
-        {author.id !== user.id && <Bookmark />}
+        {author.id !== user.id && <Bookmark postId={id} />}
         <ShareLinkButton />
       </div>
       <div className={styles.actionsBlock}>
         <button className={styles.aboutButton} onClick={goToAuthorPage}>
           ABOUT AUTHOR
         </button>
-        <button className={styles.likeButton} onClick={handleLike}>
-          <IconThumbUp size={23} strokeWidth="1.2" className={isLiked ? styles.like : ''} />
+        <button
+          className={styles.likeButton}
+          onClick={handleLike}
+          disabled={status !== 'authenticated'}
+        >
+          <IconThumbUp
+            size={23}
+            strokeWidth="1.2"
+            className={isLiked && status === 'authenticated' ? styles.like : ''}
+          />
           <span>{countLikes}</span>
         </button>
       </div>

@@ -1,13 +1,24 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Patch } from '@/constants/common.constants';
 import styles from './followButton.module.scss';
 
 const FollowButton = (): JSX.Element => {
-  const handleFollowing = (): void => {};
+  const { status } = useSession();
+  const { push } = useRouter();
+
+  const handleFollowing = (): void => {
+    if (status !== 'authenticated') {
+      push(Patch.signIn);
+    }
+  };
+
   return (
-    <p className={styles.followButton} onClick={handleFollowing}>
+    <button className={styles.followButton} onClick={handleFollowing}>
       + Follow
-    </p>
+    </button>
   );
 };
 

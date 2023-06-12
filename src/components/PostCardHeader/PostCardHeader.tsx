@@ -1,23 +1,26 @@
-import { IUser } from '@/types/interfaces';
+import { IPostWithUser } from '@/types/interfaces';
 import Image from 'next/image';
 import getFormattedDate from '@/utils/getFormattedDate';
 import Bookmark from '@/components/Bookmark/Bookmark';
 import { Patch } from '@/constants/common.constants';
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/huks/redux';
 import styles from './postCardHeader.module.scss';
 
-const PostCardHeader = ({ user, updatedDate }: { user: IUser; updatedDate: Date }): JSX.Element => {
+const PostCardHeader = ({ card }: { card: IPostWithUser }): JSX.Element => {
   const { push } = useRouter();
+  const { id, updatedDate, user: author } = card;
+  const { user } = useAppSelector((state) => state.userReducer);
 
   const goToAuthorPage = (): void => {
-    push(`${Patch.author}/${user.id}`);
+    push(`${Patch.author}/${author.id}`);
   };
 
   return (
     <div className={styles.userInfo}>
-      {user.avatarUrl ? (
+      {author.avatarUrl ? (
         <Image
-          src={user.avatarUrl}
+          src={author.avatarUrl}
           width={40}
           height={40}
           alt="user photo"
@@ -26,14 +29,14 @@ const PostCardHeader = ({ user, updatedDate }: { user: IUser; updatedDate: Date 
         />
       ) : (
         <div className={styles.userIcon} onClick={goToAuthorPage}>
-          {user.name?.at(0)?.toUpperCase() || user.email.at(0)?.toUpperCase()}
+          {author.name?.at(0)?.toUpperCase() || author.email.at(0)?.toUpperCase()}
         </div>
       )}
       <div>
-        <p>{user.name}</p>
+        <p>{author.name}</p>
         <p>{getFormattedDate(updatedDate)}</p>
       </div>
-      <Bookmark />
+      {author.id !== user.id && <Bookmark postId={id} />}
     </div>
   );
 };

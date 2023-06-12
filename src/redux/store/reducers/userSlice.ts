@@ -9,6 +9,12 @@ export const initialState: IInitialStateUserSlice = {
   user: {
     id: '',
     email: '',
+    name: '',
+    avatarUrl: '',
+    bio: '',
+    twitter: '',
+    mail: '',
+    instagram: '',
   },
 };
 
