@@ -63,6 +63,28 @@ export const postsApi = createApi({
       }),
       invalidatesTags: ['Posts'],
     }),
+    visitPost: build.mutation<object, number>({
+      query: (id) => ({
+        url: `/post/visit/${id}`,
+        method: 'PUT',
+      }),
+    }),
+    addLike: build.mutation<object, { userId: string; postId: number }>({
+      query: ({ userId, postId }) => ({
+        url: `/like?userId=${userId}&postId=${postId}`,
+        method: 'POST',
+      }),
+    }),
+    removeLike: build.mutation<object, { userId: string; postId: number }>({
+      query: ({ userId, postId }) => ({
+        url: `/like`,
+        method: 'DELETE',
+        body: {
+          userId,
+          postId,
+        },
+      }),
+    }),
   }),
 });
 
@@ -75,4 +97,7 @@ export const {
   useCreatePostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
+  useVisitPostMutation,
+  useAddLikeMutation,
+  useRemoveLikeMutation,
 } = postsApi;

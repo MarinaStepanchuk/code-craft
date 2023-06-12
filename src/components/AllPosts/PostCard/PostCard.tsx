@@ -10,7 +10,7 @@ import { Patch } from '@/constants/common.constants';
 import styles from './PostCard.module.scss';
 
 const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
-  const { id, title, banner, content, updatedDate, user } = card;
+  const { id, title, banner, content } = card;
   const { push } = useRouter();
 
   const readPost = (): void => {
@@ -30,7 +30,7 @@ const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
         />
       </div>
       <div className={styles.contentContainer}>
-        <PostCardHeader user={user} updatedDate={updatedDate} />
+        <PostCardHeader card={card} />
         <div className={styles.postContainer} onClick={readPost}>
           <h3 className={styles.title}>{title}</h3>
           <div className={styles.content}>{getFirstParagraph(content || '')}</div>

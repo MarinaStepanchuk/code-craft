@@ -25,7 +25,8 @@ export const initialState: IInitialStatePostSlice = {
       mail: '',
       instagram: '',
     },
-    likes: 0,
+    countLikes: 0,
+    isLiked: false,
   },
 };
 
@@ -36,8 +37,16 @@ export const postSlice = createSlice({
     setPost(state, action: PayloadAction<IExpandedPost>) {
       state.post = action.payload;
     },
+    updateLike(state, action: PayloadAction<boolean>) {
+      state.post.isLiked = action.payload;
+      if (action.payload) {
+        state.post.countLikes += 1;
+      } else {
+        state.post.countLikes -= 1;
+      }
+    },
   },
 });
 
-export const { setPost } = postSlice.actions;
+export const { setPost, updateLike } = postSlice.actions;
 export default postSlice.reducer;
