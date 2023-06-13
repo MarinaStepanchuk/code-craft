@@ -1,5 +1,5 @@
 import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import defaultProfilePhoto from '@/assets/profile_default.png';
 import Image from 'next/image';
 import { IFormDataProfile } from '@/types/interfaces';

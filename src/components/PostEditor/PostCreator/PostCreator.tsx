@@ -23,7 +23,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { lowlight } from 'lowlight';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import Link from '@tiptap/extension-link';
 import { ITag } from '@/types/interfaces';
 import PostTags from '../PostTags/PostTags';

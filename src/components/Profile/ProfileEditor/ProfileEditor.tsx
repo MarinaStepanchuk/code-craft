@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import { useForm } from 'react-hook-form';
 import { IFormDataProfile } from '@/types/interfaces';
 import { useUpdateUserMutation } from '@/redux/services/userApi';

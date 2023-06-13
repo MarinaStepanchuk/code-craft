@@ -1,0 +1,19 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.form {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.formActions {
+  @include flex($jc: flex-start);
+}
+
+.formButton {
+  @include darkButton($w: 8rem, $h: 3rem);
+  margin: 1rem 0 0 0.5rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+  font-size: 1.4rem;
+}

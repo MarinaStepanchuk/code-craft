@@ -1,6 +1,7 @@
 import { IconMessageCircle2 } from '@tabler/icons-react';
 import { Accordion, AccordionControlProps, Box, Tooltip, createStyles } from '@mantine/core';
-import CommentsList from '../CommentsList/CommentsList';
+import { lazy, Suspense } from 'react';
+import Preloader from '@/components/Preloader/Preloader';
 import PostActions from '../PostActions/PostActions';
 import styles from './expendedPostFooter.module.scss';
 
@@ -41,6 +42,8 @@ function AccordionControl(props: AccordionControlProps): JSX.Element {
   );
 }
 
+const Comments = lazy(() => import('../Comments/Comments'));
+
 const ExpendedPostFooter = (): JSX.Element => {
   const { classes } = useStyles();
   return (
@@ -54,11 +57,12 @@ const ExpendedPostFooter = (): JSX.Element => {
           </AccordionControl>
 
           <Accordion.Panel sx={{ borderTop: '1px solid #ced4da' }}>
-            <CommentsList />
+            <Suspense fallback={<Preloader />}>
+              <Comments />
+            </Suspense>
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>
-      <p>jafkdsndsldm</p>
     </footer>
   );
 };

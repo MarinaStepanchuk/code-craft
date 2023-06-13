@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { IconAt, IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
 import { IFormDataProfile } from '@/types/interfaces';

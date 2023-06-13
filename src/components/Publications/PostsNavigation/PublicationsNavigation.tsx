@@ -4,7 +4,7 @@ import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell } from '@tabler/icons-react';
 import { useGetUserPostsQuery } from '@/redux/services/postsApi';
 import { ErrorMessages } from '@/constants/common.constants';
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import { IPost } from '@/types/interfaces';
 import Preloader from '@/components/Preloader/Preloader';
 import PublicationList from '../PublicationsList/PublicationList';

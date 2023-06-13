@@ -4,10 +4,10 @@ import Link from 'next/link';
 // eslint-disable-next-line camelcase
 import { Amatic_SC } from 'next/font/google';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
+import getNameFromEmail from '@/utils/getNameFromEmail';
 import styles from './authorBio.module.scss';
 import EmailButton from '../EmailButton/EmailButton';
 import FollowButton from '../FollowButton/FollowButton';
-import getNameFromEmail from '@/utils/getNameFromEmail';
 
 const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 

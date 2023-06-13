@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import { Menu, Text, Avatar, Flex, useMantineTheme, createStyles } from '@mantine/core';
 import {
   IconUserEdit,
