@@ -4,6 +4,7 @@ import Link from 'next/link';
 // eslint-disable-next-line camelcase
 import { Amatic_SC } from 'next/font/google';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
+import getNameFromEmail from '@/utils/getNameFromEmail';
 import styles from './authorBio.module.scss';
 import EmailButton from '../EmailButton/EmailButton';
 import FollowButton from '../FollowButton/FollowButton';
@@ -33,7 +34,9 @@ const AuthorBio = ({ user, postsCount }: { user: IUser; postsCount: number }): J
       </div>
       <div className={styles.bioContainer}>
         <div className={styles.flexContainerNameFollow}>
-          <p className={`${styles.name} ${amatic.className}`}>{name}</p>
+          <p className={`${styles.name} ${amatic.className}`}>
+            {user.name || getNameFromEmail(user.email)}
+          </p>
           <FollowButton />
         </div>
         <p className={styles.bio}>{bio}</p>

@@ -2,7 +2,7 @@ import Bookmark from '@/components/Bookmark/Bookmark';
 import { IconThumbUp } from '@tabler/icons-react';
 import ShareLinkButton from '@/components/ShareLinkButton/ShareLinkButton';
 import { Patch } from '@/constants/common.constants';
-import { useAppDispatch, useAppSelector } from '@/huks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { useRouter } from 'next/navigation';
 import { useAddLikeMutation, useRemoveLikeMutation } from '@/redux/services/postsApi';
 import { useEffect } from 'react';

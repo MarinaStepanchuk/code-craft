@@ -5,7 +5,7 @@ import { userSlice } from '@/redux/store/reducers/userSlice';
 import { useGetUserByEmailQuery } from '@/redux/services/userApi';
 import { useEffect } from 'react';
 import { IUser } from '@/types/interfaces';
-import { useAppDispatch } from '@/huks/redux';
+import { useAppDispatch } from '@/hooks/redux';
 import { Flex } from '@mantine/core';
 import { Session } from 'next-auth';
 import { IconArrowBadgeDown, IconPencilPlus } from '@tabler/icons-react';

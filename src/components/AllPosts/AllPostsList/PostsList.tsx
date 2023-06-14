@@ -10,8 +10,8 @@ const AllPostsList = ({
   width?: string;
 }): JSX.Element => (
   <section className={styles.postList} style={{ width: `${width}` }}>
-    {cards.map((card, index) => (
-      <PostCard key={index} card={card} />
+    {cards.map((card) => (
+      <PostCard key={card.id} card={card} />
     ))}
   </section>
 );

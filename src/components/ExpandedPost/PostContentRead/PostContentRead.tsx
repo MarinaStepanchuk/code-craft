@@ -16,7 +16,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import FontFamily from '@tiptap/extension-font-family';
 import { lowlight } from 'lowlight';
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 

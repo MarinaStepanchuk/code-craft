@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/huks/redux';
+import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { postSlice } from '@/redux/store/reducers/postSlice';
 import { IExpandedPost } from '@/types/interfaces';
 import { useVisitPostMutation } from '@/redux/services/postsApi';

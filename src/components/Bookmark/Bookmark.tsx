@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import { useUpdateBookmarksMutation } from '@/redux/services/userApi';
 import { Tooltip, createStyles } from '@mantine/core';
 import { IconAlbum } from '@tabler/icons-react';

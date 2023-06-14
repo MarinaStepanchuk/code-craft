@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import Image from 'next/image';
 import defaultBanner from '@/assets/default_banner.png';
 import getFormattedDate from '@/utils/getFormattedDate';

@@ -45,4 +45,17 @@ interface IExpandedPost extends IPostWithUser {
   isLiked: boolean;
 }
 
-export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost };
+interface IComment {
+  id: number;
+  message: string;
+  parentId: number | null;
+  createdDate: Date;
+  user: {
+    id: string;
+    name: string | null;
+    avatarUrl: string | null;
+    email: string;
+  };
+}
+
+export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost, IComment };

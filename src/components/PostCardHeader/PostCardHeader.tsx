@@ -4,7 +4,7 @@ import getFormattedDate from '@/utils/getFormattedDate';
 import Bookmark from '@/components/Bookmark/Bookmark';
 import { Patch } from '@/constants/common.constants';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from '@/huks/redux';
+import { useAppSelector } from '@/hooks/redux';
 import styles from './postCardHeader.module.scss';
 
 const PostCardHeader = ({ card }: { card: IPostWithUser }): JSX.Element => {

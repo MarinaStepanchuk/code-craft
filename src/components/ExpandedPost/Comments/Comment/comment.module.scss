@@ -1,0 +1,88 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.comment {
+  width: 100%;
+  margin: 1rem;
+  @include flex($jc: flex-start, $gap: 1.5rem, $ai: flex-start);
+  font-size: 1.4rem;
+  color: $text-dark;
+
+  p {
+    margin: 0;
+  }
+
+  .userIcon {
+    @include center-content;
+    width: 6rem;
+    height: 6rem;
+    color: $text-light;
+    font-size: 3.2rem;
+    background-color: $header-background;
+    border-radius: 50%;
+  }
+
+  .commentContent {
+    width: 80%;
+
+    .details {
+      @include flex($jc: flex-start);
+
+      .name {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: $primary-color;
+      }
+      .dot {
+        width: 5px;
+        height: 5px;
+        background-color: $primary-color;
+        border-radius: 50%;
+      }
+
+      .date {
+        color: #646262;
+      }
+    }
+
+    .author {
+      font-size: 1.2rem;
+      color: #646262;
+    }
+
+    .message {
+      margin-top: 0.5rem;
+    }
+
+    .actions {
+      @include flex($jc: flex-start);
+      margin-top: 1rem;
+
+      .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: #646262;
+      }
+
+      .action {
+        font-size: 1.2rem;
+        @include center-content;
+        width: 5rem;
+        color: $text-dark;
+        cursor: pointer;
+        width: 5rem;
+        height: 2.5rem;
+        padding: 0rem 0.4rem;
+        border-radius: 5px;
+        font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+        text-decoration: none;
+        transition: all 250ms;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

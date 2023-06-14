@@ -39,6 +39,7 @@
 }
 
 .bioContainer {
+  width: 100%;
   @include flex($dir: column, $gap: 2rem, $ai: flex-start);
   padding: 3rem 2rem 2rem 5rem;
   background-color: $text-dark;
