@@ -135,7 +135,7 @@ const PostContentCreator = ({
       notifications.show({
         message: ErrorMessages.errorLoadingImage,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },

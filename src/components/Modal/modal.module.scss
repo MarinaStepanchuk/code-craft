@@ -14,10 +14,14 @@
   transition: 0.5s;
 
   .content {
+    width: 50vw;
+    min-width: 30rem;
     padding: 3rem 2rem 2rem 2rem;
     border-radius: 1.2rem;
-    background-color: #fff;
+    background-color: #dee6e7;
     transform: scale(0.5);
+    color: $text-dark;
+    text-align: center;
 
     &.active {
       transform: scale(1);

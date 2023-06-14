@@ -5,7 +5,9 @@ const baseUrl = process.env.API_URL;
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+  }),
   tagTypes: ['User'],
   endpoints: (build) => ({
     registerUser: build.mutation<IUser, { email: string; password: string }>({
@@ -21,9 +23,6 @@ export const userApi = createApi({
     getUserById: build.query<IUser, string>({
       query: (id) => ({
         url: `/${id}`,
-        // headers: {
-        //   [Headers.key]: ApiKey,
-        // },
       }),
       providesTags: ['User'],
     }),

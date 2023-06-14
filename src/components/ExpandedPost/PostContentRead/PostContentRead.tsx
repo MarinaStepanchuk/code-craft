@@ -14,7 +14,6 @@ import Youtube from '@tiptap/extension-youtube';
 import Image from '@tiptap/extension-image';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import FontFamily from '@tiptap/extension-font-family';
 import { lowlight } from 'lowlight';
 import { useAppSelector } from '@/hooks/redux';
 
@@ -128,7 +127,6 @@ const PostContentRead = (): JSX.Element => {
       CodeBlockLowlight.configure({
         lowlight,
       }),
-      FontFamily,
     ],
     content,
     editable: false,

@@ -8,6 +8,7 @@ interface IUser {
   mail?: string;
   instagram?: string;
   bookmarks?: string;
+  accessToken?: string;
 }
 
 interface ITag {
@@ -58,4 +59,21 @@ interface IComment {
   };
 }
 
-export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost, IComment };
+interface IBackendError {
+  data: {
+    errors?: string[];
+    message: string;
+    status: number;
+  };
+}
+
+export type {
+  IUser,
+  IPost,
+  IFormDataProfile,
+  IPostWithUser,
+  ITag,
+  IExpandedPost,
+  IComment,
+  IBackendError,
+};

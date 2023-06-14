@@ -1,7 +1,7 @@
 import Header from '@/layout/Header/Header';
 import { Montserrat } from 'next/font/google';
 import './globals.scss';
-import { getServerSession } from 'next-auth';
+import { Session, getServerSession } from 'next-auth';
 import ProviderToolkit from '@/redux/provider';
 import styles from './layout.module.scss';
 import NextAuthProvider from './providers';
@@ -17,17 +17,17 @@ export const metadata = {
   template: '%s',
 };
 
-// export const getSession = async (): Promise<Session | null> => {
-//   const session = await getServerSession(authOptions);
-//   return session;
-// };
+export const checkSession = async (): Promise<Session | null> => {
+  const session = await getServerSession(authOptions);
+  return session;
+};
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }): Promise<JSX.Element> {
-  const session = await getServerSession(authOptions);
+  const session = await checkSession();
   return (
     <html lang="en" className={styles.html}>
       <NextAuthProvider>

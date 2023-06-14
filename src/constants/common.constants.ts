@@ -5,13 +5,14 @@ const Patch = {
   publications: '/publications',
   signIn: '/signin',
   signUp: '/signup',
-  newPost: '/new-post',
+  newPost: '/newpost',
   post: '/post',
   author: '/author',
 };
 
 const ErrorMessages = {
   unknown: 'Something went wrong, send your request later.',
+  invalidData: 'The data entered is incorrect',
   invalidEmail: 'the email is not valid',
   invalidPassword:
     'password should have a minimum length of 8 symbols, at least one letter, one digit, one special character',

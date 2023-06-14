@@ -6,6 +6,7 @@ import { ActiveComment } from '@/types/types';
 import { useAppSelector } from '@/hooks/redux';
 // eslint-disable-next-line camelcase
 import { Amatic_SC } from 'next/font/google';
+import getFormattedDate from '@/utils/getFormattedDate';
 import styles from './comment.module.scss';
 import CommentsForm from '../CommentsForm/CommentsForm';
 
@@ -66,13 +67,7 @@ const Comment = ({
             {user.name || getNameFromEmail(user.email)}
           </p>
           <div className={styles.dot}></div>
-          <p className={styles.date}>
-            {new Date(createdDate).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
+          <p className={styles.date}>{getFormattedDate(createdDate)}</p>
         </div>
         {user.id === creatorPost.id && <p className={styles.author}>author</p>}
         {!isEditing && <p className={styles.message}>{text}</p>}

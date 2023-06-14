@@ -14,7 +14,7 @@ const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
   const { user: userData } = useAppSelector((state) => state.userReducer);
   const { setPost } = postSlice.actions;
   const dispatch = useAppDispatch();
-  dispatch(setPost(data));
+
   const [visitPost] = useVisitPostMutation();
 
   useEffect(() => {
@@ -22,6 +22,10 @@ const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
       visitPost(data.id);
     }
   }, [data.id, data.user.id, userData.id, visitPost]);
+
+  useEffect(() => {
+    dispatch(setPost(data));
+  }, []);
 
   return (
     <section className={styles.postSection}>

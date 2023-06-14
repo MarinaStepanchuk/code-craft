@@ -6,7 +6,9 @@ const baseUrl = process.env.API_URL;
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+  }),
   endpoints: (build) => ({
     getUserPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
       query: ({ userId, status }) => ({
@@ -14,18 +16,12 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    // getPostById: build.query<IPost, string>({
-    //   query: (id) => ({
-    //     url: `/post/${id}`,
-    //   }),
-    //   providesTags: ['Posts'],
-    // }),
-    // getDraft: build.query<IPost, string>({
-    //   query: (id) => ({
-    //     url: `/post/draft/${id}`,
-    //   }),
-    //   providesTags: ['Posts'],
-    // }),
+    getAllPosts: build.query<IPostWithUser[], void>({
+      query: () => ({
+        url: `/posts`,
+      }),
+      providesTags: ['Posts'],
+    }),
     saveImageForPost: build.mutation<string | null, FormData>({
       query: (data) => ({
         url: '/save-image',
@@ -95,6 +91,7 @@ export const postsApi = createApi({
 
 export const {
   useGetUserPostsQuery,
+  useGetAllPostsQuery,
   // useGetPostByIdQuery,
   // useGetDraftQuery,
   useSaveImageForPostMutation,

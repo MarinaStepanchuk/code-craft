@@ -13,7 +13,9 @@ interface ICreateCommentData {
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',
   tagTypes: ['Comments'],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+  }),
   endpoints: (build) => ({
     getAllComments: build.query<IComment[], number>({
       query: (postId) => ({

@@ -1,10 +1,15 @@
 import FormAuthorization from '@/components/FormAuthorization/FormAuthorization';
-import { getServerSession } from 'next-auth';
+import { Session, getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
-const SignUp = async (): Promise<JSX.Element> => {
+export const checkSession = async (): Promise<Session | null> => {
   const session = await getServerSession(authOptions);
+  return session;
+};
+
+const SignUp = async (): Promise<JSX.Element> => {
+  const session = await checkSession();
 
   if (session) {
     redirect('/');
