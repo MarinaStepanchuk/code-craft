@@ -92,8 +92,6 @@ export const postsApi = createApi({
 export const {
   useGetUserPostsQuery,
   useGetAllPostsQuery,
-  // useGetPostByIdQuery,
-  // useGetDraftQuery,
   useSaveImageForPostMutation,
   useRemoveUnusedImagesMutation,
   useCreatePostMutation,

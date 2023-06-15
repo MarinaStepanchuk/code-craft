@@ -25,6 +25,7 @@ interface IPost {
   tags: Array<ITag> | null;
   viewCount: number | null;
   updatedDate: Date;
+  createdDate: Date;
   UserId: string;
 }
 
@@ -51,6 +52,8 @@ interface IComment {
   message: string;
   parentId: number | null;
   createdDate: Date;
+  updatedDate: Date;
+  postId: number;
   user: {
     id: string;
     name: string | null;

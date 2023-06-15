@@ -40,12 +40,15 @@ const useStyles = createStyles(() => ({
 
     '& p': {
       color: '#4a4a4a',
+      lineHeight: '1.8',
     },
+
     img: {
       maxWidth: '90%',
       display: 'block',
       margin: '1rem auto',
     },
+
     '& [data-youtube-video]': {
       display: 'flex',
       alignItems: 'center',
@@ -53,6 +56,7 @@ const useStyles = createStyles(() => ({
       margin: 0,
       width: '100%',
     },
+
     iframe: {
       width: '480px',
       height: '360px',
@@ -67,14 +71,14 @@ const useStyles = createStyles(() => ({
         height: '165px',
       },
     },
+
     hr: {
       width: '20%',
       textAlign: 'center',
     },
     div: {
       pre: {
-        // color: '#000',
-        backgroundColor: '#000',
+        backgroundColor: '#302f2f',
         padding: '1rem',
 
         code: {
@@ -82,7 +86,7 @@ const useStyles = createStyles(() => ({
           fontSize: '1.6rem',
           fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
           color: '#fff',
-          backgroundColor: '#000',
+          backgroundColor: '#302f2f',
         },
       },
     },
@@ -91,7 +95,7 @@ const useStyles = createStyles(() => ({
       fontSize: '1.6rem',
       fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
       color: '#fff',
-      backgroundColor: '#000',
+      backgroundColor: '#302f2f',
     },
     strong: {
       fontWeight: 800,
@@ -133,7 +137,7 @@ const PostContentRead = (): JSX.Element => {
   });
 
   return (
-    <RichTextEditor editor={editor} className={classes.root} style={{ fontFamily: 'Montserrat' }}>
+    <RichTextEditor editor={editor} className={classes.root}>
       <RichTextEditor.Content className={classes.content} />
     </RichTextEditor>
   );

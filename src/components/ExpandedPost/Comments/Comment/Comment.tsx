@@ -6,6 +6,8 @@ import { ActiveComment } from '@/types/types';
 import { useAppSelector } from '@/hooks/redux';
 // eslint-disable-next-line camelcase
 import { Amatic_SC } from 'next/font/google';
+import { useRouter } from 'next/navigation';
+import { Patch } from '@/constants/common.constants';
 import getFormattedDate from '@/utils/getFormattedDate';
 import styles from './comment.module.scss';
 import CommentsForm from '../CommentsForm/CommentsForm';
@@ -34,7 +36,7 @@ const Comment = ({
   deleteComment,
   parentId,
 }: ICommentProps): JSX.Element => {
-  const { id, message: text, createdDate, user } = comment;
+  const { id, message: text, createdDate, updatedDate, user } = comment;
   const { id: userId } = useAppSelector((state) => state.userReducer.user);
   const { user: creatorPost } = useAppSelector((state) => state.postReducer.post);
   const isEditing = activeComment && activeComment.id === id && activeComment.type === 'editing';
@@ -43,10 +45,15 @@ const Comment = ({
   const canReply = !!userId;
   const canEdit = userId === user.id;
   const replyId = parentId || id;
+  const { push } = useRouter();
+
+  const goToUserPage = (): void => {
+    push(`${Patch.author}/${user.id}`);
+  };
 
   return (
     <div className={styles.comment}>
-      <div className={styles.avatar}>
+      <div className={styles.avatar} onClick={goToUserPage}>
         {user.avatarUrl ? (
           <Image
             src={user.avatarUrl}
@@ -63,10 +70,13 @@ const Comment = ({
       </div>
       <div className={styles.commentContent}>
         <div className={styles.details}>
-          <p className={`${styles.name} ${amatic.className}`}>
+          <p className={`${styles.name} ${amatic.className}`} onClick={goToUserPage}>
             {user.name || getNameFromEmail(user.email)}
           </p>
           <div className={styles.dot}></div>
+          {new Date(updatedDate).getTime() !== new Date(createdDate).getTime() && (
+            <p className={styles.author}>edited on</p>
+          )}
           <p className={styles.date}>{getFormattedDate(createdDate)}</p>
         </div>
         {user.id === creatorPost.id && <p className={styles.author}>author</p>}

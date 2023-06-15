@@ -9,6 +9,8 @@ import {
 import { useAppSelector } from '@/hooks/redux';
 import Preloader from '@/components/Preloader/Preloader';
 import { ActiveComment } from '@/types/types';
+import { notifications } from '@mantine/notifications';
+import { ErrorMessages } from '@/constants/common.constants';
 import Comment from './Comment/Comment';
 import CommentsForm from './CommentsForm/CommentsForm';
 import styles from './comments.module.scss';
@@ -49,9 +51,19 @@ const Comments = (): JSX.Element => {
     setActiveComment(null);
   };
 
-  if (isErrorComments) {
-    return <p>Error</p>;
-  }
+  useEffect(() => {
+    if (resultCreateComment.isError || resultUpdateComment.isError || resultDeleteComment.isError) {
+      notifications.show({
+        message: ErrorMessages.unknown,
+        color: 'red',
+        autoClose: 3000,
+        withBorder: true,
+        styles: () => ({
+          description: { fontSize: '1.4rem' },
+        }),
+      });
+    }
+  }, [resultCreateComment, resultUpdateComment, resultDeleteComment, isErrorComments]);
 
   return (
     <div className={styles.comments}>

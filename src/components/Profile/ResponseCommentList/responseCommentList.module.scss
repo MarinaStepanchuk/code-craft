@@ -1,0 +1,7 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.comments {
+  @include flex($dir: column, $gap: 0, $jc: flex-start);
+  padding: 0rem 3rem;
+}

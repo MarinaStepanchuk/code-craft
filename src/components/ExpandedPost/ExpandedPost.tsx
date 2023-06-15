@@ -9,9 +9,12 @@ import PostContentRead from './PostContentRead/PostContentRead';
 import ExpendedPostHeader from './ExpendedPostHeader/ExpendedPostHeader';
 import styles from './expandedPost.module.scss';
 import ExpendedPostFooter from './ExpendedPostFooter/ExpendedPostFooter';
+import TagsList from './TagsList/TagsList';
 
 const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
   const { user: userData } = useAppSelector((state) => state.userReducer);
+  const { tags } = useAppSelector((state) => state.postReducer.post);
+
   const { setPost } = postSlice.actions;
   const dispatch = useAppDispatch();
 
@@ -31,6 +34,9 @@ const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
     <section className={styles.postSection}>
       <ExpendedPostHeader />
       <PostContentRead />
+      <div className={styles.tagsWrapper}>
+        <TagsList tags={tags} />
+      </div>
       <ExpendedPostFooter />
     </section>
   );

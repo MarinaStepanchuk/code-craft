@@ -52,7 +52,14 @@ const PostTags = ({ tag, setTag, tags, setTags }: IPostTagsProps): JSX.Element =
             key={index}
             variant={'filled'}
             pr={3}
-            sx={{ backgroundColor: theme.colors.brand[2] }}
+            style={{
+              backgroundColor: theme.colors.brand[2],
+              textTransform: 'none',
+              fontWeight: '300',
+              fontSize: '1.2rem',
+              paddingTop: '0.8rem',
+              paddingBottom: '0.8rem',
+            }}
             rightSection={
               <ActionIcon
                 size="md"

@@ -3,6 +3,7 @@
 import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell, IconSettings } from '@tabler/icons-react';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
+import ResponseCommentList from '../ResponseCommentList/ResponseCommentList';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -61,7 +62,7 @@ const SettingsNavigation = (): JSX.Element => {
           icon={<IconSettings size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
-          Settings
+          My Comments
         </Tabs.Tab>
       </Tabs.List>
 
@@ -74,7 +75,7 @@ const SettingsNavigation = (): JSX.Element => {
       </Tabs.Panel>
 
       <Tabs.Panel value="settings" pt="xs">
-        Settings tab content
+        <ResponseCommentList />
       </Tabs.Panel>
     </Tabs>
   );

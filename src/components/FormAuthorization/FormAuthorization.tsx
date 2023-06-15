@@ -7,7 +7,6 @@ import { ErrorMessages, Patch, regEmail, regPassword } from '@/constants/common.
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import googleIcon from '@/assets/icon-google.svg';
-import githubIcon from '@/assets/icon-github.svg';
 import { useRegisterUserMutation } from '@/redux/services/userApi';
 import { useRouter } from 'next/navigation';
 import { notifications } from '@mantine/notifications';
@@ -90,7 +89,10 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
   }, [user, isError]);
 
   const signInWithGoogle = async (): Promise<void> => {
-    await signIn('google');
+    await signIn('google', {
+      redirect: true,
+      callbackUrl: '/',
+    });
   };
 
   const redirect = (): void => {

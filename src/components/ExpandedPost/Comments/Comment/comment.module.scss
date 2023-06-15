@@ -12,6 +12,10 @@
     margin: 0;
   }
 
+  .avatar {
+    cursor: pointer;
+  }
+
   .userIcon {
     @include center-content;
     width: 6rem;
@@ -32,6 +36,7 @@
         font-size: 1.8rem;
         font-weight: 600;
         color: $primary-color;
+        cursor: pointer;
       }
       .dot {
         width: 5px;

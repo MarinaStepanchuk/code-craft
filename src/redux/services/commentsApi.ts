@@ -10,6 +10,18 @@ interface ICreateCommentData {
   postId: number;
 }
 
+export interface IResponseComment extends IComment {
+  post: {
+    banner: string;
+  };
+}
+
+export interface IResponseComments {
+  comments: IResponseComment[];
+  page: number;
+  amountPages: number;
+}
+
 export const commentsApi = createApi({
   reducerPath: 'commentsApi',
   tagTypes: ['Comments'],
@@ -48,6 +60,11 @@ export const commentsApi = createApi({
       }),
       invalidatesTags: ['Comments'],
     }),
+    getResponses: build.query<IResponseComments, { userId: string; offset?: number }>({
+      query: ({ userId, offset = 0 }) => ({
+        url: `/responses?userId=${userId}&offset=${offset}`,
+      }),
+    }),
   }),
 });
 
@@ -56,4 +73,5 @@ export const {
   useCreateCommentMutation,
   useUpdateCommentMutation,
   useDeleteCommentMutation,
+  useGetResponsesQuery,
 } = commentsApi;

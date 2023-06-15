@@ -36,6 +36,10 @@ const NavigationUser = (): JSX.Element => {
     push(`${Patch.me}${Patch.publications}`);
   };
 
+  const logOut = async (): Promise<void> => {
+    await signOut({ callbackUrl: '/' });
+  };
+
   return (
     <Menu shadow="md" width={400} position="bottom-end" radius={10}>
       <Menu.Target>
@@ -88,7 +92,7 @@ const NavigationUser = (): JSX.Element => {
         <Menu.Item
           className={classes.item}
           icon={<IconLogout size={30} strokeWidth="1" />}
-          onClick={(): Promise<undefined> => signOut({ callbackUrl: '/' })}
+          onClick={logOut}
           sx={{ fontSize: '1.5rem' }}
         >
           <Flex direction="column" justify="flex-start">
