@@ -27,10 +27,9 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
   const { classes } = useStyles();
   const { user } = useAppSelector((state) => state.userReducer);
   const [updateBookmarks, resultUpdateBookmarks] = useUpdateBookmarksMutation();
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const checkBookmark = (): boolean => (user.bookmarks || '').split(' ').includes(String(postId));
-
-  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const addBookmark = (bookmarks: Array<string>): Array<string> => [...bookmarks, String(postId)];
 
@@ -55,7 +54,7 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
       notifications.show({
         message: ErrorMessages.errorBookmarks,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 3000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },

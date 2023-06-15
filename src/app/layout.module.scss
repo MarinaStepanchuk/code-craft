@@ -3,11 +3,50 @@
 .html {
   font-size: 10px;
   color: $text-dark;
+  scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
+  scrollbar-width: 1.3rem; /* толщина */
+
+  /* полоса прокрутки (скроллбар) */
+  ::-webkit-scrollbar {
+    width: 1.3rem; /* ширина для вертикального скролла */
+    height: 0.5rem; /* высота для горизонтального скролла */
+    background-color: #dee6e7;
+  }
+
+  /* ползунок скроллбара */
+  ::-webkit-scrollbar-thumb {
+    background-color: $text-dark;
+    // border-radius: 9em;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $text-dark;
+  }
+
+  /* Стрелки */
+
+  ::-webkit-scrollbar-button:vertical:start:decrement {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:vertical:end:increment {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:horizontal:start:decrement {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:horizontal:end:increment {
+    display: none;
+  }
 }
 
 .body {
   background-color: #dee6e7;
   font-weight: 500;
+  scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
+  scrollbar-width: 1.3rem; /* толщина */
 }
 
 .main {

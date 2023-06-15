@@ -62,7 +62,7 @@ const ProfileEditor = (): JSX.Element => {
       notifications.show({
         message: ErrorMessages.errorUserUpdate,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },
@@ -72,7 +72,7 @@ const ProfileEditor = (): JSX.Element => {
       notifications.show({
         message: 'Data saved successfully',
         color: 'green',
-        autoClose: 2000,
+        autoClose: 3000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },

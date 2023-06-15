@@ -5,13 +5,14 @@ const Patch = {
   publications: '/publications',
   signIn: '/signin',
   signUp: '/signup',
-  newPost: '/new-post',
+  newPost: '/newpost',
   post: '/post',
   author: '/author',
 };
 
 const ErrorMessages = {
   unknown: 'Something went wrong, send your request later.',
+  invalidData: 'The data entered is incorrect',
   invalidEmail: 'the email is not valid',
   invalidPassword:
     'password should have a minimum length of 8 symbols, at least one letter, one digit, one special character',
@@ -28,6 +29,7 @@ const ErrorMessages = {
   },
   errorPostLoading: 'Loading error. Reload the page or try again later.',
   errorBookmarks: 'Failed to save bookmark.',
+  errorResponse: 'Failed to receive data, please try again later.',
 };
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;

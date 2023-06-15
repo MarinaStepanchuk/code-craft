@@ -8,7 +8,6 @@ import {
   IconLogout,
   IconHelp,
   IconBookmarks,
-  IconChartDots3,
   IconArrowBadgeDown,
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
@@ -35,6 +34,10 @@ const NavigationUser = (): JSX.Element => {
 
   const redirectToPublications = (): void => {
     push(`${Patch.me}${Patch.publications}`);
+  };
+
+  const logOut = async (): Promise<void> => {
+    await signOut({ callbackUrl: '/' });
   };
 
   return (
@@ -80,9 +83,6 @@ const NavigationUser = (): JSX.Element => {
         <Menu.Item icon={<IconBookmarks size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
           Bookmarks
         </Menu.Item>
-        <Menu.Item icon={<IconChartDots3 size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
-          Stats
-        </Menu.Item>
 
         <Menu.Divider sx={{ borderTopColor: '#ADB5BD' }} />
 
@@ -92,7 +92,7 @@ const NavigationUser = (): JSX.Element => {
         <Menu.Item
           className={classes.item}
           icon={<IconLogout size={30} strokeWidth="1" />}
-          onClick={(): Promise<undefined> => signOut()}
+          onClick={logOut}
           sx={{ fontSize: '1.5rem' }}
         >
           <Flex direction="column" justify="flex-start">

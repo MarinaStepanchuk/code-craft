@@ -94,7 +94,7 @@ const PostCreator = ({
       notifications.show({
         message: ErrorMessages.errorPostLoading,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },
@@ -139,7 +139,7 @@ const PostCreator = ({
         notifications.show({
           message: error,
           color: 'red',
-          autoClose: 2000,
+          autoClose: 4000,
           withBorder: true,
           styles: () => ({
             description: { fontSize: '1.4rem' },

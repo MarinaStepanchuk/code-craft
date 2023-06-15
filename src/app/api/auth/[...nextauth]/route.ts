@@ -2,7 +2,6 @@ import { Patch } from '@/constants/common.constants';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-// import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -23,8 +22,8 @@ export const authOptions: NextAuthOptions = {
           }),
           headers: { 'Content-Type': 'application/json' },
         });
+
         const user = await res.json();
-        console.log(res.status, user);
 
         if (res.ok && user) {
           return user;
@@ -37,10 +36,6 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-    // GitHubProvider({
-    //   clientId: process.env.GITHUB_ID as string,
-    //   clientSecret: process.env.GITHUB_SECRET as string
-    // })
   ],
   pages: {
     signIn: Patch.signIn,
@@ -58,28 +53,10 @@ export const authOptions: NextAuthOptions = {
           }),
           headers: { 'Content-Type': 'application/json' },
         });
-
         if (result.status !== 200) {
           return false;
         }
       }
-
-      // if (account?.provider === 'github') {
-      //   const result = await fetch("http://localhost:3001/api/register-provider", {
-      //     method: 'POST',
-      //     body: JSON.stringify({
-      //       email: encodeURIComponent(user.email as string),
-      //       id: user.id,
-      //       avatarUrl: user.image,
-      //       provider: account?.provider
-      //     }),
-      //     headers: { "Content-Type": "application/json" }
-      //   })
-
-      //   if (result.status !== 200) {
-      //     return false;
-      //   }
-      // }
 
       return true;
     },
@@ -88,7 +65,8 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       const activeSession = session;
-      activeSession.user = token;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      activeSession.user = token as any;
       return session;
     },
   },
@@ -96,5 +74,21 @@ export const authOptions: NextAuthOptions = {
 };
 
 const handler = NextAuth(authOptions);
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      avatarUrl: string | null;
+      bio: string | null;
+      bookmarks: string | null;
+      email: string;
+      id: string;
+      instagram: string | null;
+      mail: string | null;
+      name: string | null;
+      twitter: string | null;
+    };
+  }
+}
 
 export { handler as GET, handler as POST };

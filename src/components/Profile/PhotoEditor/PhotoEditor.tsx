@@ -26,7 +26,7 @@ const PhotoEditor = ({ register, setValue }: IPhotoEditorProps): JSX.Element => 
       notifications.show({
         message: ErrorMessages.tooBigPhoto,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },

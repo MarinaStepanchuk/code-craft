@@ -8,6 +8,7 @@ interface IUser {
   mail?: string;
   instagram?: string;
   bookmarks?: string;
+  accessToken?: string;
 }
 
 interface ITag {
@@ -24,7 +25,14 @@ interface IPost {
   tags: Array<ITag> | null;
   viewCount: number | null;
   updatedDate: Date;
+  createdDate: Date;
   UserId: string;
+}
+
+interface IPosts {
+  posts: IPost[];
+  page: number;
+  amountPages: number;
 }
 
 interface IFormDataProfile {
@@ -50,6 +58,8 @@ interface IComment {
   message: string;
   parentId: number | null;
   createdDate: Date;
+  updatedDate: Date;
+  postId: number;
   user: {
     id: string;
     name: string | null;
@@ -58,4 +68,22 @@ interface IComment {
   };
 }
 
-export type { IUser, IPost, IFormDataProfile, IPostWithUser, ITag, IExpandedPost, IComment };
+interface IBackendError {
+  data: {
+    errors?: string[];
+    message: string;
+    status: number;
+  };
+}
+
+export type {
+  IUser,
+  IPost,
+  IPosts,
+  IFormDataProfile,
+  IPostWithUser,
+  ITag,
+  IExpandedPost,
+  IComment,
+  IBackendError,
+};

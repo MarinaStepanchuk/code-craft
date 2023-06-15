@@ -16,7 +16,7 @@
 
   .contentContainer {
     @include flex($dir: column, $ai: flex-start);
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
     width: 100%;
 
     .postContainer {

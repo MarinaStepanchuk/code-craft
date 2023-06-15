@@ -72,7 +72,7 @@ const PublicationCard = ({
       notifications.show({
         message: ErrorMessages.unknown,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },
@@ -84,7 +84,7 @@ const PublicationCard = ({
       notifications.show({
         message: 'The post was successfully deleted',
         color: 'green',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },
@@ -143,7 +143,7 @@ const PublicationCard = ({
             </Flex>
           </Popover.Dropdown>
         </Popover>
-        {status === 'published' && <ShareLinkButton post={post} />}
+        {status === 'published' && <ShareLinkButton />}
       </div>
       <Divider size={3} className={classes.divider} />
     </article>

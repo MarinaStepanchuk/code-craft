@@ -1,0 +1,34 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.paginationContainer {
+  @include flex($dir: column);
+  width: 100%;
+  color: $text-dark;
+  font-size: 1.4rem;
+
+  .paginator {
+    @include flex();
+    padding-bottom: 2rem;
+
+    .arrow {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.4rem;
+      @include center-content();
+      border-radius: 8px;
+      border: 1px solid $text-dark;
+      background-color: inherit;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background-color: $text-dark;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}

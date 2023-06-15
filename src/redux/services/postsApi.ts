@@ -1,31 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostWithUser } from '@/types/interfaces';
+import { IPost, IPostWithUser, IPosts } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
+
+interface IGetPostsQueryParams {
+  userId: string;
+  status: 'published' | 'draft';
+  offset?: number;
+}
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   tagTypes: ['Posts'],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+  }),
   endpoints: (build) => ({
-    getUserPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
-      query: ({ userId, status }) => ({
-        url: `/posts?userId=${userId}&status=${status}`,
+    getUserPosts: build.query<IPosts, IGetPostsQueryParams>({
+      query: ({ userId, status, offset }) => ({
+        url: `/posts?userId=${userId}&status=${status}&offset=${offset}`,
       }),
       providesTags: ['Posts'],
     }),
-    // getPostById: build.query<IPost, string>({
-    //   query: (id) => ({
-    //     url: `/post/${id}`,
-    //   }),
-    //   providesTags: ['Posts'],
-    // }),
-    // getDraft: build.query<IPost, string>({
-    //   query: (id) => ({
-    //     url: `/post/draft/${id}`,
-    //   }),
-    //   providesTags: ['Posts'],
-    // }),
+    getAllPosts: build.query<IPostWithUser[], void>({
+      query: () => ({
+        url: `/posts`,
+      }),
+      providesTags: ['Posts'],
+    }),
     saveImageForPost: build.mutation<string | null, FormData>({
       query: (data) => ({
         url: '/save-image',
@@ -95,8 +97,7 @@ export const postsApi = createApi({
 
 export const {
   useGetUserPostsQuery,
-  // useGetPostByIdQuery,
-  // useGetDraftQuery,
+  useGetAllPostsQuery,
   useSaveImageForPostMutation,
   useRemoveUnusedImagesMutation,
   useCreatePostMutation,

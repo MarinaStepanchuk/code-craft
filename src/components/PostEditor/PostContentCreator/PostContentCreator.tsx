@@ -41,14 +41,22 @@ const useStyles = createStyles(() => ({
     fontSize: '1.8rem',
     wordBreak: 'break-word',
 
+    a: {
+      cursor: 'pointer',
+      color: '#212832',
+    },
+
     '& p': {
       color: '#4a4a4a',
+      lineHeight: '1.8',
     },
+
     img: {
       maxWidth: '90%',
       display: 'block',
       margin: '1rem auto',
     },
+
     '& [data-youtube-video]': {
       display: 'flex',
       alignItems: 'center',
@@ -56,6 +64,7 @@ const useStyles = createStyles(() => ({
       margin: 0,
       width: '100%',
     },
+
     iframe: {
       width: '480px',
       height: '360px',
@@ -70,32 +79,33 @@ const useStyles = createStyles(() => ({
         height: '165px',
       },
     },
+
     hr: {
       width: '20%',
       textAlign: 'center',
     },
-    pre: {
-      color: '#000',
-      backgroundColor: '#000',
-      padding: '1rem',
+    div: {
+      pre: {
+        backgroundColor: '#302f2f',
+        padding: '1rem',
 
-      code: {
-        fontSize: '1.6rem',
-        fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
-        color: '#fff',
-        backgroundColor: '#000',
+        code: {
+          width: '100%',
+          fontSize: '1.6rem',
+          fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
+          color: '#fff',
+          backgroundColor: '#302f2f',
+        },
       },
     },
     code: {
+      width: '100%',
       fontSize: '1.6rem',
       fontFamily: 'source-code-pro,Menlo,Monaco,"Courier New",Courier,monospace',
       color: '#fff',
-      backgroundColor: '#000',
+      backgroundColor: '#302f2f',
     },
-    a: {
-      color: '#212832',
-      cursor: 'pointer',
-    },
+
     strong: {
       fontWeight: 800,
     },
@@ -135,7 +145,7 @@ const PostContentCreator = ({
       notifications.show({
         message: ErrorMessages.errorLoadingImage,
         color: 'red',
-        autoClose: 2000,
+        autoClose: 4000,
         withBorder: true,
         styles: () => ({
           description: { fontSize: '1.4rem' },
