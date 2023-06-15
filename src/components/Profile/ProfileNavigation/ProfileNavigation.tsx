@@ -1,9 +1,8 @@
 'use client';
 
 import { Tabs, createStyles } from '@mantine/core';
-import { IconUserEdit, IconBell, IconSettings } from '@tabler/icons-react';
+import { IconUserEdit, IconBell, IconUsers } from '@tabler/icons-react';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
-import ResponseCommentList from '../ResponseCommentList/ResponseCommentList';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -37,7 +36,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const SettingsNavigation = (): JSX.Element => {
+const ProfileNavigation = (): JSX.Element => {
   const { classes } = useStyles();
 
   return (
@@ -57,12 +56,13 @@ const SettingsNavigation = (): JSX.Element => {
         >
           Notifications
         </Tabs.Tab>
+
         <Tabs.Tab
-          value="settings"
-          icon={<IconSettings size="1.8rem" strokeWidth="1.2" />}
+          value="followers"
+          icon={<IconUsers size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
-          My Comments
+          Followers
         </Tabs.Tab>
       </Tabs.List>
 
@@ -74,11 +74,11 @@ const SettingsNavigation = (): JSX.Element => {
         Messages
       </Tabs.Panel>
 
-      <Tabs.Panel value="settings" pt="xs">
-        <ResponseCommentList />
+      <Tabs.Panel value="followers" pt="xs">
+        followers
       </Tabs.Panel>
     </Tabs>
   );
 };
 
-export default SettingsNavigation;
+export default ProfileNavigation;

@@ -1,7 +1,13 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostWithUser } from '@/types/interfaces';
+import { IPost, IPostWithUser, IPosts } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
+
+interface IGetPostsQueryParams {
+  userId: string;
+  status: 'published' | 'draft';
+  offset?: number;
+}
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
@@ -10,9 +16,9 @@ export const postsApi = createApi({
     baseUrl,
   }),
   endpoints: (build) => ({
-    getUserPosts: build.query<IPost[], { userId: string; status: 'published' | 'draft' }>({
-      query: ({ userId, status }) => ({
-        url: `/posts?userId=${userId}&status=${status}`,
+    getUserPosts: build.query<IPosts, IGetPostsQueryParams>({
+      query: ({ userId, status, offset }) => ({
+        url: `/posts?userId=${userId}&status=${status}&offset=${offset}`,
       }),
       providesTags: ['Posts'],
     }),

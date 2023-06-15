@@ -2,11 +2,11 @@ import { useGetResponsesQuery } from '@/redux/services/commentsApi';
 import Preloader from '@/components/Preloader/Preloader';
 import { useAppSelector } from '@/hooks/redux';
 import PaginationContainer from '@/components/PaginationContainer/PaginationContainer';
-import styles from './responseCommentList.module.scss';
+import { useState } from 'react';
+import styles from './responseComments.module.scss';
 import ResponseCommentItem from './ResponseCommentItem/ResponseCommentItem';
-import { useEffect, useState } from 'react';
 
-const ResponseCommentList = (): JSX.Element => {
+const ResponseComments = (): JSX.Element => {
   const defaultValue = {
     comments: [],
     page: 1,
@@ -35,4 +35,4 @@ const ResponseCommentList = (): JSX.Element => {
   );
 };
 
-export default ResponseCommentList;
+export default ResponseComments;

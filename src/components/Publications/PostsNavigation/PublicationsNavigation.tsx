@@ -1,13 +1,11 @@
 'use client';
 
 import { Tabs, createStyles } from '@mantine/core';
-import { IconUserEdit, IconBell } from '@tabler/icons-react';
-import { useGetUserPostsQuery } from '@/redux/services/postsApi';
-import { ErrorMessages } from '@/constants/common.constants';
-import { useAppSelector } from '@/hooks/redux';
-import { IPost } from '@/types/interfaces';
-import Preloader from '@/components/Preloader/Preloader';
-import PublicationList from '../PublicationsList/PublicationList';
+import { IconUserEdit, IconBell, IconMessageCircle } from '@tabler/icons-react';
+import ResponseComments from '@/components/Publications/ResponseComments/ResponseComments';
+import { useState } from 'react';
+import DraftsList from '../DraftsList/DraftsList';
+import PublicatedList from '../PublicatedList/PublicatedList';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -49,57 +47,55 @@ const useStyles = createStyles((theme) => ({
 
 const PublicationsNavigation = (): JSX.Element => {
   const { classes } = useStyles();
-  const { user } = useAppSelector((state) => state.userReducer);
-  const {
-    data: publications,
-    isLoading: isLoadingPublished,
-    isError: isErrorPublished,
-  } = useGetUserPostsQuery({ userId: user.id, status: 'published' });
-  const {
-    data: drafts,
-    isLoading: isLoadingDrafts,
-    isError: isErrorDrafts,
-  } = useGetUserPostsQuery({ userId: user.id, status: 'draft' });
+  const [draftsCount, setDraftsCount] = useState(0);
+  const [publicationsCount, setPublicationsCount] = useState(0);
 
-  if (isLoadingDrafts || isLoadingPublished) {
-    return <Preloader width="5rem" height="5rem" color="#05386b" />;
-  }
+  const getDraftsCount = (count: number): void => {
+    setDraftsCount(count);
+  };
+
+  const getPublicationsCount = (count: number): void => {
+    setPublicationsCount(count);
+  };
 
   return (
     <Tabs defaultValue="Published" className={classes.container}>
       <Tabs.List className={classes.list}>
         <Tabs.Tab
-          value="Drafts"
+          value="drafts"
           icon={<IconUserEdit size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
           <span>Drafts</span>
-          <span>{drafts?.length || 0}</span>
+          <span>{draftsCount}</span>
         </Tabs.Tab>
         <Tabs.Tab
-          value="Published"
+          value="published"
           icon={<IconBell size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
           <span>Published</span>
-          <span>{publications?.length || 0}</span>
+          <span>{publicationsCount}</span>
+        </Tabs.Tab>
+        <Tabs.Tab
+          value="comments"
+          icon={<IconMessageCircle size="1.8rem" strokeWidth="1.2" />}
+          className={classes.listItem}
+        >
+          My Comments
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="Drafts" pt="xs">
-        {isErrorDrafts ? (
-          <p>{ErrorMessages.errorPostLoading}</p>
-        ) : (
-          <PublicationList status="draft" posts={drafts as IPost[]} />
-        )}
+      <Tabs.Panel value="drafts" pt="xs">
+        <DraftsList cb={getDraftsCount} />
       </Tabs.Panel>
 
-      <Tabs.Panel value="Published" pt="xs">
-        {isErrorPublished ? (
-          <p>{ErrorMessages.errorPostLoading}</p>
-        ) : (
-          <PublicationList status="published" posts={publications as IPost[]} />
-        )}
+      <Tabs.Panel value="published" pt="xs">
+        <PublicatedList cb={getPublicationsCount} />
+      </Tabs.Panel>
+
+      <Tabs.Panel value="comments" pt="xs">
+        <ResponseComments />
       </Tabs.Panel>
     </Tabs>
   );

@@ -29,6 +29,12 @@ interface IPost {
   UserId: string;
 }
 
+interface IPosts {
+  posts: IPost[];
+  page: number;
+  amountPages: number;
+}
+
 interface IFormDataProfile {
   name: string;
   bio: string;
@@ -73,6 +79,7 @@ interface IBackendError {
 export type {
   IUser,
   IPost,
+  IPosts,
   IFormDataProfile,
   IPostWithUser,
   ITag,
