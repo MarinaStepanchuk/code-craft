@@ -76,6 +76,11 @@ interface IBackendError {
   };
 }
 
+interface IChatAIMessage {
+  role: string;
+  content: string;
+}
+
 export type {
   IUser,
   IPost,
@@ -86,4 +91,5 @@ export type {
   IExpandedPost,
   IComment,
   IBackendError,
+  IChatAIMessage,
 };

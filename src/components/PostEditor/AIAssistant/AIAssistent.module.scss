@@ -1,0 +1,90 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.assistantWrapper {
+  cursor: pointer;
+  position: fixed;
+  bottom: 2rem;
+  z-index: 50;
+  align-self: flex-end;
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    @include center-content;
+  }
+
+  .tooltip .tooltipText {
+    visibility: hidden;
+    opacity: 0;
+    width: max-content;
+    background-color: $text-dark;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 1rem;
+    position: absolute;
+    z-index: 100;
+    bottom: 108%;
+    left: -150%;
+    transition: opacity 0.3s;
+    font-size: 1.4rem;
+    font-weight: 400;
+    max-width: 15rem;
+    animation: tooltip 6s linear;
+  }
+
+  .tooltip .tooltipText::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 80%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: $text-dark transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltipText {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .assistantIcon {
+    border-radius: 50%;
+    animation: blinking 1s linear;
+    animation-iteration-count: 6;
+
+    &:hover {
+      box-shadow: rgba(5, 56, 107, 0.2) 0 -25px 18px -14px inset, rgba(5, 56, 107, 0.15) 0 1px 2px,
+        rgba(5, 56, 107, 0.15) 0 2px 4px, rgba(5, 56, 107, 0.15) 0 4px 8px,
+        rgba(5, 56, 107, 0.15) 0 8px 16px, rgba(5, 56, 107, 0.15) 0 16px 32px;
+    }
+  }
+}
+
+@keyframes blinking {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0 0 15px #000;
+  }
+  100% {
+    box-shadow: none;
+  }
+}
+
+@keyframes tooltip {
+  20% {
+    visibility: visible;
+    opacity: 1;
+  }
+  80% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}

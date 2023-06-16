@@ -59,7 +59,7 @@ const PublicationsNavigation = (): JSX.Element => {
   };
 
   return (
-    <Tabs defaultValue="Published" className={classes.container}>
+    <Tabs defaultValue="published" className={classes.container}>
       <Tabs.List className={classes.list}>
         <Tabs.Tab
           value="drafts"

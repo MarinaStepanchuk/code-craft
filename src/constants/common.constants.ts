@@ -34,8 +34,8 @@ const ErrorMessages = {
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
 
-// eslint-disable-next-line no-useless-escape
 const regPassword =
+  // eslint-disable-next-line no-useless-escape
   /(?=.*[0-9])(?=.*[!@#$%^&:;~\?\/\*\.\,\[\]\-\+\(\)\<\>])(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&:;~\?\/\*\.\,\[\]\-\+\(\)\<\>]{8,}/g;
 
 const colors = {
@@ -46,4 +46,19 @@ const colors = {
   textLight: '#dee2d9',
 };
 
-export { Patch, ErrorMessages, regEmail, regPassword, colors };
+const initialChatValue = [
+  {
+    role: 'assistant',
+    content: "Hi 👋 ! It's good to see you!",
+  },
+  {
+    role: 'assistant',
+    content: 'How can I help you?',
+  },
+  {
+    role: 'user',
+    content: 'How can I help you?',
+  },
+];
+
+export { Patch, ErrorMessages, regEmail, regPassword, colors, initialChatValue };

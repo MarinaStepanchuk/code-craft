@@ -30,6 +30,7 @@ import PostTags from '../PostTags/PostTags';
 import PostHeader from '../PostHeader/PostHeader';
 import styles from './postCreator.module.scss';
 import PostContentCreator from '../PostContentCreator/PostContentCreator';
+import AIAssistant from '../AIAssistant/AIAssistant';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 
@@ -253,6 +254,7 @@ const PostCreator = ({
           Save as Draft
         </button>
       </div>
+      <AIAssistant />
     </section>
   );
 };
