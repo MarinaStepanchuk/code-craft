@@ -53,7 +53,7 @@ const SubscriberList = ({
   }
 
   if (!subscribersData.subscribers.length) {
-    return <p className={styles.noData}>You don`t have followers.</p>;
+    return <p className={styles.noData}>You don`t have subscribers yet.</p>;
   }
 
   return (
