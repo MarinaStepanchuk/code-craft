@@ -1,18 +1,21 @@
 import PaginationContainer from '@/components/PaginationContainer/PaginationContainer';
 import { useAppSelector } from '@/hooks/redux';
 import { useGetUserPostsQuery } from '@/redux/services/postsApi';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { notifications } from '@mantine/notifications';
-import { IPost } from '@/types/interfaces';
 import Preloader from '@/components/Preloader/Preloader';
 import { ErrorMessages } from '@/constants/common.constants';
-import PublicationList from '../PublicationsList/PublicationList';
+import PublicationList from '../Publications/Publications';
 
-const DraftsList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
+const DraftsList = ({
+  setDraftsCount,
+}: {
+  setDraftsCount: Dispatch<SetStateAction<number>>;
+}): JSX.Element => {
   const defaultValue = {
     posts: [],
-    page: 1,
-    amountPages: 1,
+    page: 0,
+    amountPages: 0,
     amountPosts: 0,
   };
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,7 +29,7 @@ const DraftsList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
 
   useEffect(() => {
     if (drafts) {
-      cb(drafts.amountPosts);
+      setDraftsCount(drafts.amountPosts);
     }
     if (isErrorDrafts) {
       notifications.show({
@@ -49,13 +52,17 @@ const DraftsList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  if (!drafts.posts.length) {
+    return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have drafts.</p>;
+  }
+
   return (
     <PaginationContainer
       onPageClick={changePage}
       amountPages={drafts.amountPages}
       page={drafts.page}
     >
-      <PublicationList status="draft" posts={drafts.posts as IPost[]} />
+      <PublicationList status="draft" posts={drafts.posts} isPublic={false} />
     </PaginationContainer>
   );
 };

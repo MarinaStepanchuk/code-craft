@@ -9,8 +9,8 @@ import ResponseCommentItem from './ResponseCommentItem/ResponseCommentItem';
 const ResponseComments = (): JSX.Element => {
   const defaultValue = {
     comments: [],
-    page: 1,
-    amountPages: 1,
+    page: 0,
+    amountPages: 0,
   };
   const [currentPage, setCurrentPage] = useState(0);
   const { id: userId } = useAppSelector((state) => state.userReducer.user);

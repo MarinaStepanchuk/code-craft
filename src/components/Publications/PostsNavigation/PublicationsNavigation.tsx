@@ -50,14 +50,6 @@ const PublicationsNavigation = (): JSX.Element => {
   const [draftsCount, setDraftsCount] = useState(0);
   const [publicationsCount, setPublicationsCount] = useState(0);
 
-  const getDraftsCount = (count: number): void => {
-    setDraftsCount(count);
-  };
-
-  const getPublicationsCount = (count: number): void => {
-    setPublicationsCount(count);
-  };
-
   return (
     <Tabs defaultValue="published" className={classes.container}>
       <Tabs.List className={classes.list}>
@@ -66,16 +58,16 @@ const PublicationsNavigation = (): JSX.Element => {
           icon={<IconUserEdit size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
-          <span>Drafts</span>
-          <span>{draftsCount}</span>
+          <span>Drafts </span>
+          <span>{`(${draftsCount})`}</span>
         </Tabs.Tab>
         <Tabs.Tab
           value="published"
           icon={<IconBell size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
-          <span>Published</span>
-          <span>{publicationsCount}</span>
+          <span>Published </span>
+          <span>{`(${publicationsCount})`}</span>
         </Tabs.Tab>
         <Tabs.Tab
           value="comments"
@@ -87,11 +79,11 @@ const PublicationsNavigation = (): JSX.Element => {
       </Tabs.List>
 
       <Tabs.Panel value="drafts" pt="xs">
-        <DraftsList cb={getDraftsCount} />
+        <DraftsList setDraftsCount={setDraftsCount} />
       </Tabs.Panel>
 
       <Tabs.Panel value="published" pt="xs">
-        <PublicatedList cb={getPublicationsCount} />
+        <PublicatedList setPublicationsCount={setPublicationsCount} />
       </Tabs.Panel>
 
       <Tabs.Panel value="comments" pt="xs">

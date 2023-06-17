@@ -1,8 +1,8 @@
-import AllPostsList from '@/components/AllPosts/AllPostsList/PostsList';
 import Aside from '@/components/Aside/Aside';
-import AuthorBio from '@/components/AuthorBio/AuthorBio';
-import { IPost, IFullUser } from '@/types/interfaces';
+import AuthorBio from '@/components/Author/AuthorBio/AuthorBio';
+import { IFullUser } from '@/types/interfaces';
 import { notFound } from 'next/navigation';
+import AuthorPublications from '@/components/Author/AuthorPublications/AuthorPublications';
 import styles from './author.module.scss';
 
 interface IPageProps {
@@ -22,7 +22,7 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
       <div className={styles.mainContainer}>
         <div className={styles.userContainer}>
           <AuthorBio user={user} postsCount={user.countPosts} />
-          <AllPostsList width={'100%'} />
+          <AuthorPublications authorId={id} />
         </div>
         <Aside />
       </div>

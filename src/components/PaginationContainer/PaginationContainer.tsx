@@ -22,8 +22,7 @@ const PaginationContainer = ({
   };
 
   const handleEndPageClick = (): void => {
-    console.log(amountPages);
-    onPageClick(amountPages - 1);
+    onPageClick(amountPages);
   };
 
   const handleFirstPageClick = (): void => {
@@ -54,13 +53,13 @@ const PaginationContainer = ({
             {'<'}
           </button>
           <span className={styles.navigation}>
-            {currentPage + 1} / {amountPages}
+            {currentPage + 1} / {amountPages + 1}
           </span>
           <button
             className={styles.arrow}
             type="button"
             onClick={handleNextPageClick}
-            disabled={currentPage + 1 === amountPages}
+            disabled={currentPage === amountPages}
           >
             {'>'}
           </button>
@@ -69,7 +68,7 @@ const PaginationContainer = ({
               className={styles.arrow}
               type="button"
               onClick={handleEndPageClick}
-              disabled={currentPage + 1 === amountPages}
+              disabled={currentPage === amountPages}
             >
               {'>>'}
             </button>

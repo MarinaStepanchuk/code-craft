@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostsWithUser, IPosts } from '@/types/interfaces';
+import { IPost, IPostWithUser, IPosts } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -22,7 +22,7 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    getAllPosts: build.query<IPostsWithUser, void>({
+    getAllPosts: build.query<IPostWithUser[], void>({
       query: () => ({
         url: `/posts`,
       }),

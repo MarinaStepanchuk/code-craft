@@ -3,16 +3,19 @@ import Preloader from '@/components/Preloader/Preloader';
 import { ErrorMessages } from '@/constants/common.constants';
 import { useAppSelector } from '@/hooks/redux';
 import { useGetUserPostsQuery } from '@/redux/services/postsApi';
-import { IPost } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
-import { useState, useEffect } from 'react';
-import PublicationList from '../PublicationsList/PublicationList';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import Publications from '../Publications/Publications';
 
-const PublicatedList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
+const PublicatedList = ({
+  setPublicationsCount,
+}: {
+  setPublicationsCount: Dispatch<SetStateAction<number>>;
+}): JSX.Element => {
   const defaultValue = {
     posts: [],
-    page: 1,
-    amountPages: 1,
+    page: 0,
+    amountPages: 0,
     amountPosts: 0,
   };
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,7 +29,7 @@ const PublicatedList = ({ cb }: { cb: (count: number) => void }): JSX.Element =>
 
   useEffect(() => {
     if (publications) {
-      cb(publications.amountPosts);
+      setPublicationsCount(publications.amountPosts);
     }
     if (isErrorPublished) {
       notifications.show({
@@ -49,13 +52,17 @@ const PublicatedList = ({ cb }: { cb: (count: number) => void }): JSX.Element =>
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  if (!publications.posts.length) {
+    return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have publication.</p>;
+  }
+
   return (
     <PaginationContainer
       onPageClick={changePage}
       amountPages={publications.amountPages}
       page={publications.page}
     >
-      <PublicationList status="draft" posts={publications.posts as IPost[]} />
+      <Publications status="draft" posts={publications.posts} isPublic={false} />
     </PaginationContainer>
   );
 };

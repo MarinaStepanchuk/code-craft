@@ -31,7 +31,8 @@ interface IPost {
   viewCount: number | null;
   updatedDate: Date;
   createdDate: Date;
-  UserId: string;
+  userId: string;
+  likesCount?: number;
 }
 
 interface IPosts {
@@ -94,6 +95,14 @@ interface IChatAIMessage {
   content: string;
 }
 
+interface ISubscriber {
+  id: string;
+  email: string;
+  name: string | null;
+  bio: string | null;
+  avatarUrl: string | null;
+}
+
 export type {
   IUser,
   IPost,
@@ -107,4 +116,5 @@ export type {
   IChatAIMessage,
   IPostsWithUser,
   IFullUser,
+  ISubscriber,
 };
