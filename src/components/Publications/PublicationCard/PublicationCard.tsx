@@ -2,15 +2,17 @@ import Image from 'next/image';
 import { IPost } from '@/types/interfaces';
 import defaultImage from '@/assets/default_banner.png';
 import { Popover, Text, Flex, createStyles, Divider } from '@mantine/core';
-import { IconDots, IconPencil, IconTrash } from '@tabler/icons-react';
+import { IconDots, IconPencil, IconTrash, IconThumbUp } from '@tabler/icons-react';
 import getFirstParagraph from '@/utils/getFirstParagraph';
 import { useRouter } from 'next/navigation';
+import Bookmark from '@/components/Bookmark/Bookmark';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import { useDeletePostMutation } from '@/redux/services/postsApi';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
 import getFormattedDate from '@/utils/getFormattedDate';
 import ShareLinkButton from '@/components/ShareLinkButton/ShareLinkButton';
+import { useAppSelector } from '@/hooks/redux';
 import styles from './publicationCard.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -45,12 +47,15 @@ const useStyles = createStyles((theme) => ({
 const PublicationCard = ({
   post,
   status,
+  isPublic,
 }: {
   key: number;
   post: IPost;
   status: 'published' | 'draft';
+  isPublic: boolean;
 }): JSX.Element => {
-  const { id, banner, title, content, updatedDate } = post;
+  const { id, banner, title, content, updatedDate, likesCount, userId: authorId } = post;
+  const { user } = useAppSelector((state) => state.userReducer);
   const { classes } = useStyles();
   const { push } = useRouter();
   const [deletePost, resultDelete] = useDeletePostMutation();
@@ -106,9 +111,23 @@ const PublicationCard = ({
             alt="post banner"
           />
         </div>
-
         <div className={styles.publicationContainer}>
-          <h3 className={styles.title}>{title}</h3>
+          <div className={styles.titleContainer}>
+            <h3 className={styles.title}>{title}</h3>
+            {status === 'published' && (
+              <div className={styles.iconsContainer}>
+                {authorId !== user.id && <Bookmark postId={id} />}
+                <div className={styles.likeContainer}>
+                  <IconThumbUp size={26} strokeWidth="1.2" />
+                  <sup>
+                    {(likesCount as number) < 1000
+                      ? likesCount
+                      : `${((likesCount as number) / 1000).toFixed(1)}K`}
+                  </sup>
+                </div>
+              </div>
+            )}
+          </div>
           <div className={styles.content}>{getFirstParagraph(content || '')}</div>
         </div>
       </div>
@@ -117,32 +136,35 @@ const PublicationCard = ({
           <span>{status === 'draft' ? 'Last edited on ' : 'Published on '}</span>
           <span>{date}</span>
         </div>
-        <Popover width={200} position="bottom" withArrow shadow="md">
-          <Popover.Target>
-            <IconDots size={30} strokeWidth="1.2" className={classes.iconButton} />
-          </Popover.Target>
-          <Popover.Dropdown className={classes.dropdown}>
-            <Flex
-              gap="0.5rem"
-              align="center"
-              className={classes.dropdownItem}
-              onClick={editPublication}
-            >
-              <IconPencil size={17} strokeWidth="1.2" />
-              <Text>{status === 'draft' ? 'Edit Draft' : 'Edit post'}</Text>
-            </Flex>
-            <Flex
-              gap="0.5rem"
-              align="center"
-              className={classes.dropdownItem}
-              sx={{ color: 'red' }}
-              onClick={deletePublication}
-            >
-              <IconTrash size={17} strokeWidth="1.2" />
-              <Text>{status === 'draft' ? 'Remove Draft' : 'Remove post'}</Text>
-            </Flex>
-          </Popover.Dropdown>
-        </Popover>
+        {!isPublic && (
+          <Popover width={200} position="bottom" withArrow shadow="md">
+            <Popover.Target>
+              <IconDots size={30} strokeWidth="1.2" className={classes.iconButton} />
+            </Popover.Target>
+            <Popover.Dropdown className={classes.dropdown}>
+              <Flex
+                gap="0.5rem"
+                align="center"
+                className={classes.dropdownItem}
+                onClick={editPublication}
+              >
+                <IconPencil size={17} strokeWidth="1.2" />
+                <Text>{status === 'draft' ? 'Edit Draft' : 'Edit post'}</Text>
+              </Flex>
+              <Flex
+                gap="0.5rem"
+                align="center"
+                className={classes.dropdownItem}
+                sx={{ color: 'red' }}
+                onClick={deletePublication}
+              >
+                <IconTrash size={17} strokeWidth="1.2" />
+                <Text>{status === 'draft' ? 'Remove Draft' : 'Remove post'}</Text>
+              </Flex>
+            </Popover.Dropdown>
+          </Popover>
+        )}
+
         {status === 'published' && <ShareLinkButton />}
       </div>
       <Divider size={3} className={classes.divider} />

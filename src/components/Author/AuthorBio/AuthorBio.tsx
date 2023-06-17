@@ -6,13 +6,20 @@ import { Amatic_SC } from 'next/font/google';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
 import getNameFromEmail from '@/utils/getNameFromEmail';
 import styles from './authorBio.module.scss';
-import EmailButton from '../EmailButton/EmailButton';
-import FollowButton from '../FollowButton/FollowButton';
+import EmailButton from '../../EmailButton/EmailButton';
+import FollowButton from '../../FollowButton/FollowButton';
 
 const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
-const AuthorBio = ({ user, postsCount }: { user: IUser; postsCount: number }): JSX.Element => {
-  const { name, bio, avatarUrl, email, mail, twitter, instagram } = user;
+const AuthorBio = ({
+  user: author,
+  postsCount,
+}: {
+  user: IUser;
+  postsCount: number;
+}): JSX.Element => {
+  const { name, bio, avatarUrl, email, mail, twitter, instagram, id } = author;
+
   return (
     <section className={styles.bioWrapper}>
       <div className={styles.authorWrapper}>
@@ -34,10 +41,8 @@ const AuthorBio = ({ user, postsCount }: { user: IUser; postsCount: number }): J
       </div>
       <div className={styles.bioContainer}>
         <div className={styles.flexContainerNameFollow}>
-          <p className={`${styles.name} ${amatic.className}`}>
-            {user.name || getNameFromEmail(user.email)}
-          </p>
-          <FollowButton />
+          <p className={`${styles.name} ${amatic.className}`}>{name || getNameFromEmail(email)}</p>
+          <FollowButton authorId={id} />
         </div>
         <p className={styles.bio}>{bio}</p>
         <div className={styles.contacts}>

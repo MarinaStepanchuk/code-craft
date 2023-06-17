@@ -6,14 +6,14 @@
   color: #fff;
   font-size: 1.6rem;
   font-weight: 300;
-
+  width: 95%;
   p {
     margin: 0;
   }
 }
 
 .authorWrapper {
-  width: 10rem;
+  width: 7rem;
   height: 100%;
   background-color: #dee6e7;
   @include flex($jc: flex-end);
