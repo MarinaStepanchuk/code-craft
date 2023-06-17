@@ -11,6 +11,11 @@ interface IUser {
   accessToken?: string;
 }
 
+interface IFullUser extends IUser {
+  countPosts: number;
+  countFollowers: number;
+}
+
 interface ITag {
   id: number;
   name: string;
@@ -33,6 +38,7 @@ interface IPosts {
   posts: IPost[];
   page: number;
   amountPages: number;
+  amountPosts: number;
 }
 
 interface IFormDataProfile {
@@ -46,6 +52,13 @@ interface IFormDataProfile {
 
 interface IPostWithUser extends IPost {
   user: IUser;
+}
+
+interface IPostsWithUser {
+  posts: IPostWithUser[];
+  page: number;
+  amountPages: number;
+  amountPosts: number;
 }
 
 interface IExpandedPost extends IPostWithUser {
@@ -92,4 +105,6 @@ export type {
   IComment,
   IBackendError,
   IChatAIMessage,
+  IPostsWithUser,
+  IFullUser,
 };

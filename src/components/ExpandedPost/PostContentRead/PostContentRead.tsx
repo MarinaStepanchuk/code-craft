@@ -138,7 +138,7 @@ const PostContentRead = (): JSX.Element => {
 
   return (
     <RichTextEditor editor={editor} className={classes.root}>
-      <RichTextEditor.Content className={classes.content} />
+      {content && <RichTextEditor.Content className={classes.content} />}
     </RichTextEditor>
   );
 };
