@@ -13,6 +13,7 @@ const DraftsList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
     posts: [],
     page: 1,
     amountPages: 1,
+    amountPosts: 0,
   };
   const [currentPage, setCurrentPage] = useState(0);
   const { user } = useAppSelector((state) => state.userReducer);
@@ -25,7 +26,7 @@ const DraftsList = ({ cb }: { cb: (count: number) => void }): JSX.Element => {
 
   useEffect(() => {
     if (drafts) {
-      cb(drafts.posts.length);
+      cb(drafts.amountPosts);
     }
     if (isErrorDrafts) {
       notifications.show({

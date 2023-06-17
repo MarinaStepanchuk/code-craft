@@ -14,15 +14,16 @@ const PaginationContainer = ({
   onPageClick,
 }: IPaginationContainerProps): JSX.Element => {
   const handleNextPageClick = (): void => {
-    onPageClick(currentPage - 1);
-  };
-
-  const handlePrevPageClick = (): void => {
     onPageClick(currentPage + 1);
   };
 
+  const handlePrevPageClick = (): void => {
+    onPageClick(currentPage - 1);
+  };
+
   const handleEndPageClick = (): void => {
-    onPageClick(amountPages);
+    console.log(amountPages);
+    onPageClick(amountPages - 1);
   };
 
   const handleFirstPageClick = (): void => {
