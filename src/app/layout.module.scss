@@ -4,11 +4,11 @@
   font-size: 10px;
   color: $text-dark;
   scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
-  scrollbar-width: 1.3rem; /* толщина */
+  scrollbar-width: 0.5rem; /* толщина */
 
   /* полоса прокрутки (скроллбар) */
   ::-webkit-scrollbar {
-    width: 1.3rem; /* ширина для вертикального скролла */
+    width: 0.5rem; /* ширина для вертикального скролла */
     height: 0.5rem; /* высота для горизонтального скролла */
     background-color: #dee6e7;
   }

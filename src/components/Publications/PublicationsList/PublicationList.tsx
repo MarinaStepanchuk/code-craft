@@ -8,7 +8,7 @@ const PublicationList = ({
   status: 'published' | 'draft';
   posts: IPost[];
 }): JSX.Element => (
-  <div>
+  <div style={{ width: '100%' }}>
     {posts.map((post) => (
       <PublicationCard key={post.id} post={post} status={status} />
     ))}

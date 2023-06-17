@@ -8,7 +8,7 @@ import NextAuthProvider from './providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import RootStyleRegistry from './emotion';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+export const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Code Craft',

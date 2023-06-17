@@ -7,6 +7,8 @@
   padding: 3rem 6rem;
   width: 68rem;
   margin-top: 2rem;
+  position: relative;
+  min-height: 78vh;
 
   @media screen and (max-width: 700px) {
     max-width: 68rem;
