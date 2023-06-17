@@ -104,27 +104,53 @@
     }
   }
 
-  .chat {
-    @include flex($dir: column, $jc: flex-start, $ai: flex-start);
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9em;
+  }
+
+  .chatContainer {
+    @include flex($dir: column, $jc: flex-start);
     background-color: #dee6e7;
     padding: 2rem 1rem;
     font-size: 1.4rem;
+    height: 40rem;
+    overflow: scroll;
+
+    .chat {
+      width: 100%;
+      @include flex($dir: column, $jc: flex-start);
+    }
+
+    .scrollContainer {
+      width: 100%;
+      height: 2px;
+    }
 
     .assistantMessage,
     .userMessage {
       background-color: #fff;
       padding: 1rem;
       border-radius: 1.5rem;
+      max-width: 70%;
     }
 
     .assistantMessage {
       @include flex();
       border-bottom-left-radius: 0.2rem;
+      align-self: flex-start;
     }
 
     .userMessage {
       align-self: flex-end;
       border-bottom-right-radius: 0.2rem;
+    }
+
+    .errorMessage {
+      background-color: #fc000063;
+    }
+
+    .loader {
+      color: rgb(155, 166, 178);
     }
   }
 

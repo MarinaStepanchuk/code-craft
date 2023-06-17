@@ -3,15 +3,15 @@ import { useState, useEffect, useRef, Dispatch, MutableRefObject, SetStateAction
 const useOutsideClick = (
   initialValue: boolean
 ): {
-  ref: MutableRefObject<null>;
+  ref: MutableRefObject<HTMLDivElement | null>;
   isActive: boolean;
   setIsActive: Dispatch<SetStateAction<boolean>>;
 } => {
   const [isActive, setIsActive] = useState(initialValue);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const handleClick = (e: Event): void => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (ref.current && !ref.current.contains(e.target as HTMLElement)) {
       setIsActive(false);
     }
   };

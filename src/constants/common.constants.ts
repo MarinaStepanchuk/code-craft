@@ -55,10 +55,6 @@ const initialChatValue = [
     role: 'assistant',
     content: 'How can I help you?',
   },
-  {
-    role: 'user',
-    content: 'How can I help you?',
-  },
 ];
 
 export { Patch, ErrorMessages, regEmail, regPassword, colors, initialChatValue };
