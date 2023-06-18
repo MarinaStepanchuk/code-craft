@@ -8,6 +8,8 @@ const Patch = {
   newPost: '/newpost',
   post: '/post',
   author: '/author',
+  bookmarks: '/bookmarks',
+  feeds: '/feeds',
 };
 
 const ErrorMessages = {
@@ -30,6 +32,7 @@ const ErrorMessages = {
   errorPostLoading: 'Loading error. Reload the page or try again later.',
   errorBookmarks: 'Failed to save bookmark.',
   errorResponse: 'Failed to receive data, please try again later.',
+  errorRemoveSubscriber: 'Failed to remove signature, try again later.',
 };
 
 const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;

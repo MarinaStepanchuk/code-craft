@@ -5,6 +5,7 @@ import { ErrorMessages } from '@/constants/common.constants';
 import { notifications } from '@mantine/notifications';
 import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import Preloader from '@/components/Preloader/Preloader';
+import { Divider } from '@mantine/core';
 import Subscriber from '../Subscriber/Subscriber';
 import styles from './subscriberList.module.scss';
 
@@ -53,7 +54,7 @@ const SubscriberList = ({
   }
 
   if (!subscribersData.subscribers.length) {
-    return <p className={styles.noData}>You don`t have followers.</p>;
+    return <p className={styles.noData}>You don`t have subscribers yet.</p>;
   }
 
   return (
@@ -64,7 +65,10 @@ const SubscriberList = ({
         page={subscribersData.page}
       >
         {subscribersData.subscribers.map((subscriber) => (
-          <Subscriber key={subscriber.id} subscriber={subscriber} />
+          <>
+            <Subscriber key={subscriber.id} subscriber={subscriber} />
+            <Divider size={3} style={{ width: '100%' }} />
+          </>
         ))}
       </PaginationContainer>
     </div>

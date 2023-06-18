@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { notifications } from '@mantine/notifications';
 import { IBackendError } from '@/types/interfaces';
 import { IconEye, IconEyeOff } from '@tabler/icons-react';
+import useOutsideClick from '@/hooks/useOutsideClick';
 import styles from './formAuthorization.module.scss';
 import Modal from '../Modal/Modal';
 
@@ -27,7 +28,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
   const [registerUser, { data: user, isLoading, isError, error }] = useRegisterUserMutation();
   const { push } = useRouter();
-  const [activeModal, setActiveModal] = useState(false);
+  const { ref, isActive, setIsActive } = useOutsideClick(false);
 
   const {
     register,
@@ -84,7 +85,7 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
     }
 
     if (user) {
-      setActiveModal(true);
+      setIsActive(true);
     }
   }, [user, isError]);
 
@@ -199,13 +200,15 @@ const FormAuthorization = (props: { registration: boolean }): JSX.Element => {
           </p>
         )}
       </div>
-      <Modal setActive={setActiveModal} active={activeModal} cb={redirect}>
-        <p>
-          Registration was successful, an email has been sent to you to confirm, please click on the
-          link inside the email.
-        </p>
-        <p>After closing the window you will be redirected to the main page.</p>
-      </Modal>
+      {isActive && (
+        <Modal setIsActive={setIsActive} isActive={isActive} ref={ref} cb={redirect}>
+          <p>
+            Registration was successful, an email has been sent to you to confirm, please click on
+            the link inside the email.
+          </p>
+          <p>After closing the window you will be redirected to the main page.</p>
+        </Modal>
+      )}
     </div>
   );
 };

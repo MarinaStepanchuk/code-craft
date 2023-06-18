@@ -31,7 +31,8 @@ const PaginationContainer = ({
 
   return (
     <div className={styles.paginationContainer}>
-      {children}
+      <div className={styles.children}>{children}</div>
+
       {children && (
         <div className={styles.paginator}>
           {amountPages > 0 && (

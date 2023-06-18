@@ -2,13 +2,19 @@
 @import '@/common.styles/variables.module.scss';
 
 .paginationContainer {
-  @include flex($dir: column);
+  @include flex($dir: column, $jc: space-between);
   width: 100%;
   color: $text-dark;
   font-size: 1.4rem;
+  min-height: 50vh;
+
+  .children {
+    width: 100%;
+  }
 
   .paginator {
     @include flex();
+    align-self: flex-end;
     padding-bottom: 2rem;
 
     .arrow {
