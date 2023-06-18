@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SearchBar from '@/components/SearchBar/SearchBar';
+import SearchButton from '@/components/SearchButton/SearchButton';
 import UserMenu from '@/components/Navigation/UserMenu/UserMenu';
 import LoginMenu from '@/components/Navigation/LoginMenu/LoginMenu';
 import Image from 'next/image';
@@ -14,7 +14,7 @@ const Header = ({ session }: { session: Session | null }): JSX.Element => (
         <Image width={50} height={50} src={logo} alt="logo" />
         <p>Code Craft</p>
       </Link>
-      <SearchBar />
+      <SearchButton />
     </div>
     <div>{session?.user ? <UserMenu session={session} /> : <LoginMenu />}</div>
   </header>
