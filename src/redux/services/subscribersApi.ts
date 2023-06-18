@@ -17,9 +17,9 @@ export const subscribersApi = createApi({
     baseUrl,
   }),
   endpoints: (build) => ({
-    getSubscribers: build.query<ISubscribersResponse, { author: string; offset: number }>({
-      query: ({ author, offset }) => ({
-        url: `/subscribers?author=${author}&offset=${offset}`,
+    getSubscribers: build.query<ISubscribersResponse, { author: string; page: number }>({
+      query: ({ author, page }) => ({
+        url: `/subscribers?author=${author}&page=${page}`,
       }),
       providesTags: ['Subscribers'],
     }),

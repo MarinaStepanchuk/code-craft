@@ -25,7 +25,7 @@ const DraftsList = ({
     data: drafts = defaultValue,
     isLoading: isLoadingDrafts,
     isError: isErrorDrafts,
-  } = useGetUserPostsQuery({ userId: user.id, status: 'draft', offset: currentPage });
+  } = useGetUserPostsQuery({ userId: user.id, status: 'draft', page: currentPage });
 
   useEffect(() => {
     if (drafts) {

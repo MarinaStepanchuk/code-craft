@@ -60,9 +60,9 @@ export const commentsApi = createApi({
       }),
       invalidatesTags: ['Comments'],
     }),
-    getResponses: build.query<IResponseComments, { userId: string; offset?: number }>({
-      query: ({ userId, offset = 0 }) => ({
-        url: `/responses?userId=${userId}&offset=${offset}`,
+    getResponses: build.query<IResponseComments, { userId: string; page?: number }>({
+      query: ({ userId, page = 0 }) => ({
+        url: `/responses?userId=${userId}&page=${page}`,
       }),
     }),
   }),

@@ -11,6 +11,13 @@ interface IUser {
   accessToken?: string;
 }
 
+interface IUsers {
+  users: IUser[];
+  page: number;
+  amountPages?: number;
+  amountUsers?: number;
+}
+
 interface IFullUser extends IUser {
   countPosts: number;
   countFollowers: number;
@@ -20,6 +27,13 @@ interface ITag {
   id: number;
   name: string;
   count?: number;
+}
+
+interface ITags {
+  tags: ITag[];
+  page: number;
+  amountPages?: number;
+  amountTags?: number;
 }
 
 interface IPost {
@@ -56,10 +70,10 @@ interface IPostWithUser extends IPost {
 }
 
 interface IPostsWithUser {
-  posts: IPostWithUser[];
+  posts: Array<IPostWithUser>;
   page: number;
-  amountPages: number;
-  amountPosts: number;
+  amountPages?: number;
+  amountPosts?: number;
 }
 
 interface IExpandedPost extends IPostWithUser {
@@ -117,4 +131,6 @@ export type {
   IPostsWithUser,
   IFullUser,
   ISubscriber,
+  ITags,
+  IUsers,
 };

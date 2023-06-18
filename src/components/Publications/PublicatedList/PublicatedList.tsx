@@ -25,7 +25,7 @@ const PublicatedList = ({
     data: publications = defaultValue,
     isLoading: isLoadingPublished,
     isError: isErrorPublished,
-  } = useGetUserPostsQuery({ userId: user.id, status: 'published', offset: currentPage });
+  } = useGetUserPostsQuery({ userId: user.id, status: 'published', page: currentPage });
 
   useEffect(() => {
     if (publications) {

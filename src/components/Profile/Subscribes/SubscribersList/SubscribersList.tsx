@@ -26,7 +26,7 @@ const SubscribersList = ({
     data: subscribersData = defaultValue,
     isLoading: isLoadingSubscribers,
     isError: isErrorSubscribers,
-  } = useGetSubscribersQuery({ author: user.id, offset: currentPage });
+  } = useGetSubscribersQuery({ author: user.id, page: currentPage });
 
   const changePage = (page: number): void => {
     setCurrentPage(page);
