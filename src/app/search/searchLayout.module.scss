@@ -1,0 +1,7 @@
+@import '@/common.styles/mixins.module.scss';
+
+.resultsSection {
+  @include flex($dir: column, $jc: flex-start);
+  width: 80%;
+  margin: 0 auto 2rem;
+}

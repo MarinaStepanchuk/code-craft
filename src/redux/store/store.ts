@@ -8,6 +8,7 @@ import { userApi } from '../services/userApi';
 import { commentsApi } from '../services/commentsApi';
 import { chatApi } from '../services/chatApi';
 import { subscribersApi } from '../services/subscribersApi';
+import { searchApi } from '../services/searchApi';
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [commentsApi.reducerPath]: commentsApi.reducer,
     [chatApi.reducerPath]: chatApi.reducer,
     [subscribersApi.reducerPath]: subscribersApi.reducer,
+    [searchApi.reducerPath]: searchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
@@ -25,7 +27,8 @@ export const store = configureStore({
       userApi.middleware,
       commentsApi.middleware,
       chatApi.middleware,
-      subscribersApi.middleware
+      subscribersApi.middleware,
+      searchApi.middleware
     ),
 });
 

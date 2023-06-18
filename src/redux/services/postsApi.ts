@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostWithUser, IPosts } from '@/types/interfaces';
+import { IPost, IPostsWithUser, IPosts } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
 interface IGetPostsQueryParams {
   userId: string;
   status: 'published' | 'draft';
-  offset?: number;
+  page?: number;
 }
 
 export const postsApi = createApi({
@@ -17,12 +17,12 @@ export const postsApi = createApi({
   }),
   endpoints: (build) => ({
     getUserPosts: build.query<IPosts, IGetPostsQueryParams>({
-      query: ({ userId, status, offset }) => ({
-        url: `/posts?userId=${userId}&status=${status}&offset=${offset}`,
+      query: ({ userId, status, page }) => ({
+        url: `/posts?userId=${userId}&status=${status}&page=${page}`,
       }),
       providesTags: ['Posts'],
     }),
-    getAllPosts: build.query<IPostWithUser[], void>({
+    getAllPosts: build.query<IPostsWithUser, void>({
       query: () => ({
         url: `/posts`,
       }),
@@ -87,7 +87,7 @@ export const postsApi = createApi({
         },
       }),
     }),
-    getBookmarksPosts: build.query<IPostWithUser[], string>({
+    getBookmarksPosts: build.query<IPostsWithUser, string>({
       query: (userId) => ({
         url: `/bookmarks?userId=${userId}`,
       }),

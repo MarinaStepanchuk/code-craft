@@ -3,6 +3,7 @@
 .html {
   font-size: 10px;
   color: $text-dark;
+  word-break: break-word;
   scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
   scrollbar-width: 0.5rem; /* толщина */
 

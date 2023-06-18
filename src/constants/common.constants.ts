@@ -10,6 +10,9 @@ const Patch = {
   author: '/author',
   bookmarks: '/bookmarks',
   feeds: '/feeds',
+  searchPublications: '/search/publications',
+  searchUsers: '/search/users',
+  searchTags: '/search/tags',
 };
 
 const ErrorMessages = {

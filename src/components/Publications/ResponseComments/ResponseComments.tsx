@@ -16,7 +16,7 @@ const ResponseComments = (): JSX.Element => {
   const { id: userId } = useAppSelector((state) => state.userReducer.user);
   const { data = defaultValue, isLoading: isLoadingComments } = useGetResponsesQuery({
     userId,
-    offset: currentPage,
+    page: currentPage,
   });
 
   const changePage = (page: number): void => {

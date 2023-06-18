@@ -4,7 +4,7 @@ import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
-import SubscriberList from '../Subscribes/SubscribesList/SubscriberList';
+import SubscribersList from '../Subscribes/SubscribersList/SubscribersList';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -79,7 +79,7 @@ const ProfileNavigation = (): JSX.Element => {
       </Tabs.Panel>
 
       <Tabs.Panel value="followers" pt="xs">
-        <SubscriberList setSubscribersCount={setSubscribersCount} />
+        <SubscribersList setSubscribersCount={setSubscribersCount} />
       </Tabs.Panel>
     </Tabs>
   );

@@ -7,9 +7,9 @@ import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import Preloader from '@/components/Preloader/Preloader';
 import { Divider } from '@mantine/core';
 import Subscriber from '../Subscriber/Subscriber';
-import styles from './subscriberList.module.scss';
+import styles from './subscribersList.module.scss';
 
-const SubscriberList = ({
+const SubscribersList = ({
   setSubscribersCount,
 }: {
   setSubscribersCount: Dispatch<SetStateAction<number>>;
@@ -26,7 +26,7 @@ const SubscriberList = ({
     data: subscribersData = defaultValue,
     isLoading: isLoadingSubscribers,
     isError: isErrorSubscribers,
-  } = useGetSubscribersQuery({ author: user.id, offset: currentPage });
+  } = useGetSubscribersQuery({ author: user.id, page: currentPage });
 
   const changePage = (page: number): void => {
     setCurrentPage(page);
@@ -75,4 +75,4 @@ const SubscriberList = ({
   );
 };
 
-export default SubscriberList;
+export default SubscribersList;

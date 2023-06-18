@@ -1,0 +1,9 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.tagsContainer {
+  @include flex($gap: 2rem, $wr: wrap);
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 2rem !important;
+}
