@@ -1,30 +1,33 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import styles from './modal.module.scss';
 
 const Modal = ({
-  active,
-  setActive,
+  isActive,
+  setIsActive,
   children,
   cb,
+  ref,
 }: {
-  active: boolean;
-  setActive: Dispatch<SetStateAction<boolean>>;
+  isActive: boolean;
+  setIsActive: Dispatch<SetStateAction<boolean>>;
   children: React.ReactNode;
   cb?: () => void;
+  ref: MutableRefObject<HTMLDivElement | null>;
 }): JSX.Element => {
   const closeModal = (): void => {
     if (cb) {
       cb();
     }
-    setActive(false);
+    setIsActive(false);
   };
   return (
     <div
-      className={active ? `${styles.modal} ${styles.active}` : styles.modal}
+      className={isActive ? `${styles.modal} ${styles.active}` : styles.modal}
       onClick={closeModal}
+      ref={ref}
     >
       <div
-        className={active ? `${styles.content} ${styles.active}` : styles.content}
+        className={isActive ? `${styles.content} ${styles.active}` : styles.content}
         onClick={(e): void => e.stopPropagation()}
       >
         <div className={styles.closeModalButton} onClick={closeModal}>

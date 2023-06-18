@@ -2,9 +2,9 @@
 
 import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell, IconUsers } from '@tabler/icons-react';
+import { useState } from 'react';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
 import SubscriberList from '../Subscribes/SubscribesList/SubscriberList';
-import { useState } from 'react';
 
 const useStyles = createStyles((theme) => ({
   container: {

@@ -1,0 +1,69 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.subscriber {
+  @include flex($jc: space-between, $gap: 2rem);
+  font-size: 1.4rem;
+  width: 100%;
+  padding: 1.5rem 0;
+
+  p {
+    margin: 0;
+  }
+
+  .userIcon {
+    @include center-content;
+    width: 6rem;
+    height: 6rem;
+    color: $text-light;
+    font-size: 3.5rem;
+    background-color: $header-background;
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .description {
+    @include flex($dir: column, $ai: flex-start);
+    width: 100%;
+
+    .name {
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 0;
+    }
+
+    .bio {
+      overflow: hidden;
+      max-height: 5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .buttonsContainer {
+    @include flex($dir: column);
+  }
+
+  button {
+    flex-shrink: 0;
+    @include darkButton($w: 9rem, $h: 3.3rem);
+    padding: 0;
+
+    &:last-child {
+      background-color: inherit;
+      color: $text-dark;
+    }
+  }
+}
+
+.confirmation {
+  @include flex($dir: column, $gap: 2rem);
+  text-align: center;
+
+  .confirmationButtons {
+    @include flex($gap: 2rem);
+  }
+}

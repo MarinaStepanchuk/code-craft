@@ -36,6 +36,14 @@ const NavigationUser = (): JSX.Element => {
     push(`${Patch.me}${Patch.publications}`);
   };
 
+  const redirectToBookmarks = (): void => {
+    push(`${Patch.me}${Patch.bookmarks}`);
+  };
+
+  const redirectToFeeds = (): void => {
+    push(`${Patch.me}${Patch.feeds}`);
+  };
+
   const logOut = async (): Promise<void> => {
     await signOut({ callbackUrl: '/' });
   };
@@ -80,8 +88,19 @@ const NavigationUser = (): JSX.Element => {
         >
           Publications
         </Menu.Item>
-        <Menu.Item icon={<IconBookmarks size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
+        <Menu.Item
+          icon={<IconBookmarks size={30} strokeWidth="1" />}
+          sx={{ fontSize: '1.5rem' }}
+          onClick={redirectToBookmarks}
+        >
           Bookmarks
+        </Menu.Item>
+        <Menu.Item
+          icon={<IconBookmarks size={30} strokeWidth="1" />}
+          sx={{ fontSize: '1.5rem' }}
+          onClick={redirectToFeeds}
+        >
+          Feeds
         </Menu.Item>
 
         <Menu.Divider sx={{ borderTopColor: '#ADB5BD' }} />
