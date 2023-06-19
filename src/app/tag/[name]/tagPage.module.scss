@@ -1,0 +1,31 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.title {
+  @include flex($gap: 2rem, $jc: flex-start);
+  margin: 2rem 0 0;
+  font-size: 2.4rem;
+
+  width: 80%;
+  border-bottom: 0.2rem solid rgb(190, 186, 186);
+
+  h2 {
+    font-weight: 400;
+  }
+
+  .icon {
+    @include center-content();
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: $text-dark;
+
+    svg {
+      stroke: #fff;
+    }
+  }
+}
+
+.searchResult {
+  width: 80%;
+}

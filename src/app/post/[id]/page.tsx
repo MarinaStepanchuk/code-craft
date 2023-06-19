@@ -13,7 +13,7 @@ const getPost = async (id: string): Promise<IExpandedPost> => {
   return data;
 };
 
-export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
+const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element> => {
   try {
     const data = await getPost(id);
 
@@ -25,4 +25,6 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
   } catch (error) {
     notFound();
   }
-}
+};
+
+export default EditPostPage;

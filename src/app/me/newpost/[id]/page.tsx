@@ -5,7 +5,8 @@ interface IPageProps {
   params: { id: string };
 }
 
-export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
+// eslint-disable-next-line consistent-return
+const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element> => {
   try {
     const response = await fetch(`${process.env.API_URL}/post/draft/${id}`);
     const post = await response.json();
@@ -28,4 +29,6 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
   } catch (error) {
     notFound();
   }
-}
+};
+
+export default EditPostPage;

@@ -142,7 +142,7 @@ const Chat = ({ setIsActive, chatHistory, setChatHistory }: IChat): JSX.Element 
           onChange={(e): void => setMessage(e.target.value)}
           className={`${styles.messageContainer} ${montserrat.className}`}
         />
-        {resultSendMessage.isLoading || message.length < 10 ? (
+        {resultSendMessage.isLoading || message.length < 5 ? (
           <IconSend
             size="2.5rem"
             strokeWidth="1.2"

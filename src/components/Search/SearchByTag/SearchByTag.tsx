@@ -1,19 +1,15 @@
 'use client';
 
+import PostCard from '@/components/AllPosts/PostCard/PostCard';
 import Preloader from '@/components/Preloader/Preloader';
 import { ErrorMessages } from '@/constants/common.constants';
-import { useGetSearchTagsQuery } from '@/redux/services/searchApi';
+import { useGetPostsByTagQuery } from '@/redux/services/searchApi';
 import { notifications } from '@mantine/notifications';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Tag from '@/components/ExpandedPost/TagsList/Tag/Tag';
-import styles from './searchTags.module.scss';
+import { useState, useEffect } from 'react';
 
-const TagsSearchPage = (): JSX.Element => {
+const SearchByTag = ({ tag }: { tag: string }): JSX.Element => {
   const [page, setPage] = useState(0);
-  const searchParams = useSearchParams();
-  const text = searchParams.get('search');
-  const { data: result, isLoading, isError } = useGetSearchTagsQuery({ text: text || '', page });
+  const { data: result, isLoading, isError } = useGetPostsByTagQuery({ name: tag, page });
 
   useEffect(() => {
     if (isError) {
@@ -33,17 +29,17 @@ const TagsSearchPage = (): JSX.Element => {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
-  if (!result?.tags.length) {
+  if (!result?.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>;
   }
 
   return (
-    <div className={styles.tagsContainer}>
-      {result?.tags.map((tag) => (
-        <Tag key={tag.id} tag={tag} size="big" />
+    <div>
+      {result?.posts.map((post) => (
+        <PostCard key={post.id} card={post} />
       ))}
     </div>
   );
 };
 
-export default TagsSearchPage;
+export default SearchByTag;

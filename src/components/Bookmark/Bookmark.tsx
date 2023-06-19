@@ -6,7 +6,9 @@ import { Tooltip, createStyles } from '@mantine/core';
 import { IconAlbum } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
-import { ErrorMessages } from '@/constants/common.constants';
+import { ErrorMessages, Patch } from '@/constants/common.constants';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 const useStyles = createStyles((theme) => ({
   iconButton: {
@@ -28,6 +30,8 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
   const [updateBookmarks, resultUpdateBookmarks] = useUpdateBookmarksMutation();
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const { status } = useSession();
+  const { push } = useRouter();
 
   const checkBookmark = (): boolean => (user.bookmarks || '').split(' ').includes(String(postId));
 
@@ -37,6 +41,10 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
     [...bookmarks].filter((element) => element !== String(postId));
 
   const handleBookmark = async (): Promise<void> => {
+    if (status === 'unauthenticated') {
+      push(Patch.signIn);
+      return;
+    }
     const bookmarks = (user.bookmarks || '').split(' ');
     const newBookmarks = bookmarks.includes(String(postId))
       ? removeBookmark(bookmarks)

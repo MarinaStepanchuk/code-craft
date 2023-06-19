@@ -4,7 +4,7 @@
 .container {
   @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
   width: 100%;
-  border-bottom: 1px solid rgb(33, 40, 50, 0.5);
+  border-bottom: 0.125rem solid rgb(190, 186, 186);
   padding: 2rem 0;
   font-size: 1.4rem;
 

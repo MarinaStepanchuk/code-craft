@@ -13,6 +13,7 @@ const Patch = {
   searchPublications: '/search/publications',
   searchUsers: '/search/users',
   searchTags: '/search/tags',
+  tag: '/tag',
 };
 
 const ErrorMessages = {

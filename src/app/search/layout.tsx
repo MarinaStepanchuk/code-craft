@@ -8,7 +8,7 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
       <SearchNavigationHeader />
       <section className={styles.resultsSection}>
         <SearchNavigation />
-        {children}
+        <div>{children}</div>
       </section>
     </>
   );
