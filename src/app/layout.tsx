@@ -5,9 +5,9 @@ import { Session, getServerSession } from 'next-auth';
 import ProviderToolkit from '@/redux/provider';
 import { Metadata } from 'next';
 import styles from './layout.module.scss';
-import NextAuthProvider from './providers';
+import NextAuthProvider from '../providers/providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
-import RootStyleRegistry from './emotion';
+import RootStyleRegistry from '../providers/emotion';
 
 export const montserrat = Montserrat({ subsets: ['latin'] });
 
