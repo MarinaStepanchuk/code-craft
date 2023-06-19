@@ -25,6 +25,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+const checkBookmark = (bookmarks: string | undefined, postId: number): boolean =>
+  (bookmarks || '').split(' ').includes(String(postId));
+
 const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
   const { classes } = useStyles();
   const { user } = useAppSelector((state) => state.userReducer);
@@ -32,8 +35,6 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const { status } = useSession();
   const { push } = useRouter();
-
-  const checkBookmark = (): boolean => (user.bookmarks || '').split(' ').includes(String(postId));
 
   const addBookmark = (bookmarks: Array<string>): Array<string> => [...bookmarks, String(postId)];
 
@@ -52,7 +53,7 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
 
     await updateBookmarks({ bookmarks: newBookmarks.join(' '), userId: user.id });
 
-    setIsBookmarked(checkBookmark());
+    setIsBookmarked(checkBookmark(user.bookmarks, postId));
   };
 
   useEffect(() => {
@@ -72,8 +73,8 @@ const Bookmark = ({ postId }: { postId: number }): JSX.Element => {
   }, [resultUpdateBookmarks]);
 
   useEffect(() => {
-    setIsBookmarked(checkBookmark());
-  }, [user]);
+    setIsBookmarked(checkBookmark(user.bookmarks, postId));
+  }, [postId, user]);
 
   return (
     <Tooltip label="Save" withArrow>

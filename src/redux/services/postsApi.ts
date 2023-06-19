@@ -87,11 +87,6 @@ export const postsApi = createApi({
         },
       }),
     }),
-    getBookmarksPosts: build.query<IPostsWithUser, string>({
-      query: (userId) => ({
-        url: `/bookmarks?userId=${userId}`,
-      }),
-    }),
   }),
 });
 

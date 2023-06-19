@@ -20,8 +20,11 @@ interface ICommentProps {
   replies: IComment[];
   activeComment: ActiveComment | null;
   setActiveComment: Dispatch<SetStateAction<ActiveComment | null>>;
+  // eslint-disable-next-line no-unused-vars
   addComment: (message: string, parentId?: number | null) => Promise<void>;
+  // eslint-disable-next-line no-unused-vars
   updateComment: (message: string, id: number) => Promise<void>;
+  // eslint-disable-next-line no-unused-vars
   deleteComment: (id: number) => Promise<void>;
   parentId?: number;
 }
