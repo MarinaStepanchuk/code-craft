@@ -6,8 +6,8 @@ import { useRouter } from 'next/navigation';
 import getFormattedDate from '@/utils/getFormattedDate';
 import { Patch } from '@/constants/common.constants';
 import { IResponseComment } from '@/redux/services/commentsApi';
-import styles from './responseCommentItem.module.scss';
 import { Divider } from '@mantine/core';
+import styles from './responseCommentItem.module.scss';
 
 const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 

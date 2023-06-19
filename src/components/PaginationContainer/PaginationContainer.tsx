@@ -2,6 +2,7 @@ import styles from './paginationContainer.module.scss';
 
 interface IPaginationContainerProps {
   children: React.ReactNode;
+  // eslint-disable-next-line no-unused-vars
   onPageClick: (page: number) => void;
   amountPages: number;
   page: number;

@@ -21,6 +21,7 @@ type CommentFormLabels = 'WRITE' | 'UPDATE' | 'REPLY';
 
 interface ICommentsFormProps {
   label: CommentFormLabels;
+  // eslint-disable-next-line no-unused-vars
   handleSubmit: (message: string, parentId?: number | null) => Promise<void>;
   hasCancelButton?: boolean;
   handleCancel?: () => void;
