@@ -12,8 +12,10 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s;
+  z-index: 100;
 
   .content {
+    position: relative;
     width: 50vw;
     min-width: 30rem;
     padding: 3rem 2rem 2rem 2rem;
@@ -22,6 +24,7 @@
     transform: scale(0.5);
     color: $text-dark;
     text-align: center;
+    z-index: 101;
 
     &.active {
       transform: scale(1);

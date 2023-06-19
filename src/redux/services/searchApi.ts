@@ -24,8 +24,17 @@ export const searchApi = createApi({
         url: `/search?text=${text}&type=tags&page=${page}`,
       }),
     }),
+    getPostsByTag: build.query<IPostsWithUser, { name: string; page: number }>({
+      query: ({ name, page }) => ({
+        url: `/posts/tag/${name}?page=${page}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetSearchPublicationsQuery, useGetSearchUsersQuery, useGetSearchTagsQuery } =
-  searchApi;
+export const {
+  useGetSearchPublicationsQuery,
+  useGetSearchUsersQuery,
+  useGetSearchTagsQuery,
+  useGetPostsByTagQuery,
+} = searchApi;

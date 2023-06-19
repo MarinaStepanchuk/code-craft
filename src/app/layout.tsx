@@ -22,11 +22,7 @@ export const checkSession = async (): Promise<Session | null> => {
   return session;
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}): Promise<JSX.Element> {
+const RootLayout = async ({ children }: { children: React.ReactNode }): Promise<JSX.Element> => {
   const session = await checkSession();
   return (
     <html lang="en" className={styles.html}>
@@ -42,4 +38,6 @@ export default async function RootLayout({
       </NextAuthProvider>
     </html>
   );
-}
+};
+
+export default RootLayout;
