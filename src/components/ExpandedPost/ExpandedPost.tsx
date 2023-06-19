@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { postSlice } from '@/redux/store/reducers/postSlice';
 import { IExpandedPost } from '@/types/interfaces';
 import { useVisitPostMutation } from '@/redux/services/postsApi';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import PostContentRead from './PostContentRead/PostContentRead';
 import ExpendedPostHeader from './ExpendedPostHeader/ExpendedPostHeader';
 import styles from './expandedPost.module.scss';
@@ -28,12 +28,12 @@ const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
 
   useEffect(() => {
     dispatch(setPost(data));
-  }, []);
+  }, [data, dispatch, setPost]);
 
   return (
     <section className={styles.postSection}>
       <ExpendedPostHeader />
-      <PostContentRead />
+      <PostContentRead data={data} />
       <div className={styles.tagsWrapper}>
         <TagsList tags={tags} />
       </div>

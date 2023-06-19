@@ -16,6 +16,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { lowlight } from 'lowlight';
 import { useAppSelector } from '@/hooks/redux';
+import { IPost } from '@/types/interfaces';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
 
@@ -106,9 +107,9 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const PostContentRead = (): JSX.Element => {
+const PostContentRead = ({ data }: { data: IPost }): JSX.Element => {
   const { classes } = useStyles();
-  const { content } = useAppSelector((state) => state.postReducer.post);
+  // const { content } = useAppSelector((state) => state.postReducer.post);
 
   const editor = useEditor({
     extensions: [
@@ -132,13 +133,13 @@ const PostContentRead = (): JSX.Element => {
         lowlight,
       }),
     ],
-    content,
+    content: data.content,
     editable: false,
   });
 
   return (
     <RichTextEditor editor={editor} className={classes.root}>
-      {content && <RichTextEditor.Content className={classes.content} />}
+      {data.content && <RichTextEditor.Content className={classes.content} />}
     </RichTextEditor>
   );
 };

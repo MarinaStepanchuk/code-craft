@@ -6,14 +6,14 @@ interface IPageProps {
   params: { id: string };
 }
 
-const getPost = async (id: string): Promise<IExpandedPost> => {
+export const getPost = async (id: string): Promise<IExpandedPost> => {
   const response = await fetch(`${process.env.API_URL}/post/${id}`);
   const data = await response.json();
 
   return data;
 };
 
-const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element> => {
+export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
     const data = await getPost(id);
 
@@ -25,6 +25,4 @@ const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element
   } catch (error) {
     notFound();
   }
-};
-
-export default EditPostPage;
+}
