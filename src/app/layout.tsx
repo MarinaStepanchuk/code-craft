@@ -27,6 +27,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }): Promise<
   const session = await checkSession();
   return (
     <html lang="en" className={styles.html}>
+      <head></head>
       <NextAuthProvider>
         <RootStyleRegistry>
           <ProviderToolkit>
