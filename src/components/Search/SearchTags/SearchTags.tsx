@@ -11,7 +11,6 @@ import styles from './searchTags.module.scss';
 
 const SearchTags = (): JSX.Element => {
   const [page, setPage] = useState(0);
-  setPage(0);
   const searchParams = useSearchParams();
   const text = searchParams.get('search');
   const { data: result, isLoading, isError } = useGetSearchTagsQuery({ text: text || '', page });

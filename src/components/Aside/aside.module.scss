@@ -4,4 +4,10 @@
 .aside {
   @include flex($dir: column, $jc: flex-start);
   width: 40%;
+  position: relative;
+  margin: 2rem 0;
+
+  .stickyContainer {
+    position: sticky;
+  }
 }

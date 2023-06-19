@@ -1,13 +1,15 @@
 import ExpandedPost from '@/components/ExpandedPost/ExpandedPost';
-import { IExpandedPost } from '@/types/interfaces';
+import { IPostWithUser } from '@/types/interfaces';
 import { notFound } from 'next/navigation';
 
 interface IPageProps {
   params: { id: string };
 }
 
-export const getPost = async (id: string): Promise<IExpandedPost> => {
-  const response = await fetch(`${process.env.API_URL}/post/${id}`);
+export const getPost = async (id: string): Promise<IPostWithUser> => {
+  const response = await fetch(`${process.env.API_URL}/post/${id}`, {
+    cache: 'reload',
+  });
   const data = await response.json();
 
   return data;

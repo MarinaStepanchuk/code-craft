@@ -9,6 +9,7 @@
   .preview {
     @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
     width: 100%;
+    cursor: pointer;
 
     .bannerContainer {
       width: 10rem;

@@ -1,5 +1,6 @@
 import Header from '@/layout/Header/Header';
-import { Montserrat } from 'next/font/google';
+// eslint-disable-next-line camelcase
+import { Montserrat, Amatic_SC } from 'next/font/google';
 import './globals.scss';
 import { Session, getServerSession } from 'next-auth';
 import ProviderToolkit from '@/redux/provider';
@@ -10,6 +11,8 @@ import { authOptions } from './api/auth/[...nextauth]/route';
 import RootStyleRegistry from '../providers/emotion';
 
 export const montserrat = Montserrat({ subsets: ['latin'] });
+
+export const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
 export const metadata: Metadata = {
   title: 'Code Craft',

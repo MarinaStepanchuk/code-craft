@@ -65,10 +65,10 @@ const SubscribersList = ({
         page={subscribersData.page}
       >
         {subscribersData.subscribers.map((subscriber) => (
-          <>
+          <div key={subscriber.id + 1}>
             <Subscriber key={subscriber.id} subscriber={subscriber} />
             <Divider size={3} style={{ width: '100%' }} />
-          </>
+          </div>
         ))}
       </PaginationContainer>
     </div>

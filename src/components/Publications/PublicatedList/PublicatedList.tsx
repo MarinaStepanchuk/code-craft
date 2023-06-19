@@ -20,7 +20,6 @@ const PublicatedList = ({
   };
   const [currentPage, setCurrentPage] = useState(0);
   const { user } = useAppSelector((state) => state.userReducer);
-
   const {
     data: publications = defaultValue,
     isLoading: isLoadingPublished,
@@ -51,6 +50,10 @@ const PublicatedList = ({
   if (isLoadingPublished) {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
+
+  // if (isErrorPublished) {
+  //   return <></>;
+  // }
 
   if (!publications.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have publication.</p>;

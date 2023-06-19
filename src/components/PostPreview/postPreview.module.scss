@@ -1,0 +1,13 @@
+@import '@/common.styles/variables.module.scss';
+@import '@/common.styles/mixins.module.scss';
+
+.userIcon {
+  @include center-content;
+  width: 4rem;
+  height: 4rem;
+  color: $text-light;
+  font-size: 2.2rem;
+  background-color: $header-background;
+  border-radius: 50%;
+  cursor: pointer;
+}

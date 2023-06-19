@@ -70,6 +70,10 @@ const PublicationCard = ({
     await deletePost(id);
   };
 
+  const goToPostPage = (): void => {
+    push(`${Patch.post}/${id}`);
+  };
+
   useEffect(() => {
     const { isError, data } = resultDelete;
 
@@ -100,7 +104,7 @@ const PublicationCard = ({
 
   return (
     <article className={styles.publication}>
-      <div className={styles.preview}>
+      <div className={styles.preview} onClick={goToPostPage}>
         <div className={styles.bannerContainer}>
           <Image
             src={banner || defaultImage}

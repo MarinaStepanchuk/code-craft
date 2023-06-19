@@ -71,22 +71,6 @@ export const postsApi = createApi({
         method: 'PUT',
       }),
     }),
-    addLike: build.mutation<object, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like?userId=${userId}&postId=${postId}`,
-        method: 'POST',
-      }),
-    }),
-    removeLike: build.mutation<object, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like`,
-        method: 'DELETE',
-        body: {
-          userId,
-          postId,
-        },
-      }),
-    }),
   }),
 });
 
@@ -99,6 +83,4 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useVisitPostMutation,
-  useAddLikeMutation,
-  useRemoveLikeMutation,
 } = postsApi;

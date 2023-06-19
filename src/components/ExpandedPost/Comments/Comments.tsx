@@ -1,4 +1,4 @@
-import { IComment } from '@/types/interfaces';
+import { IComment, IPostWithUser } from '@/types/interfaces';
 import { useEffect, useState } from 'react';
 import {
   useCreateCommentMutation,
@@ -15,15 +15,14 @@ import Comment from './Comment/Comment';
 import CommentsForm from './CommentsForm/CommentsForm';
 import styles from './comments.module.scss';
 
-const Comments = (): JSX.Element => {
+const Comments = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const [activeComment, setActiveComment] = useState<ActiveComment | null>(null);
-  const { id: postId } = useAppSelector((state) => state.postReducer.post);
   const { id: userId } = useAppSelector((state) => state.userReducer.user);
   const {
     data: comments = [],
     isLoading: isLoadingComments,
     isError: isErrorComments,
-  } = useGetAllCommentsQuery(postId);
+  } = useGetAllCommentsQuery(data.id);
   const [createCommentItem, resultCreateComment] = useCreateCommentMutation();
   const [updateCommentItem, resultUpdateComment] = useUpdateCommentMutation();
   const [deleteCommentItem, resultDeleteComment] = useDeleteCommentMutation();
@@ -37,7 +36,7 @@ const Comments = (): JSX.Element => {
       );
 
   const addComment = async (message: string, parentId: number | null = null): Promise<void> => {
-    await createCommentItem({ message, parentId, postId, userId });
+    await createCommentItem({ message, parentId, postId: data.id, userId });
     setActiveComment(null);
   };
 
@@ -82,6 +81,7 @@ const Comments = (): JSX.Element => {
               addComment={addComment}
               updateComment={updateComment}
               deleteComment={deleteComment}
+              authorPostId={data.user.id}
             />
           ))}
       </div>

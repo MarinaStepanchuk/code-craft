@@ -1,15 +1,16 @@
+'use client';
+
 import { IUser } from '@/types/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
-// eslint-disable-next-line camelcase
-import { Amatic_SC } from 'next/font/google';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
+import { useGetSubscribersQuery } from '@/redux/services/subscribersApi';
+
 import getNameFromEmail from '@/utils/getNameFromEmail';
+import { amatic } from '@/app/layout';
 import styles from './authorBio.module.scss';
 import EmailButton from '../../EmailButton/EmailButton';
 import FollowButton from '../../FollowButton/FollowButton';
-
-const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
 const AuthorBio = ({
   user: author,
@@ -19,6 +20,13 @@ const AuthorBio = ({
   postsCount: number;
 }): JSX.Element => {
   const { name, bio, avatarUrl, email, mail, twitter, instagram, id } = author;
+  const defaultValue = {
+    subscribers: [],
+    page: 0,
+    amountPages: 0,
+    amountSubscribers: 0,
+  };
+  const { data: subscribersData = defaultValue } = useGetSubscribersQuery({ author: id, page: 0 });
 
   return (
     <section className={styles.bioWrapper}>
@@ -60,7 +68,7 @@ const AuthorBio = ({
           )}
         </div>
         <div className={styles.statisticContainer}>
-          <p className={styles.statisticItem}>Followers : 0</p>
+          <p className={styles.statisticItem}>Followers : {subscribersData.amountSubscribers}</p>
           <div className={styles.divider}></div>
           <p className={styles.statisticItem}>Posts : {postsCount}</p>
         </div>

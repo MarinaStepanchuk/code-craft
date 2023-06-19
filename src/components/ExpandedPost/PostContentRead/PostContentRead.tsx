@@ -15,7 +15,6 @@ import Image from '@tiptap/extension-image';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { lowlight } from 'lowlight';
-import { useAppSelector } from '@/hooks/redux';
 import { IPost } from '@/types/interfaces';
 
 lowlight.registerLanguage('ts', tsLanguageSyntax);
@@ -109,7 +108,6 @@ const useStyles = createStyles(() => ({
 
 const PostContentRead = ({ data }: { data: IPost }): JSX.Element => {
   const { classes } = useStyles();
-  // const { content } = useAppSelector((state) => state.postReducer.post);
 
   const editor = useEditor({
     extensions: [
