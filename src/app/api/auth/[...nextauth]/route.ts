@@ -1,75 +1,94 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
-// import GitHubProvider from "next-auth/providers/github";
+import { Patch } from '@/constants/common.constants';
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 
-export const authOptions:NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'email',
       credentials: {},
       async authorize(credentials) {
         const { email, password } = credentials as {
-          email: string,
-          password: string,
+          email: string;
+          password: string;
         };
-        
-        const res = await fetch("http://localhost:3001/api/login", {
+
+        const res = await fetch('http://localhost:3001/api/login', {
           method: 'POST',
           body: JSON.stringify({
             email,
-            password
+            password,
           }),
-          headers: { "Content-Type": "application/json" }
-        })
-        const user = await res.json()
-        console.log(res.status, user)
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        const user = await res.json();
 
         if (res.ok && user) {
-          return user
-        };
+          return user;
+        }
 
         return null;
-      }
+      },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
-    // GitHubProvider({
-    //   clientId: process.env.GITHUB_ID as string,
-    //   clientSecret: process.env.GITHUB_SECRET as string
-    // })
   ],
   pages: {
-    signIn: "/signin" 
+    signIn: Patch.signIn,
   },
   callbacks: {
     async signIn({ user, account }) {
-      if(account?.provider === 'google') {
-        await fetch("http://localhost:3001/api/register-google", {
+      if (account?.provider === 'google') {
+        const result = await fetch('http://localhost:3001/api/register-provider', {
           method: 'POST',
           body: JSON.stringify({
-            email: user.email,
-            id: user.id
+            email: encodeURIComponent(user.email as string),
+            id: user.id,
+            avatarUrl: user.image,
+            provider: account?.provider,
           }),
-          headers: { "Content-Type": "application/json" }
-        })
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (result.status !== 200) {
+          return false;
+        }
       }
+
       return true;
     },
     async jwt({ token, user }) {
-      return {...token, ...user}
+      return { ...token, ...user };
     },
     async session({ session, token }) {
       const activeSession = session;
-      activeSession.user = token;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      activeSession.user = token as any;
       return session;
-    }
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
+};
 
-const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions);
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      avatarUrl: string | null;
+      bio: string | null;
+      bookmarks: string | null;
+      email: string;
+      id: string;
+      instagram: string | null;
+      mail: string | null;
+      name: string | null;
+      twitter: string | null;
+    };
+  }
+}
 
 export { handler as GET, handler as POST };

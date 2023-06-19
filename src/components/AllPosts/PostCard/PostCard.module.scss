@@ -1,0 +1,40 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.container {
+  @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
+  width: 100%;
+  border-bottom: 0.125rem solid rgb(190, 186, 186);
+  padding: 2rem 0;
+  font-size: 1.4rem;
+
+  .bannerContainer {
+    width: 18rem;
+    height: 18rem;
+    cursor: pointer;
+  }
+
+  .contentContainer {
+    @include flex($dir: column, $ai: flex-start);
+    margin-top: 0.5rem;
+    width: 100%;
+
+    .postContainer {
+      cursor: pointer;
+
+      .title {
+        font-size: 2rem;
+        margin: 0 0 1rem;
+      }
+
+      .content {
+        overflow: hidden;
+        max-height: 5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}

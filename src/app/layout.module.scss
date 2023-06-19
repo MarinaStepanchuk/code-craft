@@ -1,0 +1,60 @@
+@import '@/common.styles/variables.module.scss';
+
+.html {
+  font-size: 10px;
+  color: $text-dark;
+  word-break: break-word;
+  scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
+  scrollbar-width: 0.5rem; /* толщина */
+
+  /* полоса прокрутки (скроллбар) */
+  ::-webkit-scrollbar {
+    width: 0.5rem; /* ширина для вертикального скролла */
+    height: 0.5rem; /* высота для горизонтального скролла */
+    background-color: #dee6e7;
+  }
+
+  /* ползунок скроллбара */
+  ::-webkit-scrollbar-thumb {
+    background-color: $text-dark;
+    // border-radius: 9em;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $text-dark;
+  }
+
+  /* Стрелки */
+
+  ::-webkit-scrollbar-button:vertical:start:decrement {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:vertical:end:increment {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:horizontal:start:decrement {
+    display: none;
+  }
+
+  ::-webkit-scrollbar-button:horizontal:end:increment {
+    display: none;
+  }
+}
+
+.body {
+  background-color: #dee6e7;
+  font-weight: 500;
+  scrollbar-color: $text-dark #dee6e7; /* «цвет ползунка» «цвет полосы скроллбара» */
+  scrollbar-width: 1.3rem; /* толщина */
+}
+
+.main {
+  max-width: 120rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -11,15 +11,26 @@
 }
 
 .containerLogo {
-  @include flex($gap: 3rem);
+  @include flex($gap: 2rem);
 
   .logo {
-    @include flex($gap: 3rem);
-    font-size: 3rem;
+    @include flex($gap: 2rem);
+    font-size: 2.5rem;
 
     & img {
       animation: logo 2s linear;
     }
+
+    p {
+      margin: 0;
+    }
   }
 }
 
+.header {
+  color: #fff;
+  padding: 1.5rem 2rem;
+  // border-bottom: 2px solid $secondary-color;
+  background-color: #212832;
+  @include flex($jc: space-between);
+}

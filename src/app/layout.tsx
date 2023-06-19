@@ -2,11 +2,13 @@ import Header from '@/layout/Header/Header';
 import { Montserrat } from 'next/font/google';
 import './globals.scss';
 import { Session, getServerSession } from 'next-auth';
+import ProviderToolkit from '@/redux/provider';
+import styles from './layout.module.scss';
 import NextAuthProvider from './providers';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import RootStyleRegistry from './emotion';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
+export const montserrat = Montserrat({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Code Craft',
@@ -15,26 +17,27 @@ export const metadata = {
   template: '%s',
 };
 
-export const getSession = async (): Promise<Session | null> => {
+export const checkSession = async (): Promise<Session | null> => {
   const session = await getServerSession(authOptions);
-  return session
-}
+  return session;
+};
 
-export default async function RootLayout({ children }: { children: React.ReactNode }): Promise<JSX.Element> {
-  const session = await getSession();
+const RootLayout = async ({ children }: { children: React.ReactNode }): Promise<JSX.Element> => {
+  const session = await checkSession();
   return (
-    <html lang="en">
+    <html lang="en" className={styles.html}>
       <NextAuthProvider>
-          <RootStyleRegistry>
-      <body className={montserrat.className}>
-          <Header session={session} />
-            <main>
-              {children}
-            </main>
-
-      </body>
-      </RootStyleRegistry>
-        </NextAuthProvider>
+        <RootStyleRegistry>
+          <ProviderToolkit>
+            <body className={`${styles.body} ${montserrat.className}`}>
+              <Header session={session} />
+              <main className={styles.main}>{children}</main>
+            </body>
+          </ProviderToolkit>
+        </RootStyleRegistry>
+      </NextAuthProvider>
     </html>
   );
-}
+};
+
+export default RootLayout;

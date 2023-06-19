@@ -1,0 +1,27 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.navigation {
+  @include flex($jc: flex-start, $gap: 1rem);
+  width: 100%;
+  border-bottom: solid 1px rgb(190, 186, 186);
+
+  p {
+    margin: 0;
+    display: block;
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 0 1rem 0.5rem 1rem;
+    box-sizing: border-box;
+    border-bottom: 0.125rem solid transparent;
+
+    &:hover {
+      border-bottom: 0.2rem solid rgb(190, 186, 186);
+    }
+  }
+
+  .activeTab {
+    color: #d4331e;
+    border-bottom: 0.2rem solid #d4331e;
+  }
+}

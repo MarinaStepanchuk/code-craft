@@ -28,6 +28,7 @@
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-var-reqiures": "off",
+    "no-param-reassign": "off",
     "prefer-const": "error",
     "comma-dangle": ["error", "only-multiline"],
     "no-undef": "off",

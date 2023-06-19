@@ -1,5 +1,0 @@
-@import '@/common.styles/mixins.module.scss';
-
-.signIn {
-  @include button($w: 12rem, $h: 4rem);
-}

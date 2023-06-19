@@ -1,0 +1,66 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.modal {
+  @include center-content;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba($color: #000000, $alpha: 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+  z-index: 100;
+
+  .content {
+    position: relative;
+    width: 50vw;
+    min-width: 30rem;
+    padding: 3rem 2rem 2rem 2rem;
+    border-radius: 1.2rem;
+    background-color: #dee6e7;
+    transform: scale(0.5);
+    color: $text-dark;
+    text-align: center;
+    z-index: 101;
+
+    &.active {
+      transform: scale(1);
+    }
+  }
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.closeModalButton {
+  position: absolute;
+  z-index: 30;
+  top: 1.2rem;
+  right: 2.5rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+
+  span {
+    position: absolute;
+    display: block;
+    width: 2.2rem;
+    height: 3px;
+    margin: 1rem;
+    background-color: $secondary-dark;
+    border-radius: 1rem;
+  }
+
+  :first-child {
+    transform: rotate(45deg);
+  }
+
+  :last-child {
+    transform: rotate(-45deg);
+  }
+}

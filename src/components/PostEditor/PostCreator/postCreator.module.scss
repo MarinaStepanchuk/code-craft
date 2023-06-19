@@ -1,0 +1,79 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.creator {
+  @include flex($dir: column, $gap: 2rem, $ai: flex-start);
+  background-color: #fff;
+  padding: 3rem 6rem;
+  width: 68rem;
+  margin-top: 2rem;
+  position: relative;
+  min-height: 78vh;
+
+  @media screen and (max-width: 700px) {
+    max-width: 68rem;
+    width: auto;
+    padding: 2rem 2rem;
+  }
+
+  .postImage {
+    max-width: 300px;
+    text-align: center;
+  }
+
+  .divider {
+    @include flex();
+    align-self: center;
+
+    div {
+      width: 5px;
+      border-radius: 50%;
+      height: 5px;
+      background-color: $secondary-color;
+    }
+  }
+
+  .buttonContainer {
+    @include flex($gap: 2rem);
+
+    .publish,
+    .cancel {
+      @include button($w: 14rem, $h: 4rem);
+      background-color: inherit;
+      border: 1px solid $secondary-dark;
+      color: $secondary-dark;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
+    }
+
+    .publish:hover {
+      background-color: $secondary-dark;
+      border: none;
+      color: #fff;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
+    }
+
+    .cancel:hover {
+      background-color: $primary-color;
+      border: none;
+      color: #fff;
+
+      &.disabledButton {
+        background-color: #ced4da;
+      }
+    }
+  }
+
+  .errorMessage {
+    padding-bottom: 0.5rem;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}

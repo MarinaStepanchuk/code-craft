@@ -1,0 +1,7 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.aside {
+  @include flex($dir: column, $jc: flex-start);
+  width: 40%;
+}

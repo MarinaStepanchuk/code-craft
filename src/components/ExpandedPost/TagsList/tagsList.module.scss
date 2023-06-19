@@ -1,0 +1,5 @@
+@import '@/common.styles/mixins.module.scss';
+
+.tagsContainer {
+  @include flex($wr: wrap);
+}

@@ -6,14 +6,14 @@
   margin: 5rem auto;
   padding: 2rem 3rem;
   background-color: $secondary-color;
-  max-width: 40rem;
+  width: 40rem;
   border-radius: 2rem;
   color: #fff;
   font-size: 1.8rem;
 
   h2 {
     font-size: 3rem;
-    margin: 1rem 0 1.5rem;
+    margin: 1rem 0 2rem;
   }
 
   .formBox {
@@ -40,58 +40,50 @@
 
     input {
       width: 100%;
-      padding: 1rem 0;
+      padding: 1.2rem 0.4rem 0.5rem 0.2rem;
       font-size: 1.6rem;
-      color: #fff;
+      color: $text-dark;
       margin-bottom: 3rem;
       border: none;
       border-bottom: 1px solid #fff;
       outline: none;
       background: transparent;
-      margin-bottom: 0;
+      margin-bottom: 1rem;
+    }
+
+    .eye {
+      position: absolute;
+      z-index: 3;
+      right: 0.5rem;
+      bottom: 1rem;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px $secondary-color inset !important;
     }
 
     label {
       position: absolute;
-      top:0;
-      left: 0;
-      padding: 1rem 2rem;
-      font-size: 1.6rem;
-      color: #fff;
-      pointer-events: none;
-      transition: .5s;
-    }
-
-    .labelClick {
       top: -2rem;
-      left: 0;
-      color: $text-dark;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    input:focus ~ label {
-      top: -2rem;
-      left: 0;
-      color: $text-dark;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    label {
-      position: absolute;
-      top:0;
       left: 0;
       padding: 1rem 0;
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       color: #fff;
       pointer-events: none;
-      transition: .5s;
+      transition: 0.5s;
+      font-weight: 400;
     }
   }
 
+  .inputContainer:not(:first-child) input {
+    padding-right: 4rem;
+  }
+
   button {
-    @include button($w:100%, $h:5rem);
+    @include button($w: 100%, $h: 5rem);
     @include center-content;
     gap: 1rem;
     border-radius: 1rem;
@@ -103,5 +95,9 @@
     &:hover {
       color: $text-dark;
     }
+  }
+
+  .changeModeButton {
+    @include flex($wr: wrap, $gap: 0.5rem);
   }
 }

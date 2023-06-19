@@ -1,0 +1,56 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.errorPage {
+  width: 80%;
+  margin: 2rem auto;
+  @include flex($gap: 2rem);
+
+  .message {
+    @include flex($dir: column, $gap: 2rem, $ai: flex-start);
+    width: 35%;
+
+    p {
+      margin: 0;
+    }
+
+    & :first-child {
+      font-weight: 700;
+      font-size: 4.4rem;
+    }
+
+    & :nth-child(2) {
+      font-weight: 300;
+      font-size: 3.6rem;
+    }
+
+    & :nth-child(3) {
+      font-weight: 300;
+      font-size: 1.4rem;
+    }
+
+    button {
+      @include darkButton($w: 12rem, $h: 4.5rem);
+      font-weight: 600;
+      font-size: 2.2rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      outline: none;
+    }
+  }
+
+  .containerImage {
+    position: relative;
+    max-height: 40rem;
+    padding-top: 55.25%;
+    width: 51.5%;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+    }
+  }
+}

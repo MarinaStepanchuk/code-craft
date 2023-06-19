@@ -23,6 +23,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/components/ExpandedPost/ExpendedPostHeader",
+    "src/components/ExpandedPost/TagsList/TagItem/Tag.tsx"
+  ],
   "exclude": ["node_modules"]
 }

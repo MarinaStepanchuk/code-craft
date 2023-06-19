@@ -1,9 +1,7 @@
 @import '@/common.styles/variables.module.scss';
+@import '@/common.styles/mixins.module.scss';
 
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: $secondary-color;
+.postsContainer {
+  @include flex();
+  width: 100%;
 }
