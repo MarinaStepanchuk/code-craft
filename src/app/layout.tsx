@@ -32,7 +32,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }): Promise<
         <RootStyleRegistry>
           <ProviderToolkit>
             <body className={`${styles.body} ${montserrat.className}`}>
-              {/* <Header session={session} /> */}
+              <Header session={session} />
               <main className={styles.main}>{children}</main>
             </body>
           </ProviderToolkit>
