@@ -29,6 +29,10 @@ const SearchByTag = ({ tag }: { tag: string }): JSX.Element => {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  if (isError) {
+    return <></>;
+  }
+
   if (!result?.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>;
   }

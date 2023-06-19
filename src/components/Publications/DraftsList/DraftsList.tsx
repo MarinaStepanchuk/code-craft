@@ -52,6 +52,10 @@ const DraftsList = ({
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  // if (isErrorDrafts) {
+  //   return <></>;
+  // }
+
   if (!drafts.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have drafts.</p>;
   }

@@ -2,6 +2,6 @@
 @import '@/common.styles/mixins.module.scss';
 
 .postsContainer {
-  @include flex();
+  @include flex($ai: flex-start);
   width: 100%;
 }

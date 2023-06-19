@@ -63,7 +63,7 @@ const FollowButton = ({ authorId }: { authorId: string }): JSX.Element => {
       onClick={handleFollowing}
       disabled={resultSubscribe.isLoading || resultUnsubscribe.isLoading}
     >
-      {isSubscribed ? '- Unfollow' : '+ Follow'}
+      {isSubscribed ? 'Unfollow' : 'Follow'}
     </button>
   );
 };

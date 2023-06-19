@@ -27,7 +27,7 @@ const ResponseComments = (): JSX.Element => {
     <PaginationContainer onPageClick={changePage} amountPages={data.amountPages} page={data.page}>
       <div className={styles.comments}>
         {isLoadingComments && <Preloader width="5rem" height="5rem" color="#05386b" />}
-        {data.comments.map((comment) => (
+        {data?.comments?.map((comment) => (
           <ResponseCommentItem comment={comment} key={comment.id} />
         ))}
       </div>

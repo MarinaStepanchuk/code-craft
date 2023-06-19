@@ -32,6 +32,10 @@ const SearchPublications = (): JSX.Element => {
     }
   }, [isError]);
 
+  if (isError) {
+    return <></>;
+  }
+
   if (isLoading) {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }

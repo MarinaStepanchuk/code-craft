@@ -11,7 +11,6 @@ import styles from './searchTags.module.scss';
 
 const SearchTags = (): JSX.Element => {
   const [page, setPage] = useState(0);
-  setPage(0);
   const searchParams = useSearchParams();
   const text = searchParams.get('search');
   const { data: result, isLoading, isError } = useGetSearchTagsQuery({ text: text || '', page });
@@ -29,6 +28,10 @@ const SearchTags = (): JSX.Element => {
       });
     }
   }, [isError]);
+
+  if (isError) {
+    return <></>;
+  }
 
   if (isLoading) {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
