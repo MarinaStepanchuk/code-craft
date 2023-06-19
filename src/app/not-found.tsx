@@ -1,13 +1,9 @@
-// 'use client';
-
 import Image from 'next/image';
 import errorPhoto from '@/assets/404page.png';
-import { useRouter } from 'next/navigation';
+import GoToMainButton from '@/components/GoToMainButton/GoToMainButton';
 import styles from './not-found.module.scss';
 
 const NotFoundPage = (): JSX.Element => (
-  // const { push } = useRouter();
-
   <div className={styles.errorPage}>
     <div className={styles.message}>
       <p>Ooops...</p>
@@ -15,7 +11,7 @@ const NotFoundPage = (): JSX.Element => (
       <p>
         The page you are looking for doesn’t exist or an other error occurred, go back to home page.
       </p>
-      {/* <button onClick={(): void => push('/')}>Go Back</button> */}
+      <GoToMainButton />
     </div>
     <div className={styles.containerImage}>
       <Image
