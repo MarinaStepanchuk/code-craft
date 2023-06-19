@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IUser } from '@/types/interfaces';
+import { IPostsWithUser, IUser } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -51,6 +51,12 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
+    getBookmarksPosts: build.query<IPostsWithUser, { userId: string; page: number }>({
+      query: ({ userId, page }) => ({
+        url: `/bookmarks?userId=${userId}&page=${page}`,
+      }),
+      providesTags: ['User'],
+    }),
   }),
 });
 
@@ -60,4 +66,5 @@ export const {
   useRegisterUserMutation,
   useUpdateUserMutation,
   useUpdateBookmarksMutation,
+  useGetBookmarksPostsQuery,
 } = userApi;
