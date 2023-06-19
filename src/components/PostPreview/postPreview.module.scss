@@ -1,13 +1,29 @@
 @import '@/common.styles/variables.module.scss';
 @import '@/common.styles/mixins.module.scss';
 
-.userIcon {
-  @include center-content;
-  width: 4rem;
-  height: 4rem;
-  color: $text-light;
-  font-size: 2.2rem;
-  background-color: $header-background;
-  border-radius: 50%;
-  cursor: pointer;
+.post {
+  margin: 1.5rem 0;
+
+  .user {
+    @include flex($jc: flex-start);
+    font-size: 1.2rem;
+    padding-bottom: 1rem;
+  }
+
+  .userIcon {
+    @include center-content;
+    width: 4rem;
+    height: 4rem;
+    color: $text-light;
+    font-size: 2.2rem;
+    background-color: $header-background;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+  }
 }
