@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { createRef, useEffect, useRef, useState } from 'react';
 import Tag from '@/components/ExpandedPost/TagsList/Tag/Tag';
 import { ITag } from '@/types/interfaces';
+import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
 import styles from './searchTags.module.scss';
 
 const SearchTags = (): JSX.Element => {
@@ -21,6 +22,11 @@ const SearchTags = (): JSX.Element => {
     text: text || '',
     page: currentPage,
   });
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -78,6 +84,7 @@ const SearchTags = (): JSX.Element => {
       {!displayedTags.length && (
         <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>
       )}
+      <ScrollUpButton active={activeUpButton} />
     </>
   );
 };

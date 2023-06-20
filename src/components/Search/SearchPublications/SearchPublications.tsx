@@ -2,6 +2,7 @@
 
 import PostCard from '@/components/AllPosts/PostCard/PostCard';
 import Preloader from '@/components/Preloader/Preloader';
+import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
 import { ErrorMessages } from '@/constants/common.constants';
 import { useGetSearchPublicationsQuery } from '@/redux/services/searchApi';
 import { IPostWithUser } from '@/types/interfaces';
@@ -20,6 +21,11 @@ const SearchPublications = (): JSX.Element => {
     text: text || '',
     page: currentPage,
   });
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -74,6 +80,7 @@ const SearchPublications = (): JSX.Element => {
       {!displayedPosts.length && (
         <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>
       )}
+      <ScrollUpButton active={activeUpButton} />
     </div>
   );
 };

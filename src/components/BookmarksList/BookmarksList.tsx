@@ -8,6 +8,7 @@ import { useGetBookmarksPostsQuery } from '@/redux/services/userApi';
 import { IPostWithUser } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
 import { useState, useEffect, createRef, useRef } from 'react';
+import ScrollUpButton from '../ScrollUpButton/ScrollUpButton';
 
 const BookmarksList = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -19,6 +20,11 @@ const BookmarksList = (): JSX.Element => {
   });
   const lastItem = createRef<HTMLElement>();
   const observerLoader = useRef<IntersectionObserver | null>(null);
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -74,6 +80,7 @@ const BookmarksList = (): JSX.Element => {
           <PostCard key={card.id} card={card} />
         )
       )}
+      <ScrollUpButton active={activeUpButton} />
     </div>
   );
 };

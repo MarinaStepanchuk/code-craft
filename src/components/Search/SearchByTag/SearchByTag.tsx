@@ -2,6 +2,7 @@
 
 import PostCard from '@/components/AllPosts/PostCard/PostCard';
 import Preloader from '@/components/Preloader/Preloader';
+import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
 import { ErrorMessages } from '@/constants/common.constants';
 import { useGetPostsByTagQuery } from '@/redux/services/searchApi';
 import { IPostWithUser } from '@/types/interfaces';
@@ -14,6 +15,11 @@ const SearchByTag = ({ tag }: { tag: string }): JSX.Element => {
   const lastItem = createRef<HTMLElement>();
   const observerLoader = useRef<IntersectionObserver | null>(null);
   const { data, isLoading, isError } = useGetPostsByTagQuery({ name: tag, page: currentPage });
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -69,6 +75,7 @@ const SearchByTag = ({ tag }: { tag: string }): JSX.Element => {
       {!displayedPosts.length && (
         <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>
       )}
+      <ScrollUpButton active={activeUpButton} />
     </div>
   );
 };

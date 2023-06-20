@@ -5,6 +5,7 @@ import { createRef, useEffect, useRef, useState } from 'react';
 import { ErrorMessages } from '@/constants/common.constants';
 import { notifications } from '@mantine/notifications';
 import { IPostWithUser } from '@/types/interfaces';
+import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
 import styles from './postsList.module.scss';
 import PostCard from '../PostCard/PostCard';
 
@@ -14,6 +15,11 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
   const [displayedPosts, setDisplayedPosts] = useState<IPostWithUser[]>([]);
   const lastItem = createRef<HTMLElement>();
   const observerLoader = useRef<IntersectionObserver | null>(null);
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -37,6 +43,7 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
     if (observerLoader.current) {
       observerLoader.current.disconnect();
     }
+
     observerLoader.current = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]): void => {
         if (entries[0].isIntersecting && currentPage < (data?.amountPages as number)) {
@@ -44,6 +51,7 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
         }
       }
     );
+
     if (lastItem.current) {
       observerLoader.current.observe(lastItem.current);
     }
@@ -62,6 +70,7 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
           <PostCard key={card.id} card={card} />
         )
       )}
+      <ScrollUpButton active={activeUpButton} />
     </section>
   );
 };

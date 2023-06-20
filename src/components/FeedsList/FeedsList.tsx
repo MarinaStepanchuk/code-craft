@@ -8,15 +8,20 @@ import { useAppSelector } from '@/hooks/redux';
 import { IPostWithUser } from '@/types/interfaces';
 import PostCard from '../AllPosts/PostCard/PostCard';
 import Preloader from '../Preloader/Preloader';
+import ScrollUpButton from '../ScrollUpButton/ScrollUpButton';
 
 const FeedsList = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0);
   const [displayedFeeds, setDisplayedFeeds] = useState<IPostWithUser[]>([]);
   const lastItem = createRef<HTMLElement>();
   const observerLoader = useRef<IntersectionObserver | null>(null);
-
   const { user } = useAppSelector((state) => state.userReducer);
   const { data, isLoading, isError } = useGetFeedsQuery({ userId: user.id, page: currentPage });
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -72,6 +77,7 @@ const FeedsList = (): JSX.Element => {
           <PostCard key={card.id} card={card} />
         )
       )}
+      <ScrollUpButton active={activeUpButton} />
     </div>
   );
 };

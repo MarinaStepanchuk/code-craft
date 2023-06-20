@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { Divider } from '@mantine/core';
 import { IUser } from '@/types/interfaces';
+import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
 import styles from './searchUsers.module.scss';
 
 const SearchUsers = (): JSX.Element => {
@@ -22,6 +23,11 @@ const SearchUsers = (): JSX.Element => {
     text: text || '',
     page: currentPage,
   });
+  const [activeUpButton, setActiveUpButton] = useState(false);
+
+  useEffect(() => {
+    setActiveUpButton(currentPage > 0);
+  }, [currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -84,6 +90,7 @@ const SearchUsers = (): JSX.Element => {
       {!displayedUsers.length && (
         <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>Nothing was found.</p>
       )}
+      <ScrollUpButton active={activeUpButton} />
     </>
   );
 };
