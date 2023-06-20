@@ -16,7 +16,7 @@ export const postsApi = createApi({
     baseUrl,
   }),
   endpoints: (build) => ({
-    getUserPosts: build.query<IPosts, IGetPostsQueryParams>({
+    getUserPosts: build.query<IPostsWithUser, IGetPostsQueryParams>({
       query: ({ userId, status, page }) => ({
         url: `/posts?userId=${userId}&status=${status}&page=${page}`,
       }),

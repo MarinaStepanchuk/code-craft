@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import getFormattedDate from '@/utils/getFormattedDate';
 import ShareLinkButton from '@/components/ShareLinkButton/ShareLinkButton';
 import { useAppSelector } from '@/hooks/redux';
+import Link from 'next/link';
 import styles from './publicationCard.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -70,10 +71,6 @@ const PublicationCard = ({
     await deletePost(id);
   };
 
-  const goToPostPage = (): void => {
-    push(`${Patch.post}/${id}`);
-  };
-
   useEffect(() => {
     const { isError, data } = resultDelete;
 
@@ -104,37 +101,42 @@ const PublicationCard = ({
 
   return (
     <article className={styles.publication}>
-      <div className={styles.preview} onClick={goToPostPage}>
-        <div className={styles.bannerContainer}>
-          <Image
-            src={banner || defaultImage}
-            width={100}
-            height={100}
-            quality={100}
-            style={{ objectFit: 'cover' }}
-            alt="post banner"
-          />
-        </div>
-        <div className={styles.publicationContainer}>
-          <div className={styles.titleContainer}>
-            <h3 className={styles.title}>{title}</h3>
-            {status === 'published' && (
-              <div className={styles.iconsContainer}>
-                {authorId !== user.id && <Bookmark postId={id} />}
-                <div className={styles.likeContainer}>
-                  <IconThumbUp size={26} strokeWidth="1.2" />
-                  <sup>
-                    {(likesCount as number) < 1000
-                      ? likesCount
-                      : `${((likesCount as number) / 1000).toFixed(1)}K`}
-                  </sup>
-                </div>
-              </div>
-            )}
+      <Link
+        href={status === 'published' ? `${Patch.post}/${id}` : `${Patch.me}${Patch.newPost}/${id}`}
+        className={styles.link}
+      >
+        <div className={styles.preview}>
+          <div className={styles.bannerContainer}>
+            <Image
+              src={banner || defaultImage}
+              width={100}
+              height={100}
+              quality={100}
+              style={{ objectFit: 'cover' }}
+              alt="post banner"
+            />
           </div>
-          <div className={styles.content}>{getFirstParagraph(content || '')}</div>
+          <div className={styles.publicationContainer}>
+            <div className={styles.titleContainer}>
+              <h3 className={styles.title}>{title}</h3>
+              {status === 'published' && (
+                <div className={styles.iconsContainer}>
+                  {authorId !== user.id && <Bookmark postId={id} />}
+                  <div className={styles.likeContainer}>
+                    <IconThumbUp size={26} strokeWidth="1.2" />
+                    <sup>
+                      {(likesCount as number) < 1000
+                        ? likesCount
+                        : `${((likesCount as number) / 1000).toFixed(1)}K`}
+                    </sup>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className={styles.content}>{getFirstParagraph(content || '')}</div>
+          </div>
         </div>
-      </div>
+      </Link>
       <div className={styles.footer}>
         <div>
           <span>{status === 'draft' ? 'Last edited on ' : 'Published on '}</span>

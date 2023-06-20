@@ -8,33 +8,35 @@ import { useGetSubscribersQuery } from '@/redux/services/subscribersApi';
 
 import getNameFromEmail from '@/utils/getNameFromEmail';
 import { amatic } from '@/app/layout';
+import { useGetUserByIdQuery } from '@/redux/services/userApi';
 import styles from './authorBio.module.scss';
 import EmailButton from '../../EmailButton/EmailButton';
 import FollowButton from '../../FollowButton/FollowButton';
 
-const AuthorBio = ({
-  user: author,
-  postsCount,
-}: {
-  user: IUser;
-  postsCount: number;
-}): JSX.Element => {
-  const { name, bio, avatarUrl, email, mail, twitter, instagram, id } = author;
+const AuthorBio = ({ userId, postsCount }: { userId: string; postsCount: number }): JSX.Element => {
+  const { data: author, isLoading } = useGetUserByIdQuery(userId);
   const defaultValue = {
     subscribers: [],
     page: 0,
     amountPages: 0,
     amountSubscribers: 0,
   };
-  const { data: subscribersData = defaultValue } = useGetSubscribersQuery({ author: id, page: 0 });
+  const { data: subscribersData = defaultValue } = useGetSubscribersQuery({
+    author: userId,
+    page: 0,
+  });
+
+  if (isLoading) {
+    return <></>;
+  }
 
   return (
     <section className={styles.bioWrapper}>
       <div className={styles.authorWrapper}>
         <div className={styles.authorPhotoContainer}>
-          {avatarUrl ? (
+          {author?.avatarUrl ? (
             <Image
-              src={avatarUrl}
+              src={author.avatarUrl}
               width={100}
               height={100}
               alt="author photo"
@@ -42,27 +44,29 @@ const AuthorBio = ({
             />
           ) : (
             <div className={styles.userIcon}>
-              {name?.at(0)?.toUpperCase() || email.at(0)?.toUpperCase()}
+              {author?.name?.at(0)?.toUpperCase() || author?.email.at(0)?.toUpperCase()}
             </div>
           )}
         </div>
       </div>
       <div className={styles.bioContainer}>
         <div className={styles.flexContainerNameFollow}>
-          <p className={`${styles.name} ${amatic.className}`}>{name || getNameFromEmail(email)}</p>
-          <FollowButton authorId={id} />
+          <p className={`${styles.name} ${amatic.className}`}>
+            {author?.name || getNameFromEmail(author?.email || '')}
+          </p>
+          <FollowButton authorId={userId} />
         </div>
-        <p className={styles.bio}>{bio}</p>
+        <p className={styles.bio}>{author?.bio}</p>
         <div className={styles.contacts}>
           Contact me:
-          {twitter && (
-            <Link href={twitter} target="_blank" className={styles.link}>
+          {author?.twitter && (
+            <Link href={author?.twitter} target="_blank" className={styles.link}>
               <IconBrandTwitter size="1.8rem" strokeWidth="1.2" />
             </Link>
           )}
-          <EmailButton email={email} mail={mail} />
-          {instagram && (
-            <Link href={instagram} target="_blank" className={styles.link}>
+          <EmailButton email={author?.email || ''} mail={author?.mail} />
+          {author?.instagram && (
+            <Link href={author?.instagram} target="_blank" className={styles.link}>
               <IconBrandInstagram size="1.8rem" strokeWidth="1.2" />
             </Link>
           )}

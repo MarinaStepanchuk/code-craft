@@ -4,9 +4,11 @@ import { useRouter } from 'next/navigation';
 import { amatic } from '@/app/layout';
 import { IUser } from '@/types/interfaces';
 import { Patch } from '@/constants/common.constants';
+import { forwardRef } from 'react';
 import styles from './userCard.module.scss';
 
-const UserCard = ({ user }: { user: IUser }): JSX.Element => {
+// eslint-disable-next-line react/display-name
+const UserCard = forwardRef<HTMLElement, { user: IUser }>(({ user }, ref): JSX.Element => {
   const { id, email, name, bio, avatarUrl } = user;
   const { push } = useRouter();
 
@@ -15,7 +17,7 @@ const UserCard = ({ user }: { user: IUser }): JSX.Element => {
   };
 
   return (
-    <div className={styles.userContainer} onClick={goToAuthorPage}>
+    <div className={styles.userContainer} onClick={goToAuthorPage} ref={ref}>
       {avatarUrl ? (
         <Image
           src={avatarUrl}
@@ -35,6 +37,6 @@ const UserCard = ({ user }: { user: IUser }): JSX.Element => {
       </div>
     </div>
   );
-};
+});
 
 export default UserCard;

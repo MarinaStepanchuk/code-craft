@@ -11,7 +11,7 @@ interface IPageProps {
 
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
-    const responseUser = await fetch(`${process.env.API_URL}/user/${id}`);
+    const responseUser = await fetch(`${process.env.API_URL}/user/${id}`, { cache: 'reload' });
     const user: IFullUser = await responseUser.json();
 
     if (!user) {
@@ -21,7 +21,7 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
     return (
       <div className={styles.mainContainer}>
         <div className={styles.userContainer}>
-          <AuthorBio user={user} postsCount={user.countPosts} />
+          <AuthorBio userId={user.id} postsCount={user.countPosts} />
           <AuthorPublications authorId={id} />
         </div>
         <Aside />

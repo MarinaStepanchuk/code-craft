@@ -19,7 +19,7 @@ const AIAssistant = (): JSX.Element => {
     <div className={styles.assistantWrapper} onClick={handleButtonClick} ref={ref}>
       <div className={styles.tooltip}>
         <span className={styles.tooltipText} id="myTooltip">
-          Get help with your article - use our chat assistant!
+          Hi, I`m ArtiBot! I can help you with your writing!
         </span>
         <Image
           src={AIIcon}
