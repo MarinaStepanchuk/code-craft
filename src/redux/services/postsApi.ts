@@ -22,9 +22,9 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    getAllPosts: build.query<IPostsWithUser, void>({
-      query: () => ({
-        url: `/posts`,
+    getAllPosts: build.query<IPostsWithUser, number>({
+      query: (page) => ({
+        url: `/posts?page=${page}`,
       }),
       providesTags: ['Posts'],
     }),

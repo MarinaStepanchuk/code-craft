@@ -12,17 +12,17 @@
 
   .userIcon {
     @include center-content;
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
     color: $text-light;
-    font-size: 2.2rem;
+    font-size: 2rem;
     background-color: $header-background;
     border-radius: 50%;
     cursor: pointer;
   }
 
   p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin: 0;
   }
