@@ -3,7 +3,7 @@ import { IconThumbUp } from '@tabler/icons-react';
 import ShareLinkButton from '@/components/ShareLinkButton/ShareLinkButton';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import { useAppSelector } from '@/hooks/redux';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   useAddLikeMutation,
   useCheckLikeQuery,
@@ -15,21 +15,19 @@ import { useSession } from 'next-auth/react';
 import { IPostWithUser } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
 
+import getFirstParagraph from '@/utils/getFirstParagraph';
 import styles from './postActions.module.scss';
 
 const PostActions = ({ data }: { data: IPostWithUser }): JSX.Element => {
-  const { id, user: author } = data;
+  const { id, title, content, user: author } = data;
+  const url = `${Patch.post}/${id}`;
+  const text = `${getFirstParagraph(content as string).slice(0, 150)}...`;
   const { status } = useSession();
   const { user } = useAppSelector((state) => state.userReducer);
-  const { push } = useRouter();
   const [addLike, resultAddLike] = useAddLikeMutation();
   const [removeLike, resultRemoveLike] = useRemoveLikeMutation();
   const { data: countLikes } = useGetLikesQuery(data.id);
   const { data: isLiked = false } = useCheckLikeQuery({ userId: user.id, postId: data.id });
-
-  const goToAuthorPage = (): void => {
-    push(`${Patch.author}/${author.id}`);
-  };
 
   const handleLike = async (): Promise<void> => {
     if (isLiked) {
@@ -57,12 +55,12 @@ const PostActions = ({ data }: { data: IPostWithUser }): JSX.Element => {
     <div className={styles.actionsBlock}>
       <div className={styles.actionsBlock}>
         {author.id !== user.id && <Bookmark postId={id} />}
-        <ShareLinkButton />
+        <ShareLinkButton text={text} url={url} title={title as string} />
       </div>
       <div className={styles.actionsBlock}>
-        <button className={styles.aboutButton} onClick={goToAuthorPage}>
+        <Link href={`${Patch.author}/${author.id}`} className={styles.aboutButton}>
           ABOUT AUTHOR
-        </button>
+        </Link>
         <button
           className={styles.likeButton}
           onClick={handleLike}

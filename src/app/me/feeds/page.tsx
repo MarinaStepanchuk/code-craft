@@ -1,6 +1,10 @@
 import { IconUsers } from '@tabler/icons-react';
 import FeedsList from '@/components/FeedsList/FeedsList';
+import { rootMetadata } from '@/constants/common.constants';
+import { Metadata } from 'next/types';
 import styles from './feedsPage.module.scss';
+
+export const metadata: Metadata = { ...rootMetadata, title: 'Feeds' };
 
 const FeedsPage = (): JSX.Element => (
   <>

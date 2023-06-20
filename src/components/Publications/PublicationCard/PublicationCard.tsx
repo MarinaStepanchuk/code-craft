@@ -56,6 +56,8 @@ const PublicationCard = ({
   isPublic: boolean;
 }): JSX.Element => {
   const { id, banner, title, content, updatedDate, likesCount, userId: authorId } = post;
+  const url = `${Patch.post}/${id}`;
+  const text = `${getFirstParagraph(content as string).slice(0, 150)}...`;
   const { user } = useAppSelector((state) => state.userReducer);
   const { classes } = useStyles();
   const { push } = useRouter();
@@ -98,6 +100,10 @@ const PublicationCard = ({
       });
     }
   }, [resultDelete]);
+
+  useEffect(() => {
+    console.log(status);
+  });
 
   return (
     <article className={styles.publication}>
@@ -171,7 +177,9 @@ const PublicationCard = ({
           </Popover>
         )}
 
-        {status === 'published' && <ShareLinkButton />}
+        {status === 'published' && (
+          <ShareLinkButton text={text} url={url} title={title as string} />
+        )}
       </div>
       <Divider size={3} className={classes.divider} />
     </article>

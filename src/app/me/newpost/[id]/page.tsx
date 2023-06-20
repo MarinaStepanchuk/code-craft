@@ -1,9 +1,13 @@
 import PostCreator from '@/components/PostEditor/PostCreator/PostCreator';
+import { rootMetadata } from '@/constants/common.constants';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface IPageProps {
   params: { id: string };
 }
+
+export const metadata: Metadata = { ...rootMetadata, title: 'Edit Post' };
 
 // eslint-disable-next-line consistent-return
 const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element> => {

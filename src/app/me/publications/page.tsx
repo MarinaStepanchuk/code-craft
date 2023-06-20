@@ -1,5 +1,9 @@
 import PublicationsNavigation from '@/components/Publications/PostsNavigation/PublicationsNavigation';
+import { rootMetadata } from '@/constants/common.constants';
+import { Metadata } from 'next/types';
 import styles from './page.module.scss';
+
+export const metadata: Metadata = { ...rootMetadata, title: 'My Publications' };
 
 const Publications = async (): Promise<JSX.Element> => (
   <>

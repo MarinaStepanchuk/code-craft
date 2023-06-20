@@ -29,7 +29,7 @@ const DraftsList = ({
 
   useEffect(() => {
     if (drafts) {
-      setDraftsCount(drafts.amountPosts);
+      setDraftsCount(drafts.amountPosts as number);
     }
     if (isErrorDrafts) {
       notifications.show({
@@ -63,7 +63,7 @@ const DraftsList = ({
   return (
     <PaginationContainer
       onPageClick={changePage}
-      amountPages={drafts.amountPages}
+      amountPages={drafts.amountPages as number}
       page={drafts.page}
     >
       <PublicationList status="draft" posts={drafts.posts} isPublic={false} />

@@ -1,6 +1,10 @@
 import { IconBookmarks } from '@tabler/icons-react';
 import BookmarksList from '@/components/BookmarksList/BookmarksList';
+import { rootMetadata } from '@/constants/common.constants';
+import { Metadata } from 'next';
 import styles from './bookmarksPage.module.scss';
+
+export const metadata: Metadata = { ...rootMetadata, title: 'My Bookmarks' };
 
 const BookmarksPage = (): JSX.Element => (
   <>
