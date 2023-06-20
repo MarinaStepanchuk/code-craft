@@ -9,8 +9,8 @@ import { useEffect, useState } from 'react';
 
 const LastFeeds = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
-  const { data: result, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
-  const [renderList, setRenderList] = useState<IPostWithUser[]>([]);
+  const { data: result, isLoading, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
+  const [renderList, setRenderList] = useState<IPostWithUser[]>();
 
   useEffect(() => {
     if (isError) {
@@ -35,13 +35,17 @@ const LastFeeds = (): JSX.Element => {
     return <></>;
   }
 
+  if (isLoading) {
+    return <></>;
+  }
+
   if (!result?.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have subscriptions</p>;
   }
 
   return (
     <div>
-      {renderList.map((post) => (
+      {renderList?.map((post) => (
         <PostPreview key={post.id} post={post} />
       ))}
     </div>

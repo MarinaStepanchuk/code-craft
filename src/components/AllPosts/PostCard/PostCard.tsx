@@ -7,9 +7,11 @@ import getFirstParagraph from '@/utils/getFirstParagraph';
 import PostCardHeader from '@/components/PostCardHeader/PostCardHeader';
 import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
+import { forwardRef } from 'react';
 import styles from './PostCard.module.scss';
 
-const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
+// eslint-disable-next-line react/display-name
+const PostCard = forwardRef<HTMLElement, { card: IPostWithUser }>(({ card }, ref): JSX.Element => {
   const { id, title, banner, content } = card;
   const { push } = useRouter();
 
@@ -18,7 +20,7 @@ const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
   };
 
   return (
-    <article className={styles.container}>
+    <article className={styles.container} ref={ref}>
       <div className={styles.bannerContainer} onClick={readPost}>
         <Image
           src={banner || defaultBanner}
@@ -38,6 +40,6 @@ const PostCard = ({ card }: { card: IPostWithUser }): JSX.Element => {
       </div>
     </article>
   );
-};
+});
 
 export default PostCard;

@@ -4,12 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Patch } from '@/constants/common.constants';
-import styles from './postPreview.module.scss';
 import getNameFromEmail from '@/utils/getNameFromEmail';
+import styles from './postPreview.module.scss';
 
 const PostPreview = ({ post }: { post: IPostWithUser }): JSX.Element => {
-  console.log(22222);
-  const { id, title, banner, user: author } = post;
+  const { id, title, user: author } = post;
   const { email, name, avatarUrl } = author;
   const { push } = useRouter();
 
@@ -20,11 +19,11 @@ const PostPreview = ({ post }: { post: IPostWithUser }): JSX.Element => {
   return (
     <article className={styles.post} onClick={readPost}>
       <div className={styles.user}>
-        {author.avatarUrl ? (
+        {avatarUrl ? (
           <Image
-            src={author.avatarUrl}
-            width={40}
-            height={40}
+            src={avatarUrl}
+            width={35}
+            height={35}
             alt="user photo"
             style={{ cursor: 'pointer', borderRadius: '50%' }}
           />
