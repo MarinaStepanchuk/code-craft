@@ -1,11 +1,14 @@
 import PostPreview from '@/components/PostPreview/PostPreview';
-import { ErrorMessages } from '@/constants/common.constants';
+import { ErrorMessages, Patch } from '@/constants/common.constants';
 import { useAppSelector } from '@/hooks/redux';
 import { useGetFeedsQuery } from '@/redux/services/subscribersApi';
 import { IPostWithUser } from '@/types/interfaces';
 import getRandomList from '@/utils/getRandomList';
 import { notifications } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
+import { amatic } from '@/app/layout';
+import Link from 'next/link';
+import styles from './lastFeeds.module.scss';
 
 const LastFeeds = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
@@ -44,10 +47,14 @@ const LastFeeds = (): JSX.Element => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
+      <p className={`${styles.title} ${amatic.className}`}>New to your subscriptions</p>
       {renderList?.map((post) => (
         <PostPreview key={post.id} post={post} />
       ))}
+      <Link href={`${Patch.me}${Patch.feeds}`} className={styles.linkMore}>
+        See the full list
+      </Link>
     </div>
   );
 };
