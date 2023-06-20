@@ -3,10 +3,11 @@
 
 .post {
   margin: 1.5rem 0;
+  cursor: pointer;
 
   .user {
     @include flex($jc: flex-start);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     padding-bottom: 1rem;
   }
 
@@ -19,6 +20,10 @@
     background-color: $header-background;
     border-radius: 50%;
     cursor: pointer;
+  }
+
+  .name {
+    font-weight: 600;
   }
 
   p {

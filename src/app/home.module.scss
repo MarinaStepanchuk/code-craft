@@ -4,4 +4,5 @@
 .postsContainer {
   @include flex($ai: flex-start, $gap: 4rem, $jc: space-around);
   width: 100%;
+  position: relative;
 }

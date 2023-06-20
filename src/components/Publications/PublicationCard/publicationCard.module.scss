@@ -6,6 +6,11 @@
   width: 100%;
   color: $text-dark;
 
+  .link {
+    display: block;
+    width: 100%;
+  }
+
   .preview {
     @include flex($jc: flex-start, $ai: flex-start, $gap: 2rem);
     width: 100%;

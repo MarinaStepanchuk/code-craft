@@ -22,7 +22,7 @@ export const userApi = createApi({
     }),
     getUserById: build.query<IUser, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/user/${id}`,
       }),
       providesTags: ['User'],
     }),
