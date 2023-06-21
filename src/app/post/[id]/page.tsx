@@ -52,6 +52,8 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
       notFound();
     }
 
+    return <p>пост</p>;
+
     return <ExpandedPost data={data} />;
   } catch (error) {
     notFound();
