@@ -76,11 +76,6 @@ interface IPostsWithUser {
   amountPosts?: number;
 }
 
-interface IExpandedPost extends IPostWithUser {
-  countLikes: number;
-  isLiked: boolean;
-}
-
 interface IComment {
   id: number;
   message: string;
@@ -117,6 +112,11 @@ interface ISubscriber {
   avatarUrl: string | null;
 }
 
+interface INotification {
+  id: number;
+  message: string;
+}
+
 export type {
   IUser,
   IPost,
@@ -124,7 +124,6 @@ export type {
   IFormDataProfile,
   IPostWithUser,
   ITag,
-  IExpandedPost,
   IComment,
   IBackendError,
   IChatAIMessage,
@@ -133,4 +132,5 @@ export type {
   ISubscriber,
   ITags,
   IUsers,
+  INotification,
 };

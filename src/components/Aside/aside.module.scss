@@ -2,6 +2,7 @@
 @import '@/common.styles/variables.module.scss';
 
 .aside {
-  @include flex($dir: column, $jc: flex-start);
-  width: 40%;
+  @include flex($dir: column, $jc: flex-start, $gap: 4rem);
+  width: 30%;
+  margin: 3rem 0;
 }

@@ -135,7 +135,7 @@
     }
 
     .assistantMessage {
-      @include flex();
+      @include flex($ai: flex-start);
       border-bottom-left-radius: 0.2rem;
       align-self: flex-start;
     }

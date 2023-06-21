@@ -20,7 +20,6 @@ const PublicatedList = ({
   };
   const [currentPage, setCurrentPage] = useState(0);
   const { user } = useAppSelector((state) => state.userReducer);
-
   const {
     data: publications = defaultValue,
     isLoading: isLoadingPublished,
@@ -29,7 +28,7 @@ const PublicatedList = ({
 
   useEffect(() => {
     if (publications) {
-      setPublicationsCount(publications.amountPosts);
+      setPublicationsCount(publications.amountPosts as number);
     }
     if (isErrorPublished) {
       notifications.show({
@@ -52,6 +51,10 @@ const PublicatedList = ({
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  if (isErrorPublished) {
+    return <></>;
+  }
+
   if (!publications.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have publication.</p>;
   }
@@ -59,10 +62,10 @@ const PublicatedList = ({
   return (
     <PaginationContainer
       onPageClick={changePage}
-      amountPages={publications.amountPages}
+      amountPages={publications.amountPages as number}
       page={publications.page}
     >
-      <Publications status="draft" posts={publications.posts} isPublic={false} />
+      <Publications status="published" posts={publications.posts} isPublic={false} />
     </PaginationContainer>
   );
 };

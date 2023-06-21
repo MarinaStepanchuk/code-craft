@@ -1,0 +1,30 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.container {
+  @include flex($dir: column);
+  width: 100%;
+
+  .title {
+    align-self: flex-start;
+    font-size: 2.6rem;
+    border-bottom: 0.2rem solid rgb(190, 186, 186);
+    width: 100%;
+    padding-bottom: 1rem;
+    margin: 0;
+    font-weight: 600;
+    color: $primary-color;
+  }
+
+  .listTags {
+    @include flex($wr: wrap, $jc: flex-start);
+  }
+
+  .linkMore {
+    align-self: flex-start;
+    font-size: 1.4rem;
+    text-decoration: underline;
+    margin-top: 1rem;
+    color: $primary-color;
+  }
+}

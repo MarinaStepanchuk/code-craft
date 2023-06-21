@@ -2,8 +2,13 @@ import { IconMessageCircle2 } from '@tabler/icons-react';
 import { Accordion, AccordionControlProps, Box, Tooltip, createStyles } from '@mantine/core';
 import { lazy, Suspense } from 'react';
 import Preloader from '@/components/Preloader/Preloader';
+import { IPostWithUser } from '@/types/interfaces';
 import PostActions from '../PostActions/PostActions';
 import styles from './expendedPostFooter.module.scss';
+
+interface IAccordionProps extends AccordionControlProps {
+  data: IPostWithUser;
+}
 
 const useStyles = createStyles((theme) => ({
   iconButton: {
@@ -25,7 +30,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function AccordionControl(props: AccordionControlProps): JSX.Element {
+function AccordionControl(props: IAccordionProps): JSX.Element {
   return (
     <Box
       sx={{
@@ -36,7 +41,7 @@ function AccordionControl(props: AccordionControlProps): JSX.Element {
     >
       <Accordion.Control {...props} />
       <div className={styles.actionContainer}>
-        <PostActions />
+        <PostActions data={props.data} />
       </div>
     </Box>
   );
@@ -44,13 +49,13 @@ function AccordionControl(props: AccordionControlProps): JSX.Element {
 
 const Comments = lazy(() => import('../Comments/Comments'));
 
-const ExpendedPostFooter = (): JSX.Element => {
+const ExpendedPostFooter = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const { classes } = useStyles();
   return (
     <footer>
       <Accordion variant="default" disableChevronRotation chevronPosition="left" chevron={false}>
         <Accordion.Item value="photos">
-          <AccordionControl className={classes.control}>
+          <AccordionControl className={classes.control} data={data}>
             <Tooltip label="Comments" withArrow>
               <IconMessageCircle2 size={30} strokeWidth="1.2" className={classes.iconButton} />
             </Tooltip>
@@ -58,7 +63,7 @@ const ExpendedPostFooter = (): JSX.Element => {
 
           <Accordion.Panel sx={{ borderTop: '1px solid #ced4da' }}>
             <Suspense fallback={<Preloader />}>
-              <Comments />
+              <Comments data={data} />
             </Suspense>
           </Accordion.Panel>
         </Accordion.Item>

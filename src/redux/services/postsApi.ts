@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostsWithUser, IPosts } from '@/types/interfaces';
+import { IPost, IPostWithUser, IPostsWithUser, ITag } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -16,15 +16,15 @@ export const postsApi = createApi({
     baseUrl,
   }),
   endpoints: (build) => ({
-    getUserPosts: build.query<IPosts, IGetPostsQueryParams>({
+    getUserPosts: build.query<IPostsWithUser, IGetPostsQueryParams>({
       query: ({ userId, status, page }) => ({
-        url: `/posts?userId=${userId}&status=${status}&page=${page}`,
+        url: `/posts?userId=${userId || ''}&status=${status}&page=${page || ''}`,
       }),
       providesTags: ['Posts'],
     }),
-    getAllPosts: build.query<IPostsWithUser, void>({
-      query: () => ({
-        url: `/posts`,
+    getAllPosts: build.query<IPostsWithUser, { page: number; sort: 'DESC' | 'ASC' }>({
+      query: ({ page, sort }) => ({
+        url: `/posts?page=${page || ''}&sort=${sort || ''}`,
       }),
       providesTags: ['Posts'],
     }),
@@ -71,20 +71,15 @@ export const postsApi = createApi({
         method: 'PUT',
       }),
     }),
-    addLike: build.mutation<object, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like?userId=${userId}&postId=${postId}`,
-        method: 'POST',
+    getTopics: build.query<ITag[], { count: number; userId: string | null }>({
+      query: ({ count, userId }) => ({
+        url: `/tags/topic?count=${count}&userId=${userId}`,
       }),
+      providesTags: ['Posts'],
     }),
-    removeLike: build.mutation<object, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like`,
-        method: 'DELETE',
-        body: {
-          userId,
-          postId,
-        },
+    getRecomendedPosts: build.query<IPostWithUser[], number>({
+      query: (count) => ({
+        url: `/posts/recomendation?count=${count}`,
       }),
     }),
   }),
@@ -99,6 +94,6 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useVisitPostMutation,
-  useAddLikeMutation,
-  useRemoveLikeMutation,
+  useGetTopicsQuery,
+  useGetRecomendedPostsQuery,
 } = postsApi;

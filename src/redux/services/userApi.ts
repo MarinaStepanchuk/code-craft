@@ -22,7 +22,7 @@ export const userApi = createApi({
     }),
     getUserById: build.query<IUser, string>({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/user/${id}`,
       }),
       providesTags: ['User'],
     }),
@@ -53,7 +53,7 @@ export const userApi = createApi({
     }),
     getBookmarksPosts: build.query<IPostsWithUser, { userId: string; page: number }>({
       query: ({ userId, page }) => ({
-        url: `/bookmarks?userId=${userId}&page=${page}`,
+        url: `/bookmarks?userId=${userId || ''}&page=${page || 0}`,
       }),
       providesTags: ['User'],
     }),

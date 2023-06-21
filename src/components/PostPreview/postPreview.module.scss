@@ -1,0 +1,39 @@
+@import '@/common.styles/variables.module.scss';
+@import '@/common.styles/mixins.module.scss';
+
+.linkContainer {
+  width: 100%;
+  padding: 0;
+}
+
+.post {
+  cursor: pointer;
+
+  .user {
+    @include flex($jc: flex-start);
+    font-size: 1.4rem;
+    padding-bottom: 1rem;
+  }
+
+  .userIcon {
+    @include center-content;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: $text-light;
+    font-size: 2rem;
+    background-color: $header-background;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}

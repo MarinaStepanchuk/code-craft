@@ -29,7 +29,7 @@ const DraftsList = ({
 
   useEffect(() => {
     if (drafts) {
-      setDraftsCount(drafts.amountPosts);
+      setDraftsCount(drafts.amountPosts as number);
     }
     if (isErrorDrafts) {
       notifications.show({
@@ -52,6 +52,10 @@ const DraftsList = ({
     return <Preloader width="5rem" height="5rem" color="#05386b" />;
   }
 
+  if (isErrorDrafts) {
+    return <></>;
+  }
+
   if (!drafts.posts.length) {
     return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have drafts.</p>;
   }
@@ -59,7 +63,7 @@ const DraftsList = ({
   return (
     <PaginationContainer
       onPageClick={changePage}
-      amountPages={drafts.amountPages}
+      amountPages={drafts.amountPages as number}
       page={drafts.page}
     >
       <PublicationList status="draft" posts={drafts.posts} isPublic={false} />

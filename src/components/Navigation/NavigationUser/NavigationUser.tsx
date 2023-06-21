@@ -9,6 +9,7 @@ import {
   IconHelp,
   IconBookmarks,
   IconArrowBadgeDown,
+  IconUsers,
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -96,7 +97,7 @@ const NavigationUser = (): JSX.Element => {
           Bookmarks
         </Menu.Item>
         <Menu.Item
-          icon={<IconBookmarks size={30} strokeWidth="1" />}
+          icon={<IconUsers size={30} strokeWidth="1" />}
           sx={{ fontSize: '1.5rem' }}
           onClick={redirectToFeeds}
         >
