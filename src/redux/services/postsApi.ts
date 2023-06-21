@@ -18,13 +18,13 @@ export const postsApi = createApi({
   endpoints: (build) => ({
     getUserPosts: build.query<IPostsWithUser, IGetPostsQueryParams>({
       query: ({ userId, status, page }) => ({
-        url: `/posts?userId=${userId}&status=${status}&page=${page}`,
+        url: `/posts?userId=${userId || ''}&status=${status}&page=${page || ''}`,
       }),
       providesTags: ['Posts'],
     }),
     getAllPosts: build.query<IPostsWithUser, { page: number; sort: 'DESC' | 'ASC' }>({
       query: ({ page, sort }) => ({
-        url: `/posts?page=${page}&sort=${sort}`,
+        url: `/posts?page=${page || ''}&sort=${sort || ''}`,
       }),
       providesTags: ['Posts'],
     }),

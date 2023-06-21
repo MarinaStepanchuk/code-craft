@@ -5,7 +5,7 @@ import { useGetFeedsQuery } from '@/redux/services/subscribersApi';
 import { IPostWithUser } from '@/types/interfaces';
 import getRandomList from '@/utils/getRandomList';
 import { notifications } from '@mantine/notifications';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { amatic } from '@/app/layout';
 import Link from 'next/link';
 import styles from './lastFeeds.module.scss';
@@ -13,7 +13,6 @@ import styles from './lastFeeds.module.scss';
 const LastFeeds = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
   const { data: result, isLoading, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
-  const [renderList, setRenderList] = useState<IPostWithUser[]>();
 
   useEffect(() => {
     if (isError) {
@@ -28,10 +27,10 @@ const LastFeeds = (): JSX.Element => {
       });
     }
 
-    if (result) {
-      const randomList = getRandomList(result?.posts, 5);
-      setRenderList(randomList);
-    }
+    // if (result) {
+    //   const randomList = getRandomList(result?.posts, 5);
+    //   setRenderList(randomList);
+    // }
   }, [isError, result]);
 
   if (isError) {
@@ -42,16 +41,14 @@ const LastFeeds = (): JSX.Element => {
     return <></>;
   }
 
-  if (!result?.posts.length) {
-    return <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have subscriptions</p>;
-  }
-
   return (
     <div className={styles.container}>
       <p className={`${styles.title} ${amatic.className}`}>New to your subscriptions</p>
-      {renderList?.map((post) => (
-        <PostPreview key={post.id} post={post} />
-      ))}
+      {result?.posts?.length === 0 ? (
+        <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have subscriptions</p>
+      ) : (
+        result?.posts?.map((post) => <PostPreview key={post.id} post={post} />)
+      )}
       <Link href={`${Patch.me}${Patch.feeds}`} className={styles.linkMore}>
         See the full list
       </Link>

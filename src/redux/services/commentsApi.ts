@@ -62,7 +62,7 @@ export const commentsApi = createApi({
     }),
     getResponses: build.query<IResponseComments, { userId: string; page?: number }>({
       query: ({ userId, page = 0 }) => ({
-        url: `/responses?userId=${userId}&page=${page}`,
+        url: `/responses?userId=${userId || ''}&page=${page || 0}`,
       }),
     }),
   }),

@@ -19,7 +19,7 @@ export const subscribersApi = createApi({
   endpoints: (build) => ({
     getSubscribers: build.query<ISubscribersResponse, { author: string; page: number }>({
       query: ({ author, page }) => ({
-        url: `/subscribers?author=${author}&page=${page}`,
+        url: `/subscribers?author=${author}&page=${page || 0}`,
       }),
       providesTags: ['Subscribers'],
     }),
@@ -53,7 +53,7 @@ export const subscribersApi = createApi({
     }),
     getFeeds: build.query<IPostsWithUser, { userId: string; page: number }>({
       query: ({ userId, page }) => ({
-        url: `/subscribers/feeds?userId=${userId}&page=${page}`,
+        url: `/subscribers/feeds?userId=${userId || ''}&page=${page || 0}`,
       }),
       providesTags: ['Subscribers'],
     }),

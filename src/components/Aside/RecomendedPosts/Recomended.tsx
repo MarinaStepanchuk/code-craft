@@ -1,23 +1,23 @@
+import { amatic } from '@/app/layout';
+import Tag from '@/components/ExpandedPost/TagsList/Tag/Tag';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
+import { useAppSelector } from '@/hooks/redux';
+import { useGetTopicsQuery } from '@/redux/services/postsApi';
 import { ITag } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
-import { useEffect, useState } from 'react';
-import { amatic } from '@/app/layout';
-import Link from 'next/link';
-import Tag from '@/components/ExpandedPost/TagsList/Tag/Tag';
-import { useGetTopicsQuery } from '@/redux/services/postsApi';
-import { useAppSelector } from '@/hooks/redux';
 import { useSession } from 'next-auth/react';
-import styles from './topic.module.scss';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import styles from './recomended.module.scss';
 
-const Topic = (): JSX.Element => {
+const RecommendedPosts = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
-  const { status } = useSession();
   const {
     data: result,
     isLoading,
     isError,
   } = useGetTopicsQuery({ count: 10, userId: user.id || '' });
+  const [renderList, setRenderList] = useState<ITag[]>();
 
   useEffect(() => {
     if (isError) {
@@ -30,6 +30,10 @@ const Topic = (): JSX.Element => {
           description: { fontSize: '1.4rem' },
         }),
       });
+    }
+
+    if (result) {
+      setRenderList(result);
     }
   }, [isError, result]);
 
@@ -44,9 +48,9 @@ const Topic = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <p className={`${styles.title} ${amatic.className}`}>Recommended topics</p>
-      {result && (
+      {renderList && (
         <div className={styles.listTags}>
-          {result?.map((tag) => (
+          {renderList.map((tag) => (
             <Tag key={tag.id} tag={tag} />
           ))}
         </div>
@@ -58,4 +62,4 @@ const Topic = (): JSX.Element => {
   );
 };
 
-export default Topic;
+export default RecommendedPosts;
