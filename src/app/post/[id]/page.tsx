@@ -4,7 +4,6 @@ import { IPostWithUser } from '@/types/interfaces';
 import getFirstParagraph from '@/utils/getFirstParagraph';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next/types';
-import { GetServerSideProps } from 'next';
 
 interface IPageProps {
   params: { id: string };
@@ -45,45 +44,19 @@ export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<
 //   return data;
 // };
 
-interface PropductProps {
-  data: IPostWithUser;
-}
-
-export default async function EditPostPage({ data }: PropductProps): Promise<JSX.Element> {
+export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
-    // const data = await getPost(id);
+    const response = await fetch(`${process.env.API_URL}/post/${id}`, {
+      cache: 'reload',
+    });
+    const data = await response.json();
 
-    // if (!data) {
-    //   notFound();
-    // }
-
-    // return <p>пост</p>;
+    if (!data) {
+      notFound();
+    }
 
     return <ExpandedPost data={data} />;
   } catch (error) {
     notFound();
   }
 }
-
-export const getServerSideProps: GetServerSideProps<{
-  product: IPostWithUser;
-}> = async (context) => {
-  // get product id from the url
-  const id = context.params?.id;
-
-  const response = await fetch(`${process.env.API_URL}/post/${id}`, {
-    cache: 'reload',
-  });
-
-  const data = (await response.json()) as IPostWithUser;
-
-  if (!data) {
-    notFound();
-  }
-
-  return {
-    props: {
-      product: data,
-    },
-  };
-};
