@@ -5,6 +5,7 @@ import { IconUserEdit, IconBell, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
 import SubscribersList from '../Subscribes/SubscribersList/SubscribersList';
+import NotificationList from '@/components/NotificationList/NotificationList';
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -75,7 +76,7 @@ const ProfileNavigation = (): JSX.Element => {
       </Tabs.Panel>
 
       <Tabs.Panel value="notifications" pt="xs">
-        Messages
+        <NotificationList />
       </Tabs.Panel>
 
       <Tabs.Panel value="followers" pt="xs">

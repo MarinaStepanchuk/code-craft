@@ -15,21 +15,20 @@ const useStyles = createStyles((theme) => ({
 
 interface IShareLinkProps {
   text: string;
-  url: string;
   title: string;
 }
 
-const ShareLinkButton = ({ text, url, title }: IShareLinkProps): JSX.Element => {
+const ShareLinkButton = ({ text, title }: IShareLinkProps): JSX.Element => {
   const { classes } = useStyles();
   const shareHandler = (): void => {
     if (navigator.share) {
       navigator.share({
         text,
-        url,
+        url: window.location.href,
         title,
       });
     } else {
-      navigator.clipboard.writeText(url);
+      navigator.clipboard.writeText(window.location.href);
     }
   };
 

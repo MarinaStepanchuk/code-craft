@@ -16,11 +16,13 @@ import { IPostWithUser } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
 
 import getFirstParagraph from '@/utils/getFirstParagraph';
+import { useCreateNotificationMutation } from '@/redux/services/notificationApi';
+import createNotificationMessage from '@/utils/createNotificationMessage';
+import getNameFromEmail from '@/utils/getNameFromEmail';
 import styles from './postActions.module.scss';
 
 const PostActions = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const { id, title, content, user: author } = data;
-  const url = `${Patch.post}/${id}`;
   const text = `${getFirstParagraph(content as string).slice(0, 150)}...`;
   const { status } = useSession();
   const { user } = useAppSelector((state) => state.userReducer);
@@ -28,12 +30,29 @@ const PostActions = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const [removeLike, resultRemoveLike] = useRemoveLikeMutation();
   const { data: countLikes } = useGetLikesQuery(data.id);
   const { data: isLiked = false } = useCheckLikeQuery({ userId: user.id, postId: data.id });
+  const [createNotification] = useCreateNotificationMutation();
 
   const handleLike = async (): Promise<void> => {
     if (isLiked) {
       await removeLike({ userId: user.id, postId: id });
+      const message = createNotificationMessage({
+        type: 'dislike',
+        postId: id,
+        postTitle: title as string,
+        userName: user.name || getNameFromEmail(user.email),
+        userId: user.id,
+      });
+      await createNotification({ userId: author.id, message });
     } else {
       await addLike({ userId: user.id, postId: id });
+      const message = createNotificationMessage({
+        type: 'like',
+        postId: id,
+        postTitle: title as string,
+        userName: user.name || getNameFromEmail(user.email),
+        userId: user.id,
+      });
+      await createNotification({ userId: author.id, message });
     }
   };
 
@@ -55,7 +74,7 @@ const PostActions = ({ data }: { data: IPostWithUser }): JSX.Element => {
     <div className={styles.actionsBlock}>
       <div className={styles.actionsBlock}>
         {author.id !== user.id && <Bookmark postId={id} />}
-        <ShareLinkButton text={text} url={url} title={title as string} />
+        <ShareLinkButton text={text} title={title as string} />
       </div>
       <div className={styles.actionsBlock}>
         <Link href={`${Patch.author}/${author.id}`} className={styles.aboutButton}>

@@ -11,6 +11,8 @@ import Preloader from '@/components/Preloader/Preloader';
 import { ActiveComment } from '@/types/types';
 import { notifications } from '@mantine/notifications';
 import { ErrorMessages } from '@/constants/common.constants';
+import createNotificationMessage from '@/utils/createNotificationMessage';
+import { useCreateNotificationMutation } from '@/redux/services/notificationApi';
 import Comment from './Comment/Comment';
 import CommentsForm from './CommentsForm/CommentsForm';
 import styles from './comments.module.scss';
@@ -26,6 +28,7 @@ const Comments = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const [createCommentItem, resultCreateComment] = useCreateCommentMutation();
   const [updateCommentItem, resultUpdateComment] = useUpdateCommentMutation();
   const [deleteCommentItem, resultDeleteComment] = useDeleteCommentMutation();
+  const [createNotification] = useCreateNotificationMutation();
 
   const getReplies = (commentId: number): IComment[] =>
     comments
@@ -37,6 +40,13 @@ const Comments = ({ data }: { data: IPostWithUser }): JSX.Element => {
 
   const addComment = async (message: string, parentId: number | null = null): Promise<void> => {
     await createCommentItem({ message, parentId, postId: data.id, userId });
+    const messageNotification = createNotificationMessage({
+      type: 'comment',
+      postId: data.id,
+      postTitle: data.title as string,
+      comment: message,
+    });
+    await createNotification({ userId, message: messageNotification });
     setActiveComment(null);
   };
 

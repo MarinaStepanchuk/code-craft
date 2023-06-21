@@ -9,6 +9,7 @@ import { chatApi } from '../services/chatApi';
 import { subscribersApi } from '../services/subscribersApi';
 import { searchApi } from '../services/searchApi';
 import { likeApi } from '../services/likeApi';
+import { notificationApi } from '../services/notificationApi';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [subscribersApi.reducerPath]: subscribersApi.reducer,
     [searchApi.reducerPath]: searchApi.reducer,
     [likeApi.reducerPath]: likeApi.reducer,
+    [notificationApi.reducerPath]: notificationApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(
@@ -29,7 +31,8 @@ export const store = configureStore({
       chatApi.middleware,
       subscribersApi.middleware,
       searchApi.middleware,
-      likeApi.middleware
+      likeApi.middleware,
+      notificationApi.middleware
     ),
 });
 

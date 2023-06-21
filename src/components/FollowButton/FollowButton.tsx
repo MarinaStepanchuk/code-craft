@@ -11,6 +11,9 @@ import {
 } from '@/redux/services/subscribersApi';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
+import { useCreateNotificationMutation } from '@/redux/services/notificationApi';
+import createNotificationMessage from '@/utils/createNotificationMessage';
+import getNameFromEmail from '@/utils/getNameFromEmail';
 import styles from './followButton.module.scss';
 
 const FollowButton = ({ authorId }: { authorId: string }): JSX.Element => {
@@ -20,6 +23,7 @@ const FollowButton = ({ authorId }: { authorId: string }): JSX.Element => {
   const { data: isSubscribed } = useCheckSubscribeQuery({ author: authorId, subscriber: user.id });
   const [subscribe, resultSubscribe] = useSubscribeMutation();
   const [unsubscribe, resultUnsubscribe] = useUnsubscribeMutation();
+  const [createNotification] = useCreateNotificationMutation();
 
   const handleFollowing = async (): Promise<void> => {
     if (status !== 'authenticated') {
@@ -31,11 +35,23 @@ const FollowButton = ({ authorId }: { authorId: string }): JSX.Element => {
         author: authorId,
         subscriber: user.id,
       });
+      const message = createNotificationMessage({
+        type: 'unfollow',
+        userId: user.id,
+        userName: user.name || getNameFromEmail(user.email),
+      });
+      await createNotification({ userId: authorId, message });
     } else {
       await subscribe({
         author: authorId,
         subscriber: user.id,
       });
+      const message = createNotificationMessage({
+        type: 'follow',
+        userId: user.id,
+        userName: user.name || getNameFromEmail(user.email),
+      });
+      await createNotification({ userId: authorId, message });
     }
   };
 
