@@ -45,21 +45,13 @@ interface IPageProps {
 // };
 
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
-  try {
-    const response = await fetch(`${process.env.API_URL}/post/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
-    const data = await response.json();
+  const response = await fetch(`${process.env.API_URL}/post/${id}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  });
+  const data = await response.json();
 
-    if (!data) {
-      notFound();
-    }
-
-    return <ExpandedPost data={data} />;
-  } catch (error) {
-    notFound();
-  }
+  return <p>{JSON.stringify(data)}</p>;
 }
