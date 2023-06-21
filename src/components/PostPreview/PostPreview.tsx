@@ -11,7 +11,7 @@ const PostPreview = ({ post }: { post: IPostWithUser }): JSX.Element => {
   const { email, name, avatarUrl } = author;
 
   return (
-    <Link href={`${Patch.post}/${id}`}>
+    <Link href={`${Patch.post}/${id}`} className={styles.linkContainer}>
       <article className={styles.post}>
         <div className={styles.user}>
           {avatarUrl ? (

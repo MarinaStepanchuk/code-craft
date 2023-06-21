@@ -1,8 +1,12 @@
 @import '@/common.styles/variables.module.scss';
 @import '@/common.styles/mixins.module.scss';
 
+.linkContainer {
+  width: 100%;
+  padding: 0;
+}
+
 .post {
-  margin: 1.5rem 0;
   cursor: pointer;
 
   .user {
@@ -24,6 +28,7 @@
 
   .name {
     font-weight: 600;
+    font-size: 1.6rem;
   }
 
   p {
