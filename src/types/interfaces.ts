@@ -112,6 +112,11 @@ interface ISubscriber {
   avatarUrl: string | null;
 }
 
+interface INotification {
+  id: number;
+  message: string;
+}
+
 export type {
   IUser,
   IPost,
@@ -127,4 +132,5 @@ export type {
   ISubscriber,
   ITags,
   IUsers,
+  INotification,
 };

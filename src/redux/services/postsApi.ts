@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostsWithUser, ITag } from '@/types/interfaces';
+import { IPost, IPostWithUser, IPostsWithUser, ITag } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -77,6 +77,11 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
+    getRecomendedPosts: build.query<IPostWithUser[], number>({
+      query: (count) => ({
+        url: `/posts/recomendation?count=${count}`,
+      }),
+    }),
   }),
 });
 
@@ -90,4 +95,5 @@ export const {
   useDeletePostMutation,
   useVisitPostMutation,
   useGetTopicsQuery,
+  useGetRecomendedPostsQuery,
 } = postsApi;

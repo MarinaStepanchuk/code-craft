@@ -1,23 +1,14 @@
 import { amatic } from '@/app/layout';
-import Tag from '@/components/ExpandedPost/TagsList/Tag/Tag';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
-import { useAppSelector } from '@/hooks/redux';
-import { useGetTopicsQuery } from '@/redux/services/postsApi';
-import { ITag } from '@/types/interfaces';
+import { useGetRecomendedPostsQuery } from '@/redux/services/postsApi';
 import { notifications } from '@mantine/notifications';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import PostPreview from '@/components/PostPreview/PostPreview';
 import styles from './recomended.module.scss';
 
 const RecommendedPosts = (): JSX.Element => {
-  const { user } = useAppSelector((state) => state.userReducer);
-  const {
-    data: result,
-    isLoading,
-    isError,
-  } = useGetTopicsQuery({ count: 10, userId: user.id || '' });
-  const [renderList, setRenderList] = useState<ITag[]>();
+  const { data: result, isLoading, isError } = useGetRecomendedPostsQuery(5);
 
   useEffect(() => {
     if (isError) {
@@ -31,11 +22,7 @@ const RecommendedPosts = (): JSX.Element => {
         }),
       });
     }
-
-    if (result) {
-      setRenderList(result);
-    }
-  }, [isError, result]);
+  }, [isError]);
 
   if (isError) {
     return <></>;
@@ -48,10 +35,10 @@ const RecommendedPosts = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <p className={`${styles.title} ${amatic.className}`}>Recommended topics</p>
-      {renderList && (
+      {!!result?.length && (
         <div className={styles.listTags}>
-          {renderList.map((tag) => (
-            <Tag key={tag.id} tag={tag} />
+          {result.map((post) => (
+            <PostPreview key={post.id} post={post} />
           ))}
         </div>
       )}

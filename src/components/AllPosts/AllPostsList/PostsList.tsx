@@ -15,7 +15,6 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
   const [displayedPosts, setDisplayedPosts] = useState<IPostWithUser[]>([]);
   const [activeUpButton, setActiveUpButton] = useState(false);
   const observerLoader = useRef<IntersectionObserver | null>(null);
-  const isLastPage = currentPage >= (data?.amountPages as number);
 
   const lastItem = useCallback(
     (post: HTMLElement) => {
@@ -27,7 +26,7 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
 
       observerLoader.current = new IntersectionObserver(
         (posts: IntersectionObserverEntry[]): void => {
-          if (posts[0].isIntersecting && !isLastPage) {
+          if (posts[0].isIntersecting) {
             setCurrentPage((prev) => prev + 1);
           }
         }
@@ -35,7 +34,7 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
 
       if (post) observerLoader.current.observe(post);
     },
-    [isLoading, isLastPage]
+    [isLoading]
   );
 
   useEffect(() => {

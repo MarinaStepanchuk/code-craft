@@ -2,17 +2,15 @@ import PostPreview from '@/components/PostPreview/PostPreview';
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import { useAppSelector } from '@/hooks/redux';
 import { useGetFeedsQuery } from '@/redux/services/subscribersApi';
-import { IPostWithUser } from '@/types/interfaces';
-import getRandomList from '@/utils/getRandomList';
 import { notifications } from '@mantine/notifications';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { amatic } from '@/app/layout';
 import Link from 'next/link';
 import styles from './lastFeeds.module.scss';
 
 const LastFeeds = (): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
-  const { data: result, isLoading, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
+  const { data: result, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
 
   useEffect(() => {
     if (isError) {
@@ -26,29 +24,20 @@ const LastFeeds = (): JSX.Element => {
         }),
       });
     }
-
-    // if (result) {
-    //   const randomList = getRandomList(result?.posts, 5);
-    //   setRenderList(randomList);
-    // }
-  }, [isError, result]);
+  }, [isError]);
 
   if (isError) {
-    return <></>;
-  }
-
-  if (isLoading) {
     return <></>;
   }
 
   return (
     <div className={styles.container}>
       <p className={`${styles.title} ${amatic.className}`}>New to your subscriptions</p>
-      {result?.posts?.length === 0 ? (
+      {result?.posts?.length === 0 && (
         <p style={{ textAlign: 'center', fontSize: '1.6rem' }}>You don`t have subscriptions</p>
-      ) : (
-        result?.posts?.map((post) => <PostPreview key={post.id} post={post} />)
       )}
+      {!!result?.posts?.length &&
+        result?.posts?.slice(0, 6).map((post) => <PostPreview key={post.id} post={post} />)}
       <Link href={`${Patch.me}${Patch.feeds}`} className={styles.linkMore}>
         See the full list
       </Link>

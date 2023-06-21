@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import LastFeeds from './LastFeeds/LastFeeds';
 import Topic from './Topic/Topic';
 import styles from './aside.module.scss';
+import RecommendedPosts from './RecomendedPosts/Recomended';
 
 const Aside = (): JSX.Element => {
   const { status } = useSession();
@@ -12,6 +13,7 @@ const Aside = (): JSX.Element => {
     <aside className={styles.aside}>
       {status === 'authenticated' && <LastFeeds />}
       <Topic />
+      <RecommendedPosts />
     </aside>
   );
 };
