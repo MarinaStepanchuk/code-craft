@@ -1,7 +1,7 @@
 'use client';
 
 import { useGetAllPostsQuery } from '@/redux/services/postsApi';
-import { createRef, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ErrorMessages } from '@/constants/common.constants';
 import { notifications } from '@mantine/notifications';
 import { IPostWithUser } from '@/types/interfaces';
@@ -11,11 +11,32 @@ import PostCard from '../PostCard/PostCard';
 
 const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0);
-  const { data, isError } = useGetAllPostsQuery(currentPage);
+  const { data, isLoading, isError } = useGetAllPostsQuery({ page: currentPage, sort: 'DESC' });
   const [displayedPosts, setDisplayedPosts] = useState<IPostWithUser[]>([]);
-  const lastItem = createRef<HTMLElement>();
-  const observerLoader = useRef<IntersectionObserver | null>(null);
   const [activeUpButton, setActiveUpButton] = useState(false);
+  const observerLoader = useRef<IntersectionObserver | null>(null);
+  const isLastPage = currentPage >= (data?.amountPages as number);
+
+  const lastItem = useCallback(
+    (post: HTMLElement) => {
+      if (isLoading) return;
+
+      if (observerLoader.current) {
+        observerLoader.current.disconnect();
+      }
+
+      observerLoader.current = new IntersectionObserver(
+        (posts: IntersectionObserverEntry[]): void => {
+          if (posts[0].isIntersecting && !isLastPage) {
+            setCurrentPage((prev) => prev + 1);
+          }
+        }
+      );
+
+      if (post) observerLoader.current.observe(post);
+    },
+    [isLoading, isLastPage]
+  );
 
   useEffect(() => {
     setActiveUpButton(currentPage > 0);
@@ -38,24 +59,6 @@ const AllPostsList = ({ width = '60%' }: { width?: string }): JSX.Element => {
       });
     }
   }, [isError, data]);
-
-  useEffect(() => {
-    if (observerLoader.current) {
-      observerLoader.current.disconnect();
-    }
-
-    observerLoader.current = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]): void => {
-        if (entries[0].isIntersecting && currentPage < (data?.amountPages as number)) {
-          setCurrentPage(currentPage + 1);
-        }
-      }
-    );
-
-    if (lastItem.current) {
-      observerLoader.current.observe(lastItem.current);
-    }
-  }, [lastItem]);
 
   if (isError) {
     return <></>;

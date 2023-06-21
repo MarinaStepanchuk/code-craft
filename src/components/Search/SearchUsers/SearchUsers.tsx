@@ -6,7 +6,7 @@ import { ErrorMessages } from '@/constants/common.constants';
 import { useGetSearchUsersQuery } from '@/redux/services/searchApi';
 import { notifications } from '@mantine/notifications';
 import { useSearchParams } from 'next/navigation';
-import { createRef, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Divider } from '@mantine/core';
 import { IUser } from '@/types/interfaces';
 import ScrollUpButton from '@/components/ScrollUpButton/ScrollUpButton';
@@ -15,8 +15,6 @@ import styles from './searchUsers.module.scss';
 const SearchUsers = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0);
   const [displayedUsers, setDisplayedUsers] = useState<IUser[]>([]);
-  const lastItem = createRef<HTMLElement>();
-  const observerLoader = useRef<IntersectionObserver | null>(null);
   const searchParams = useSearchParams();
   const text = searchParams.get('search');
   const { data, isLoading, isError } = useGetSearchUsersQuery({
@@ -24,6 +22,30 @@ const SearchUsers = (): JSX.Element => {
     page: currentPage,
   });
   const [activeUpButton, setActiveUpButton] = useState(false);
+  const isLastPage = currentPage >= (data?.amountPages as number);
+
+  const observerLoader = useRef<IntersectionObserver | null>(null);
+
+  const lastItem = useCallback(
+    (post: HTMLElement) => {
+      if (isLoading) return;
+
+      if (observerLoader.current) {
+        observerLoader.current.disconnect();
+      }
+
+      observerLoader.current = new IntersectionObserver(
+        (posts: IntersectionObserverEntry[]): void => {
+          if (posts[0].isIntersecting && currentPage < !isLastPage) {
+            setCurrentPage((prev) => prev + 1);
+          }
+        }
+      );
+
+      if (post) observerLoader.current.observe(post);
+    },
+    [isLoading, isLastPage]
+  );
 
   useEffect(() => {
     setActiveUpButton(currentPage > 0);
@@ -45,22 +67,6 @@ const SearchUsers = (): JSX.Element => {
       });
     }
   }, [isError, data]);
-
-  useEffect(() => {
-    if (observerLoader.current) {
-      observerLoader.current.disconnect();
-    }
-    observerLoader.current = new IntersectionObserver(
-      (entries: IntersectionObserverEntry[]): void => {
-        if (entries[0].isIntersecting && currentPage < (data?.amountPages as number)) {
-          setCurrentPage(currentPage + 1);
-        }
-      }
-    );
-    if (lastItem.current) {
-      observerLoader.current.observe(lastItem.current);
-    }
-  }, [lastItem]);
 
   if (isLoading) {
     return <Preloader width="5rem" height="5rem" color="#05386b" />;

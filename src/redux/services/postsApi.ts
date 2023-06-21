@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IPost, IPostsWithUser, IPosts } from '@/types/interfaces';
+import { IPost, IPostsWithUser, ITag } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -22,9 +22,9 @@ export const postsApi = createApi({
       }),
       providesTags: ['Posts'],
     }),
-    getAllPosts: build.query<IPostsWithUser, number>({
-      query: (page) => ({
-        url: `/posts?page=${page}`,
+    getAllPosts: build.query<IPostsWithUser, { page: number; sort: 'DESC' | 'ASC' }>({
+      query: ({ page, sort }) => ({
+        url: `/posts?page=${page}&sort=${sort}`,
       }),
       providesTags: ['Posts'],
     }),
@@ -71,6 +71,12 @@ export const postsApi = createApi({
         method: 'PUT',
       }),
     }),
+    getTopics: build.query<ITag[], { count: number; userId: string | null }>({
+      query: ({ count, userId }) => ({
+        url: `/tags/topic?count=${count}&userId=${userId}`,
+      }),
+      providesTags: ['Posts'],
+    }),
   }),
 });
 
@@ -83,4 +89,5 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useVisitPostMutation,
+  useGetTopicsQuery,
 } = postsApi;

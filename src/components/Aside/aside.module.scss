@@ -9,5 +9,6 @@
 
   .stickyContainer {
     position: sticky;
+    @include flex($dir: column, $jc: flex-start, $gap: 4rem);
   }
 }
