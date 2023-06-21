@@ -51,9 +51,9 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
     });
     const data = await response.json();
 
-    if (!data) {
-      notFound();
-    }
+    // if (!data) {
+    //   notFound();
+    // }
 
     return <ExpandedPost data={data} />;
   } catch (error) {
