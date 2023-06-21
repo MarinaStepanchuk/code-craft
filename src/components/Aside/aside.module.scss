@@ -2,13 +2,7 @@
 @import '@/common.styles/variables.module.scss';
 
 .aside {
-  @include flex($dir: column, $jc: flex-start);
+  @include flex($dir: column, $jc: flex-start, $gap: 4rem);
   width: 30%;
-  position: relative;
   margin: 3rem 0;
-
-  .stickyContainer {
-    position: sticky;
-    @include flex($dir: column, $jc: flex-start, $gap: 4rem);
-  }
 }

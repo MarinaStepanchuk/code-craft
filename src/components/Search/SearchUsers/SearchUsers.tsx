@@ -36,7 +36,7 @@ const SearchUsers = (): JSX.Element => {
 
       observerLoader.current = new IntersectionObserver(
         (posts: IntersectionObserverEntry[]): void => {
-          if (posts[0].isIntersecting && currentPage < !isLastPage) {
+          if (posts[0].isIntersecting && !isLastPage) {
             setCurrentPage((prev) => prev + 1);
           }
         }

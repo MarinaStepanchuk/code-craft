@@ -10,10 +10,8 @@ const Aside = (): JSX.Element => {
 
   return (
     <aside className={styles.aside}>
-      <div className={styles.stickyContainer}>
-        {status === 'authenticated' && <LastFeeds />}
-        <Topic />
-      </div>
+      {status === 'authenticated' && <LastFeeds />}
+      <Topic />
     </aside>
   );
 };
