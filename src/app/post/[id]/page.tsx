@@ -45,7 +45,11 @@ export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<
 //   return data;
 // };
 
-export default async function EditPostPage(data: IPostWithUser): Promise<JSX.Element> {
+interface PropductProps {
+  data: IPostWithUser;
+}
+
+export default async function EditPostPage({ data }: PropductProps): Promise<JSX.Element> {
   try {
     // const data = await getPost(id);
 
@@ -79,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      data,
+      product: data,
     },
   };
 };
