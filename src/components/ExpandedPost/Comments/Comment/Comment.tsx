@@ -4,15 +4,12 @@ import Image from 'next/image';
 import getNameFromEmail from '@/utils/getNameFromEmail';
 import { ActiveComment } from '@/types/types';
 import { useAppSelector } from '@/hooks/redux';
-// eslint-disable-next-line camelcase
-import { Amatic_SC } from 'next/font/google';
+import { amatic } from '@/app/layout';
 import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
 import getFormattedDate from '@/utils/getFormattedDate';
 import styles from './comment.module.scss';
 import CommentsForm from '../CommentsForm/CommentsForm';
-
-const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
 interface ICommentProps {
   key: number;
@@ -27,6 +24,7 @@ interface ICommentProps {
   // eslint-disable-next-line no-unused-vars
   deleteComment: (id: number) => Promise<void>;
   parentId?: number;
+  authorPostId: string;
 }
 
 const Comment = ({
@@ -38,10 +36,10 @@ const Comment = ({
   updateComment,
   deleteComment,
   parentId,
+  authorPostId,
 }: ICommentProps): JSX.Element => {
   const { id, message: text, createdDate, updatedDate, user } = comment;
   const { id: userId } = useAppSelector((state) => state.userReducer.user);
-  const { user: creatorPost } = useAppSelector((state) => state.postReducer.post);
   const isEditing = activeComment && activeComment.id === id && activeComment.type === 'editing';
   const isReplying = activeComment && activeComment.id === id && activeComment.type === 'replying';
   const canDelete = userId === user.id;
@@ -82,7 +80,7 @@ const Comment = ({
           )}
           <p className={styles.date}>{getFormattedDate(createdDate)}</p>
         </div>
-        {user.id === creatorPost.id && <p className={styles.author}>author</p>}
+        {user.id === authorPostId && <p className={styles.author}>author</p>}
         {!isEditing && <p className={styles.message}>{text}</p>}
         {isEditing && (
           <CommentsForm
@@ -156,6 +154,7 @@ const Comment = ({
                 deleteComment={deleteComment}
                 replies={[]}
                 parentId={id}
+                authorPostId={authorPostId}
               />
             ))}
           </div>

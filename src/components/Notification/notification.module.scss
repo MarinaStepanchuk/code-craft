@@ -1,0 +1,23 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.notificationItem {
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  vertical-align: bottom;
+
+  a {
+    display: inline;
+    font-weight: 600;
+    font-size: 1.4rem;
+  }
+
+  .user {
+    color: $primary-color;
+  }
+
+  .title {
+    color: $secondary-dark;
+  }
+}

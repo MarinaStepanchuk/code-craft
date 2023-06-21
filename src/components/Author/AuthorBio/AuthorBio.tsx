@@ -1,32 +1,42 @@
+'use client';
+
 import { IUser } from '@/types/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
-// eslint-disable-next-line camelcase
-import { Amatic_SC } from 'next/font/google';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
+import { useGetSubscribersQuery } from '@/redux/services/subscribersApi';
+
 import getNameFromEmail from '@/utils/getNameFromEmail';
+import { amatic } from '@/app/layout';
+import { useGetUserByIdQuery } from '@/redux/services/userApi';
 import styles from './authorBio.module.scss';
 import EmailButton from '../../EmailButton/EmailButton';
 import FollowButton from '../../FollowButton/FollowButton';
 
-const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
+const AuthorBio = ({ userId, postsCount }: { userId: string; postsCount: number }): JSX.Element => {
+  const { data: author, isLoading } = useGetUserByIdQuery(userId);
+  const defaultValue = {
+    subscribers: [],
+    page: 0,
+    amountPages: 0,
+    amountSubscribers: 0,
+  };
+  const { data: subscribersData = defaultValue } = useGetSubscribersQuery({
+    author: userId,
+    page: 0,
+  });
 
-const AuthorBio = ({
-  user: author,
-  postsCount,
-}: {
-  user: IUser;
-  postsCount: number;
-}): JSX.Element => {
-  const { name, bio, avatarUrl, email, mail, twitter, instagram, id } = author;
+  if (isLoading) {
+    return <></>;
+  }
 
   return (
     <section className={styles.bioWrapper}>
       <div className={styles.authorWrapper}>
         <div className={styles.authorPhotoContainer}>
-          {avatarUrl ? (
+          {author?.avatarUrl ? (
             <Image
-              src={avatarUrl}
+              src={author.avatarUrl}
               width={100}
               height={100}
               alt="author photo"
@@ -34,33 +44,35 @@ const AuthorBio = ({
             />
           ) : (
             <div className={styles.userIcon}>
-              {name?.at(0)?.toUpperCase() || email.at(0)?.toUpperCase()}
+              {author?.name?.at(0)?.toUpperCase() || author?.email.at(0)?.toUpperCase()}
             </div>
           )}
         </div>
       </div>
       <div className={styles.bioContainer}>
         <div className={styles.flexContainerNameFollow}>
-          <p className={`${styles.name} ${amatic.className}`}>{name || getNameFromEmail(email)}</p>
-          <FollowButton authorId={id} />
+          <p className={`${styles.name} ${amatic.className}`}>
+            {author?.name || getNameFromEmail(author?.email || '')}
+          </p>
+          <FollowButton authorId={userId} />
         </div>
-        <p className={styles.bio}>{bio}</p>
+        <p className={styles.bio}>{author?.bio}</p>
         <div className={styles.contacts}>
           Contact me:
-          {twitter && (
-            <Link href={twitter} target="_blank" className={styles.link}>
+          {author?.twitter && (
+            <Link href={author?.twitter} target="_blank" className={styles.link}>
               <IconBrandTwitter size="1.8rem" strokeWidth="1.2" />
             </Link>
           )}
-          <EmailButton email={email} mail={mail} />
-          {instagram && (
-            <Link href={instagram} target="_blank" className={styles.link}>
+          <EmailButton email={author?.email || ''} mail={author?.mail} />
+          {author?.instagram && (
+            <Link href={author?.instagram} target="_blank" className={styles.link}>
               <IconBrandInstagram size="1.8rem" strokeWidth="1.2" />
             </Link>
           )}
         </div>
         <div className={styles.statisticContainer}>
-          <p className={styles.statisticItem}>Followers : 0</p>
+          <p className={styles.statisticItem}>Followers : {subscribersData.amountSubscribers}</p>
           <div className={styles.divider}></div>
           <p className={styles.statisticItem}>Posts : {postsCount}</p>
         </div>

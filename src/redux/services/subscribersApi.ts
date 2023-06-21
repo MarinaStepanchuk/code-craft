@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ISubscriber } from '@/types/interfaces';
+import { IPostsWithUser, ISubscriber } from '@/types/interfaces';
 
 const baseUrl = process.env.API_URL;
 
@@ -19,7 +19,7 @@ export const subscribersApi = createApi({
   endpoints: (build) => ({
     getSubscribers: build.query<ISubscribersResponse, { author: string; page: number }>({
       query: ({ author, page }) => ({
-        url: `/subscribers?author=${author}&page=${page}`,
+        url: `/subscribers?author=${author}&page=${page || 0}`,
       }),
       providesTags: ['Subscribers'],
     }),
@@ -51,6 +51,12 @@ export const subscribersApi = createApi({
       }),
       providesTags: ['Subscribers'],
     }),
+    getFeeds: build.query<IPostsWithUser, { userId: string; page: number }>({
+      query: ({ userId, page }) => ({
+        url: `/subscribers/feeds?userId=${userId || ''}&page=${page || 0}`,
+      }),
+      providesTags: ['Subscribers'],
+    }),
   }),
 });
 
@@ -59,4 +65,5 @@ export const {
   useSubscribeMutation,
   useUnsubscribeMutation,
   useCheckSubscribeQuery,
+  useGetFeedsQuery,
 } = subscribersApi;

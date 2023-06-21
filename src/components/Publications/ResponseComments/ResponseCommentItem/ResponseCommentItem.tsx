@@ -1,15 +1,12 @@
 import Image from 'next/image';
 import getNameFromEmail from '@/utils/getNameFromEmail';
-// eslint-disable-next-line camelcase
-import { Amatic_SC } from 'next/font/google';
+import { amatic } from '@/app/layout';
 import { useRouter } from 'next/navigation';
 import getFormattedDate from '@/utils/getFormattedDate';
 import { Patch } from '@/constants/common.constants';
 import { IResponseComment } from '@/redux/services/commentsApi';
 import { Divider } from '@mantine/core';
 import styles from './responseCommentItem.module.scss';
-
-const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
 
 const ResponseCommentItem = ({ comment }: { comment: IResponseComment }): JSX.Element => {
   const { user, updatedDate, createdDate, message, postId, post } = comment;

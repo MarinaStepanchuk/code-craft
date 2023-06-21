@@ -1,0 +1,28 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.upButton {
+  position: fixed;
+  background-color: $text-dark;
+  right: 2rem;
+  bottom: -1rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  cursor: pointer;
+  @include center-content();
+  width: 6rem;
+  height: 6rem;
+  display: none;
+
+  &:hover {
+    transform: translateY(-1rem);
+  }
+
+  svg {
+    transform: translateY(-0.5rem);
+  }
+}
+
+.avtive {
+  display: flex;
+}

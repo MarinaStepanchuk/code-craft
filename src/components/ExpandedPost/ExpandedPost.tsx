@@ -1,22 +1,18 @@
 'use client';
 
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { postSlice } from '@/redux/store/reducers/postSlice';
-import { IExpandedPost } from '@/types/interfaces';
+import { useAppSelector } from '@/hooks/redux';
+import { IPostWithUser } from '@/types/interfaces';
 import { useVisitPostMutation } from '@/redux/services/postsApi';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import PostContentRead from './PostContentRead/PostContentRead';
 import ExpendedPostHeader from './ExpendedPostHeader/ExpendedPostHeader';
 import styles from './expandedPost.module.scss';
 import ExpendedPostFooter from './ExpendedPostFooter/ExpendedPostFooter';
 import TagsList from './TagsList/TagsList';
 
-const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
+const ExpandedPost = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const { user: userData } = useAppSelector((state) => state.userReducer);
-  const { tags } = useAppSelector((state) => state.postReducer.post);
-
-  const { setPost } = postSlice.actions;
-  const dispatch = useAppDispatch();
+  const { tags } = data;
 
   const [visitPost] = useVisitPostMutation();
 
@@ -26,18 +22,14 @@ const ExpandedPost = ({ data }: { data: IExpandedPost }): JSX.Element => {
     }
   }, [data.id, data.user.id, userData.id, visitPost]);
 
-  useEffect(() => {
-    dispatch(setPost(data));
-  }, [data, dispatch, setPost]);
-
   return (
     <section className={styles.postSection}>
-      <ExpendedPostHeader />
+      <ExpendedPostHeader data={data} />
       <PostContentRead data={data} />
       <div className={styles.tagsWrapper}>
         <TagsList tags={tags} />
       </div>
-      <ExpendedPostFooter />
+      <ExpendedPostFooter data={data} />
     </section>
   );
 };

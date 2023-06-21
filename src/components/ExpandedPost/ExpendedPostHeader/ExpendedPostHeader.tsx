@@ -1,19 +1,16 @@
-import { useAppSelector } from '@/hooks/redux';
 import Image from 'next/image';
 import defaultBanner from '@/assets/default_banner.png';
 import getFormattedDate from '@/utils/getFormattedDate';
-// eslint-disable-next-line camelcase
-import { Amatic_SC } from 'next/font/google';
+import { amatic } from '@/app/layout';
 import getNameFromEmail from '@/utils/getNameFromEmail';
 import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
+import { IPostWithUser } from '@/types/interfaces';
 import styles from './expendedPostHeader.module.scss';
 import PostActions from '../PostActions/PostActions';
 
-const amatic = Amatic_SC({ subsets: ['latin'], weight: '400' });
-
-const ExpendedPostHeader = (): JSX.Element => {
-  const { title, banner, updatedDate, user } = useAppSelector((state) => state.postReducer.post);
+const ExpendedPostHeader = ({ data }: { data: IPostWithUser }): JSX.Element => {
+  const { title, banner, updatedDate, user } = data;
   const { push } = useRouter();
 
   const goToAuthorPage = (): void => {
@@ -57,7 +54,7 @@ const ExpendedPostHeader = (): JSX.Element => {
             {user.name || getNameFromEmail(user.email)}
           </span>
         </div>
-        <PostActions />
+        <PostActions data={data} />
       </div>
     </header>
   );

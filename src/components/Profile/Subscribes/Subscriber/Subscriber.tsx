@@ -23,7 +23,7 @@ const Subscriber = ({ subscriber }: { subscriber: ISubscriber }): JSX.Element =>
     });
   };
 
-  const modalСonfirmation = (
+  const modalConfirmation = (
     <div className={styles.confirmation}>
       <p>Are you sure you want to delete a subscriber?</p>
       <div className={styles.confirmationButtons}>
@@ -56,7 +56,7 @@ const Subscriber = ({ subscriber }: { subscriber: ISubscriber }): JSX.Element =>
       </div>
       {isActive && (
         <Modal setIsActive={setIsActive} ref={ref} isActive={isActive}>
-          {modalСonfirmation}
+          {modalConfirmation}
         </Modal>
       )}
     </div>

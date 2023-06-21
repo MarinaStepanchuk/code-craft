@@ -36,6 +36,7 @@ const SubscribersList = ({
     if (subscribersData) {
       setSubscribersCount(subscribersData.amountSubscribers);
     }
+    console.log(subscribersData);
     if (isErrorSubscribers) {
       notifications.show({
         message: ErrorMessages.errorResponse,
@@ -64,12 +65,13 @@ const SubscribersList = ({
         amountPages={subscribersData.amountPages}
         page={subscribersData.page}
       >
-        {subscribersData.subscribers.map((subscriber) => (
-          <>
-            <Subscriber key={subscriber.id} subscriber={subscriber} />
-            <Divider size={3} style={{ width: '100%' }} />
-          </>
-        ))}
+        {subscribersData?.subscribers?.length > 0 &&
+          subscribersData?.subscribers?.map((subscriber) => (
+            <div key={subscriber.id + 1}>
+              <Subscriber key={subscriber.id} subscriber={subscriber} />
+              <Divider size={3} style={{ width: '100%' }} />
+            </div>
+          ))}
       </PaginationContainer>
     </div>
   );
