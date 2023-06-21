@@ -48,6 +48,10 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
   try {
     const response = await fetch(`${process.env.API_URL}/post/${id}`, {
       cache: 'reload',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
     });
     const data = await response.json();
 
