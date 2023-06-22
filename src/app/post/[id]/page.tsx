@@ -38,7 +38,7 @@ export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<
 
 export const getPost = async (id: string): Promise<IPostWithUser> => {
   const response = await fetch(`${process.env.API_URL}/post/${id}`, {
-    cache: 'no-cache',
+    cache: 'reload',
   });
   const data = await response.json();
 
