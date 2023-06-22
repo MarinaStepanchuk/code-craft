@@ -36,7 +36,9 @@ const GreetingSection = (): JSX.Element => {
           </button>
         </div>
       </div>
-      <div className={styles.animationContainer}>{/* <GreetingAnimation /> */}</div>
+      <div className={styles.animationContainer}>
+        <GreetingAnimation />
+      </div>
     </section>
   );
 };

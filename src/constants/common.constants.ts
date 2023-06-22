@@ -65,7 +65,7 @@ const initialChatValue = [
   },
 ];
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3000/api';
 
 const rootMetadata = {
   title: 'Code Craft',

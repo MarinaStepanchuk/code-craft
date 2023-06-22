@@ -14,7 +14,7 @@ export const authOptions: NextAuthOptions = {
           password: string;
         };
 
-        const res = await fetch('https://nisnas.synology.me:3001/apiv3/login', {
+        const res = await fetch('http://localhost:3001/api/login', {
           method: 'POST',
           body: JSON.stringify({
             email,
@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === 'google') {
-        const result = await fetch('https://nisnas.synology.me:3001/apiv3/register-provider', {
+        const result = await fetch('http://localhost:3001/apiv/register-provider', {
           method: 'POST',
           body: JSON.stringify({
             email: encodeURIComponent(user.email as string),

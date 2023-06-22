@@ -1,9 +1,7 @@
 import { Metadata } from 'next/types';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
-import Image from 'next/image';
 import { IconBrandFacebook, IconBrandTwitter, IconBrandLinkedin } from '@tabler/icons-react';
 import { amatic } from '@/app/layout';
-import banner from '@/assets/contacts.png';
 import styles from './contacts.page.module.scss';
 
 export const metadata: Metadata = {
