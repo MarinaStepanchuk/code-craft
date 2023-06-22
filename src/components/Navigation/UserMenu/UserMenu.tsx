@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@/hooks/redux';
 import { Flex } from '@mantine/core';
 import { Session } from 'next-auth';
-import { IconArrowBadgeDown, IconPencilPlus } from '@tabler/icons-react';
+import { IconChevronDown, IconPencilPlus } from '@tabler/icons-react';
 import { Patch } from '@/constants/common.constants';
 import styles from './userMenu.module.scss';
 import NavigationUser from '../NavigationUser/NavigationUser';
@@ -28,15 +28,15 @@ const UserMenu = ({ session }: { session: Session }): JSX.Element => {
   return (
     <div className={styles.container}>
       <Link href={`${Patch.me}${Patch.newPost}`} className={styles.write}>
-        <IconPencilPlus size={35} strokeWidth="1.2" />
-        Write
+        <IconPencilPlus size={35} strokeWidth="1.2" className={styles.writeIcon} />
+        <span className={styles.writeTitle}>Write</span>
       </Link>
       {!isLoading ? (
         <NavigationUser />
       ) : (
-        <Flex gap="3" justify="center" align="center">
+        <Flex gap="4px" justify="center" align="center">
           <div className={styles.userIcon}>U</div>
-          <IconArrowBadgeDown size={30} strokeWidth="1.2" />
+          <IconChevronDown size={20} strokeWidth="1.2" className={styles.arrowButton} />
         </Flex>
       )}
     </div>

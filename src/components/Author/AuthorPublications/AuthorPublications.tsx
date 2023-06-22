@@ -8,6 +8,7 @@ import { useGetUserPostsQuery } from '@/redux/services/postsApi';
 import { IPostWithUser } from '@/types/interfaces';
 import { notifications } from '@mantine/notifications';
 import { useState, useRef, useEffect, useCallback } from 'react';
+import styles from './authorPublications.module.scss';
 
 const AuthorPublications = ({ authorId }: { authorId: string }): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -72,7 +73,7 @@ const AuthorPublications = ({ authorId }: { authorId: string }): JSX.Element => 
   }
 
   return (
-    <section>
+    <section className={styles.section}>
       {displayedPosts?.map((card, index) =>
         displayedPosts.length === index + 1 ? (
           <PostCard key={card.id} card={card} ref={lastItem} />

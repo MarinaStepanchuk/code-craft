@@ -1,0 +1,28 @@
+@import '@/common.styles/mixins.module.scss';
+@import '@/common.styles/variables.module.scss';
+
+.notificationWrapper {
+  width: 100%;
+  @include flex($dir: column, $ai: flex-start, $gap: 2rem);
+  position: relative;
+
+  .notificationList {
+    @include flex($dir: column, $ai: flex-start);
+  }
+
+  .clearButton {
+    cursor: pointer;
+    border-bottom: 1px solid $text-dark;
+    font-size: 1.8rem;
+    padding: 0 1rem;
+
+    svg {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}

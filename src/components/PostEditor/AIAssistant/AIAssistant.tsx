@@ -25,8 +25,7 @@ const AIAssistant = (): JSX.Element => {
           src={AIIcon}
           alt={'assistant to improve the post'}
           className={styles.assistantIcon}
-          width={70}
-          height={70}
+          fill
         />
       </div>
       {isActive && (

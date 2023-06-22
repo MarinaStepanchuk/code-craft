@@ -5,6 +5,10 @@
   @include flex($ai: flex-start, $jc: flex-start, $gap: 1rem, $dir: column);
   width: 70%;
   font-size: 1.6rem;
+
+  @media screen and (max-width: 650px) {
+    width: 100%;
+  }
 }
 
 .title {

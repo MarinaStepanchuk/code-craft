@@ -12,6 +12,17 @@
     width: 18rem;
     height: 18rem;
     cursor: pointer;
+    position: relative;
+
+    @media screen and (max-width: 550px) {
+      width: 14rem;
+      height: 14rem;
+    }
+
+    @media screen and (max-width: 440px) {
+      width: 10rem;
+      height: 10rem;
+    }
   }
 
   .contentContainer {
@@ -25,6 +36,14 @@
       .title {
         font-size: 2rem;
         margin: 0 0 1rem;
+
+        @media screen and (max-width: 550px) {
+          font-size: 1.8rem;
+        }
+
+        @media screen and (max-width: 515px) {
+          font-size: 1.6rem;
+        }
       }
 
       .content {
@@ -34,6 +53,10 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
+
+        @media screen and (max-width: 515px) {
+          font-size: 1.4rem;
+        }
       }
     }
   }

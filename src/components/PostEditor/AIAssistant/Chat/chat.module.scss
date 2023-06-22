@@ -13,6 +13,14 @@
   color: $text-dark;
   cursor: auto;
 
+  @media screen and (max-width: 800px) {
+    right: -0.5rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 40rem;
+  }
+
   p {
     margin: 0;
   }

@@ -3,6 +3,10 @@
 
 .containerPhoto {
   @include flex($gap: 3rem, $dir: column);
+
+  @media screen and (max-width: 650px) {
+    flex-direction: row;
+  }
 }
 
 .photo {
@@ -28,6 +32,11 @@
     background-color: $secondary-dark;
     color: #fff;
   }
+
+  @media screen and (max-width: 650px) {
+    width: 12rem;
+    height: 3.5rem;
+  }
 }
 
 .photoButtonRemove {
@@ -40,6 +49,11 @@
     background-color: $primary-color;
     border: none;
     color: #fff;
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 12rem;
+    height: 3.5rem;
   }
 }
 

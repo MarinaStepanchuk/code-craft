@@ -36,7 +36,7 @@ const SubscribersList = ({
     if (subscribersData) {
       setSubscribersCount(subscribersData.amountSubscribers);
     }
-    console.log(subscribersData);
+
     if (isErrorSubscribers) {
       notifications.show({
         message: ErrorMessages.errorResponse,

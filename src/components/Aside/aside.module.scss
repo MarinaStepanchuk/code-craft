@@ -5,4 +5,12 @@
   @include flex($dir: column, $jc: flex-start, $gap: 4rem);
   width: 30%;
   margin: 3rem 0;
+
+  @media screen and (max-width: 650px) {
+    width: 90%;
+    order: 2;
+    margin-bottom: 0;
+    padding-bottom: 2rem;
+    border-bottom: 0.625px solid rgb(190, 186, 186);
+  }
 }

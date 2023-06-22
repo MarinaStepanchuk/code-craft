@@ -1,11 +1,9 @@
 'use client';
 
-import { IUser } from '@/types/interfaces';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IconBrandInstagram, IconBrandTwitter } from '@tabler/icons-react';
 import { useGetSubscribersQuery } from '@/redux/services/subscribersApi';
-
 import getNameFromEmail from '@/utils/getNameFromEmail';
 import { amatic } from '@/app/layout';
 import { useGetUserByIdQuery } from '@/redux/services/userApi';

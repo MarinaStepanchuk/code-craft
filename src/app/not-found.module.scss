@@ -5,6 +5,7 @@
   width: 80%;
   margin: 2rem auto;
   @include flex($gap: 2rem);
+  padding-top: 60px;
 
   .message {
     @include flex($dir: column, $gap: 2rem, $ai: flex-start);
@@ -28,15 +29,16 @@
       font-weight: 300;
       font-size: 1.4rem;
     }
+  }
 
-    button {
-      @include darkButton($w: 12rem, $h: 4.5rem);
-      font-weight: 600;
-      font-size: 2.2rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      outline: none;
-    }
+  .backButton {
+    @include darkButton($w: 12rem, $h: 4.5rem);
+    font-weight: 600;
+    font-size: 2.2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    outline: none;
+    margin: 0;
   }
 
   .containerImage {
