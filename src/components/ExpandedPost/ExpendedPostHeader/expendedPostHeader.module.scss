@@ -44,6 +44,10 @@
   color: #fff;
   padding: 0 2rem;
 
+  @media screen and (max-width: 600px) {
+    width: 70%;
+  }
+
   h2 {
     font-size: 3.5rem;
     font-weight: 600;
@@ -61,6 +65,12 @@
   @include flex($jc: space-between, $wr: wrap);
   padding: 0rem 2rem 0rem 3rem;
   border-bottom: 0.0625rem solid #ced4da;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 3rem;
+  }
 
   .authorPhotoContainer {
     width: max-content;

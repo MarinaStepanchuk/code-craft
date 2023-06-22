@@ -1,10 +1,19 @@
 import { ErrorMessages, Patch } from '@/constants/common.constants';
 import Link from 'next/link';
-import { IconThumbUp } from '@tabler/icons-react';
+import {
+  IconThumbUp,
+  IconMinus,
+  IconThumbUpOff,
+  IconMessageDots,
+  IconUserPlus,
+  IconUserOff,
+} from '@tabler/icons-react';
+import { Tooltip } from '@mantine/core';
+
 import { useRemoveNotificationMutation } from '@/redux/services/notificationApi';
-import styles from './notification.module.scss';
 import { notifications } from '@mantine/notifications';
 import { useEffect } from 'react';
+import styles from './notification.module.scss';
 
 const Notification = ({
   id,
@@ -39,8 +48,12 @@ const Notification = ({
   if (type === 'like') {
     return (
       <div className={styles.notificationItem}>
-        <IconThumbUp size={25} strokeWidth="1.2" />
-        &nbsp;
+        <Tooltip label="mark as read">
+          <IconMinus size={25} strokeWidth="1.6" onClick={handleRemove} />
+        </Tooltip>
+        &nbsp;&nbsp;
+        <IconThumbUp size={22} strokeWidth="1.2" />
+        &nbsp;&nbsp;
         <Link href={`${Patch.author}/${userId}`} className={styles.user}>
           {userName}
         </Link>
@@ -50,7 +63,6 @@ const Notification = ({
         <Link href={`${Patch.post}/${postId}`} className={styles.title}>
           {postTitle}
         </Link>
-        <button onClick={handleRemove}>remove</button>
       </div>
     );
   }
@@ -58,16 +70,21 @@ const Notification = ({
   if (type === 'dislike') {
     return (
       <div className={styles.notificationItem}>
+        <Tooltip label="mark as read">
+          <IconMinus size={25} strokeWidth="1.6" onClick={handleRemove} />
+        </Tooltip>
+        &nbsp;&nbsp;
+        <IconThumbUpOff size={22} strokeWidth="1.2" />
+        &nbsp;&nbsp;
         <Link href={`${Patch.author}/${userId}`} className={styles.user}>
           {userName}
         </Link>
-        &nbsp;
+        &nbsp;&nbsp;
         <span>{message}</span>
-        &nbsp;
+        &nbsp;&nbsp;
         <Link href={`${Patch.post}/${postId}`} className={styles.title}>
           {postTitle}
         </Link>
-        <button onClick={handleRemove}>remove</button>
       </div>
     );
   }
@@ -75,12 +92,21 @@ const Notification = ({
   if (type === 'follow' || type === 'unfollow') {
     return (
       <div className={styles.notificationItem}>
+        <Tooltip label="mark as read">
+          <IconMinus size={25} strokeWidth="1.6" onClick={handleRemove} />
+        </Tooltip>
+        &nbsp;&nbsp;
+        {type === 'follow' ? (
+          <IconUserPlus size={25} strokeWidth="1.6" onClick={handleRemove} />
+        ) : (
+          <IconUserOff size={25} strokeWidth="1.6" onClick={handleRemove} />
+        )}
+        &nbsp;&nbsp;
         <Link href={`${Patch.author}/${userId}`} className={styles.user}>
           {userName}
         </Link>
-        &nbsp;
+        &nbsp;&nbsp;
         <span>{message}</span>
-        <button onClick={handleRemove}>remove</button>
       </div>
     );
   }
@@ -88,16 +114,21 @@ const Notification = ({
   if (type === 'comment') {
     return (
       <div className={styles.notificationItem}>
+        <Tooltip label="mark as read">
+          <IconMinus size={25} strokeWidth="1.6" onClick={handleRemove} />
+        </Tooltip>
+        &nbsp;&nbsp;
+        <IconMessageDots size={22} strokeWidth="1.2" />
+        &nbsp;&nbsp;
         <span>You`r post </span>
-        &nbsp;
+        &nbsp;&nbsp;
         <Link href={`${Patch.post}/${postId}`} className={styles.title}>
           {postTitle}
         </Link>
-        &nbsp;
-        <span>{message}</span>
-        &nbsp;
-        <span>{comment}</span>
-        <button onClick={handleRemove}>remove</button>
+        &nbsp;&nbsp;
+        <span>{`${message}:`}</span>
+        &nbsp;&nbsp;
+        <span className={styles.comment}>{`"${comment}"`}</span>
       </div>
     );
   }

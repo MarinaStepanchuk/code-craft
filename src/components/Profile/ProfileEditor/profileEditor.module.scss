@@ -12,6 +12,11 @@
   @include flex($ai: flex-start, $gap: 4rem);
   width: 100%;
   padding-bottom: 2rem;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .submit {

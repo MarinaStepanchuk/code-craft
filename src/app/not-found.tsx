@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import errorPhoto from '@/assets/404page.png';
-import GoToMainButton from '@/components/GoToMainButton/GoToMainButton';
 import styles from './not-found.module.scss';
 
 const NotFoundPage = (): JSX.Element => (

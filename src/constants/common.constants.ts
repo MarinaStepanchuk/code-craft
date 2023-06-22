@@ -14,6 +14,7 @@ const Patch = {
   searchUsers: '/search/users',
   searchTags: '/search/tags',
   tag: '/tag',
+  contacts: '/contacts',
 };
 
 const ErrorMessages = {

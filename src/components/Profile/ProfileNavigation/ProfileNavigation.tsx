@@ -3,9 +3,9 @@
 import { Tabs, createStyles } from '@mantine/core';
 import { IconUserEdit, IconBell, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
+import NotificationList from '@/components/NotificationList/NotificationList';
 import ProfileEditor from '../ProfileEditor/ProfileEditor';
 import SubscribersList from '../Subscribes/SubscribersList/SubscribersList';
-import NotificationList from '@/components/NotificationList/NotificationList';
 
 const useStyles = createStyles((theme) => ({
   container: {

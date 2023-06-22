@@ -12,6 +12,7 @@
 
 .containerLogo {
   @include flex($gap: 2rem);
+  padding-left: 2rem;
 
   .logo {
     @include flex($gap: 2rem);
@@ -23,14 +24,37 @@
 
     p {
       margin: 0;
+
+      @media screen and (max-width: 720px) {
+        display: none;
+      }
+    }
+  }
+
+  .logoImgWrapper {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+
+    @media screen and (max-width: 500px) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 35px;
+      height: 35px;
     }
   }
 }
 
 .header {
   color: #fff;
-  padding: 1.5rem 2rem;
-  // border-bottom: 2px solid $secondary-color;
+  padding: 1rem 0;
   background-color: #212832;
   @include flex($jc: space-between);
+  position: fixed;
+  width: 100%;
+  z-index: 40;
+  height: 60px;
 }

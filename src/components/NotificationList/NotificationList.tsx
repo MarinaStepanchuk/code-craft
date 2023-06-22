@@ -4,6 +4,7 @@ import {
   useGetNotificationsQuery,
   useRemoveAllNotificationMutation,
 } from '@/redux/services/notificationApi';
+import { IconChecks } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import PaginationContainer from '@/components/PaginationContainer/PaginationContainer';
 
@@ -41,20 +42,24 @@ const NotificationList = (): JSX.Element => {
         }),
       });
     }
-    console.log(notificationList);
   }, [isError, resultDeleteComment.isError, notificationList]);
 
   return (
-    <div className={styles.notificationList}>
-      <button onClick={handleRemoveAllNotifications}>clear</button>
+    <div className={styles.notificationWrapper}>
+      <span onClick={handleRemoveAllNotifications} className={styles.clearButton}>
+        <IconChecks size={25} strokeWidth="1.6" />
+        &nbsp; Mark all as read
+      </span>
       <PaginationContainer
         onPageClick={changePage}
         amountPages={notificationList?.amountPages || 0}
         page={notificationList?.page || 0}
       >
-        {notificationList?.notifications?.map((item) => (
-          <Notification notificationMessage={item.message} key={item.id} id={item.id} />
-        ))}
+        <div className={styles.notificationList}>
+          {notificationList?.notifications?.map((item) => (
+            <Notification notificationMessage={item.message} key={item.id} id={item.id} />
+          ))}
+        </div>
       </PaginationContainer>
     </div>
   );
