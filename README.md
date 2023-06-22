@@ -19,7 +19,6 @@
 - [TypeScript | JavaScript With Syntax For Types.](https://www.typescriptlang.org/)
 - [React | The library for user interfaces](https://react.dev/)
 - [Next.js 13 | SSR Framework based on React 18](https://nextjs.org/)
-- [Vite | Next Generation Frontend Tooling - uses under the hood of Next.js](https://vitejs.dev/)
 - [NextAuth.js | Authentication library for Next.js](https://next-auth.js.org/)
 - [React Hook Form | Simple React forms validation](https://react-hook-form.com/)
 - [Redux Toolkit | Tool set for efficient Redux development](https://redux-toolkit.js.org/)
