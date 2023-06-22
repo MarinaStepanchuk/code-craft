@@ -20,9 +20,19 @@
     @include darkButton($w: 9rem, $h: 3.3rem);
     padding: 0;
 
+    @media screen and (max-width: 650px) {
+      padding: 0.2rem;
+    }
+
     &:last-child {
       background-color: inherit;
       color: $text-dark;
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 7rem;
+      height: 3rem;
+      font-size: 1.2rem;
     }
   }
 }

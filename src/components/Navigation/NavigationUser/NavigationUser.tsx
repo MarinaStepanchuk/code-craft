@@ -8,7 +8,7 @@ import {
   IconLogout,
   IconHelp,
   IconBookmarks,
-  IconArrowBadgeDown,
+  IconChevronDown,
   IconUsers,
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
@@ -49,10 +49,14 @@ const NavigationUser = (): JSX.Element => {
     await signOut({ callbackUrl: '/' });
   };
 
+  const redirectToContacts = (): void => {
+    push(`${Patch.contacts}`);
+  };
+
   return (
     <Menu shadow="md" width={400} position="bottom-end" radius={10}>
       <Menu.Target>
-        <Flex gap="3" justify="center" align="center" sx={{ cursor: 'pointer' }}>
+        <Flex gap="4px" justify="center" align="center" sx={{ cursor: 'pointer' }}>
           {avatarUrl ? (
             <Avatar
               src={avatarUrl}
@@ -63,7 +67,7 @@ const NavigationUser = (): JSX.Element => {
           ) : (
             <div className={styles.userIcon}>{email[0]?.toUpperCase()}</div>
           )}
-          <IconArrowBadgeDown size={30} strokeWidth="1.2" />
+          <IconChevronDown size={20} strokeWidth="1.2" />
         </Flex>
       </Menu.Target>
 
@@ -106,8 +110,12 @@ const NavigationUser = (): JSX.Element => {
 
         <Menu.Divider sx={{ borderTopColor: '#ADB5BD' }} />
 
-        <Menu.Item icon={<IconHelp size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
-          Help
+        <Menu.Item
+          icon={<IconHelp size={30} strokeWidth="1" />}
+          sx={{ fontSize: '1.5rem' }}
+          onClick={redirectToContacts}
+        >
+          Сontact us
         </Menu.Item>
         <Menu.Item
           className={classes.item}

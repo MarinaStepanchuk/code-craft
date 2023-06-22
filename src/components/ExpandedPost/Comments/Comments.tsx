@@ -44,7 +44,7 @@ const Comments = ({ data }: { data: IPostWithUser }): JSX.Element => {
       type: 'comment',
       postId: data.id,
       postTitle: data.title as string,
-      comment: message,
+      comment: `${message.slice(0, 120)}...`,
     });
     await createNotification({ userId, message: messageNotification });
     setActiveComment(null);

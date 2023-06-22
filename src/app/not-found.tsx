@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import errorPhoto from '@/assets/404page.png';
-import GoToMainButton from '@/components/GoToMainButton/GoToMainButton';
+import Link from 'next/link';
 import styles from './not-found.module.scss';
 
 const NotFoundPage = (): JSX.Element => (
@@ -11,7 +11,9 @@ const NotFoundPage = (): JSX.Element => (
       <p>
         The page you are looking for doesn’t exist or an other error occurred, go back to home page.
       </p>
-      <GoToMainButton />
+      <Link href="/" className={styles.backButton}>
+        Go Back
+      </Link>
     </div>
     <div className={styles.containerImage}>
       <Image

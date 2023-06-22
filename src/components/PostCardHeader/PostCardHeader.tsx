@@ -17,13 +17,14 @@ const PostCardHeader = ({ card }: { card: IPostWithUser }): JSX.Element => {
     <div className={styles.userInfo}>
       <Link href={`${Patch.author}/${author.id}`}>
         {author.avatarUrl ? (
-          <Image
-            src={author.avatarUrl}
-            width={40}
-            height={40}
-            alt="user photo"
-            style={{ cursor: 'pointer', borderRadius: '50%' }}
-          />
+          <div className={styles.containerIcon}>
+            <Image
+              src={author.avatarUrl}
+              fill
+              alt="user photo"
+              style={{ cursor: 'pointer', borderRadius: '50%' }}
+            />
+          </div>
         ) : (
           <div className={styles.userIcon}>
             {author.name?.at(0)?.toUpperCase() || author.email.at(0)?.toUpperCase()}

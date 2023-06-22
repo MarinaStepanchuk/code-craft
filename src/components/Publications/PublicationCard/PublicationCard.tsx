@@ -100,10 +100,6 @@ const PublicationCard = ({
     }
   }, [resultDelete]);
 
-  useEffect(() => {
-    console.log(status);
-  });
-
   return (
     <article className={styles.publication}>
       <Link
@@ -112,14 +108,7 @@ const PublicationCard = ({
       >
         <div className={styles.preview}>
           <div className={styles.bannerContainer}>
-            <Image
-              src={banner || defaultImage}
-              width={100}
-              height={100}
-              quality={100}
-              style={{ objectFit: 'cover' }}
-              alt="post banner"
-            />
+            <Image src={banner || defaultImage} fill quality={100} alt="post banner" />
           </div>
           <div className={styles.publicationContainer}>
             <div className={styles.titleContainer}>

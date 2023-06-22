@@ -8,10 +8,25 @@
   z-index: 50;
   align-self: flex-end;
 
+  @media screen and (max-width: 850px) {
+    bottom: 6rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    bottom: 15rem;
+  }
+
   .tooltip {
     position: relative;
     display: inline-block;
     @include center-content;
+    width: 70px;
+    height: 70px;
+
+    @media screen and (max-width: 500px) {
+      width: 60px;
+      height: 60px;
+    }
   }
 
   .tooltip .tooltipText {
