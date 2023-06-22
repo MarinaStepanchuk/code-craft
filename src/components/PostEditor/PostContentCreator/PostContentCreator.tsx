@@ -18,6 +18,7 @@ const useStyles = createStyles(() => ({
     border: 'none',
     width: '100%',
     backgroundColor: 'rgb(33 40 50 / 56%)',
+    top: '9rem',
     button: {
       width: '2rem',
       height: '2rem',
