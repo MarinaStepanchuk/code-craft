@@ -3,7 +3,7 @@
 
 .formWrapper {
   @include flex($dir: column);
-  margin: 5rem auto;
+  margin: 9rem auto;
   padding: 2rem 3rem;
   background-color: $secondary-color;
   width: 40rem;
