@@ -9,8 +9,12 @@ import PublicatedList from '../PublicatedList/PublicatedList';
 
 const useStyles = createStyles((theme) => ({
   container: {
-    width: '80%',
+    width: '85%',
     fontSize: '2rem',
+
+    '@media (max-width: 410px)': {
+      width: '90%',
+    },
   },
   list: {
     width: '100%',

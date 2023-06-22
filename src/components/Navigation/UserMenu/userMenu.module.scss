@@ -22,4 +22,17 @@
   .write:hover {
     transform: scale(1.05);
   }
+
+  .writeIcon {
+    @media screen and (max-width: 720px) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+
+  .writeTitle {
+    @media screen and (max-width: 550px) {
+      display: none;
+    }
+  }
 }

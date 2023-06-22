@@ -8,7 +8,7 @@ import {
   IconLogout,
   IconHelp,
   IconBookmarks,
-  IconArrowBadgeDown,
+  IconChevronDown,
   IconUsers,
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
@@ -52,7 +52,7 @@ const NavigationUser = (): JSX.Element => {
   return (
     <Menu shadow="md" width={400} position="bottom-end" radius={10}>
       <Menu.Target>
-        <Flex gap="3" justify="center" align="center" sx={{ cursor: 'pointer' }}>
+        <Flex gap="4px" justify="center" align="center" sx={{ cursor: 'pointer' }}>
           {avatarUrl ? (
             <Avatar
               src={avatarUrl}
@@ -63,7 +63,7 @@ const NavigationUser = (): JSX.Element => {
           ) : (
             <div className={styles.userIcon}>{email[0]?.toUpperCase()}</div>
           )}
-          <IconArrowBadgeDown size={30} strokeWidth="1.2" />
+          <IconChevronDown size={20} strokeWidth="1.2" />
         </Flex>
       </Menu.Target>
 

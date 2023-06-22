@@ -10,9 +10,8 @@
   position: relative;
   min-height: 78vh;
 
-  @media screen and (max-width: 700px) {
-    max-width: 68rem;
-    width: auto;
+  @media screen and (max-width: 800px) {
+    width: 90%;
     padding: 2rem 2rem;
   }
 

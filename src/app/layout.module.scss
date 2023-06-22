@@ -41,6 +41,10 @@
   ::-webkit-scrollbar-button:horizontal:end:increment {
     display: none;
   }
+
+  @media screen and (max-width: 500px) {
+    font-size: 8px;
+  }
 }
 
 .body {

@@ -20,10 +20,9 @@ const PostCard = forwardRef<HTMLElement, { card: IPostWithUser }>(({ card }, ref
         <div className={styles.bannerContainer}>
           <Image
             src={banner || defaultBanner}
-            width={180}
-            height={180}
+            fill
             quality={100}
-            style={{ objectFit: 'cover', borderRadius: '1rem' }}
+            style={{ borderRadius: '1rem' }}
             alt="post banner"
           />
         </div>

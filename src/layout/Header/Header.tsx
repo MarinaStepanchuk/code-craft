@@ -11,7 +11,9 @@ const Header = ({ session }: { session: Session | null }): JSX.Element => (
   <header className={styles.header}>
     <div className={styles.containerLogo}>
       <Link href="/" className={styles.logo}>
-        <Image width={50} height={50} src={logo} alt="logo" />
+        <div className={styles.logoImgWrapper}>
+          <Image fill src={logo} alt="logo" />
+        </div>
         <p>Code Craft</p>
       </Link>
       <SearchButton />

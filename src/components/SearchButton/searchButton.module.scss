@@ -9,6 +9,11 @@
   svg {
     width: 2.5rem;
     height: 2.5rem;
+
+    @media screen and (max-width: 550px) {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 }
 
@@ -23,6 +28,11 @@
   transition: width 1s ease-in-out;
   background-color: $primary-color;
   color: $primary-color;
+
+  @media screen and (max-width: 550px) {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
 }
 
 .inputSearch::placeholder {
@@ -48,6 +58,11 @@
   color: $secondary-color;
   background-color: transparent;
   pointer-events: painted;
+
+  @media screen and (max-width: 550px) {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
 }
 
 .btnSearch:focus ~ .inputSearch {
@@ -76,4 +91,8 @@
   background-color: transparent;
   margin-right: 4rem;
   border-bottom: 1px solid $primary-color;
+
+  @media screen and (max-width: 550px) {
+    margin-right: 3rem;
+  }
 }

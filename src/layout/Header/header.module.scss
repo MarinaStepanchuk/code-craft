@@ -23,6 +23,26 @@
 
     p {
       margin: 0;
+
+      @media screen and (max-width: 720px) {
+        display: none;
+      }
+    }
+  }
+
+  .logoImgWrapper {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+
+    @media screen and (max-width: 500px) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 35px;
+      height: 35px;
     }
   }
 }
@@ -30,7 +50,6 @@
 .header {
   color: #fff;
   padding: 1.5rem 2rem;
-  // border-bottom: 2px solid $secondary-color;
   background-color: #212832;
   @include flex($jc: space-between);
 }

@@ -5,7 +5,16 @@
   display: inline-block;
   font-size: 1.2rem;
   line-height: 2rem;
-  vertical-align: bottom;
+
+  svg {
+    vertical-align: middle;
+    stroke: $secondary-dark;
+
+    &:first-of-type {
+      cursor: pointer;
+      stroke: $primary-color;
+    }
+  }
 
   a {
     display: inline;
@@ -18,6 +27,12 @@
   }
 
   .title {
+    color: $secondary-dark;
+    text-decoration: underline;
+  }
+
+  .comment {
+    font-size: 1.4rem;
     color: $secondary-dark;
   }
 }
