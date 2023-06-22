@@ -2,6 +2,7 @@ import SearchByTag from '@/components/Search/SearchByTag/SearchByTag';
 import { IconTags } from '@tabler/icons-react';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
 import { Metadata } from 'next/types';
+import ProgressBarProvider from '@/providers/progressBar';
 import styles from './tagPage.module.scss';
 
 interface IPageProps {
@@ -30,15 +31,17 @@ export const generateMetadata = ({ params: { name } }: IPageProps): Metadata => 
 
 const TagPage = ({ params: { name } }: IPageProps): JSX.Element => (
   <>
-    <div className={styles.title}>
-      <div className={styles.icon}>
-        <IconTags size="3rem" strokeWidth="1.2" />
+    <ProgressBarProvider>
+      <div className={styles.title}>
+        <div className={styles.icon}>
+          <IconTags size="3rem" strokeWidth="1.2" />
+        </div>
+        <h2>{name.split('%20').join(' ')}</h2>
       </div>
-      <h2>{name.split('%20').join(' ')}</h2>
-    </div>
-    <section className={styles.searchResult}>
-      <SearchByTag tag={name} />
-    </section>
+      <section className={styles.searchResult}>
+        <SearchByTag tag={name} />
+      </section>
+    </ProgressBarProvider>
   </>
 );
 
