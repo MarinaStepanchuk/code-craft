@@ -7,6 +7,8 @@
 
 ### 🛠️ Run project
 
+- Go to develop branch
+
 - "npm install": for install required packages
 - "npm run dev": for start project in developer mode
 - "npm run build": for build project
