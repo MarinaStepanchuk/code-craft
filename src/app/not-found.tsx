@@ -11,7 +11,9 @@ const NotFoundPage = (): JSX.Element => (
       <p>
         The page you are looking for doesn’t exist or an other error occurred, go back to home page.
       </p>
-      <GoToMainButton />
+      <a href="/" className={styles.backButton}>
+        Go Back
+      </a>
     </div>
     <div className={styles.containerImage}>
       <Image
