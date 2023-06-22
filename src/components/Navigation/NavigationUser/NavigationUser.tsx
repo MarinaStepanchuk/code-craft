@@ -49,6 +49,10 @@ const NavigationUser = (): JSX.Element => {
     await signOut({ callbackUrl: '/' });
   };
 
+  const redirectToContacts = (): void => {
+    push(`${Patch.contacts}`);
+  };
+
   return (
     <Menu shadow="md" width={400} position="bottom-end" radius={10}>
       <Menu.Target>
@@ -106,8 +110,12 @@ const NavigationUser = (): JSX.Element => {
 
         <Menu.Divider sx={{ borderTopColor: '#ADB5BD' }} />
 
-        <Menu.Item icon={<IconHelp size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
-          Help
+        <Menu.Item
+          icon={<IconHelp size={30} strokeWidth="1" />}
+          sx={{ fontSize: '1.5rem' }}
+          onClick={redirectToContacts}
+        >
+          Сontact us
         </Menu.Item>
         <Menu.Item
           className={classes.item}

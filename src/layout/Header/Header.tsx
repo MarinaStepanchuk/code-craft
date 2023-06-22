@@ -18,7 +18,7 @@ const Header = ({ session }: { session: Session | null }): JSX.Element => (
       </Link>
       <SearchButton />
     </div>
-    <div>{session?.user ? <UserMenu session={session} /> : <LoginMenu />}</div>
+    {session?.user ? <UserMenu session={session} /> : <LoginMenu />}
   </header>
 );
 

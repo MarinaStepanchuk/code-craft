@@ -4,6 +4,7 @@
 .container {
   @include flex($gap: 2rem);
   font-size: 2rem;
+  padding-right: 2rem;
 
   a {
     @include flex();

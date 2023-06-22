@@ -3,6 +3,7 @@
 .signIn {
   @include button($w: 12rem, $h: 4rem);
   box-shadow: none;
+  margin-right: 2rem;
 
   &:hover {
     box-shadow: rgba(212, 51, 30, 0.35) 0 -25px 18px -14px inset, rgba(212, 51, 30, 0.25) 0 1px 2px,
