@@ -12,8 +12,8 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 import { signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
+import Link from 'next/link';
 import styles from './navigationUser.module.scss';
 
 const useStyles = createStyles((theme) => ({
@@ -27,30 +27,9 @@ const NavigationUser = (): JSX.Element => {
   const { email, avatarUrl } = user;
   const theme = useMantineTheme();
   const { classes } = useStyles();
-  const { push } = useRouter();
-
-  const redirectToProfile = (): void => {
-    push(`${Patch.me}${Patch.profile}`);
-  };
-
-  const redirectToPublications = (): void => {
-    push(`${Patch.me}${Patch.publications}`);
-  };
-
-  const redirectToBookmarks = (): void => {
-    push(`${Patch.me}${Patch.bookmarks}`);
-  };
-
-  const redirectToFeeds = (): void => {
-    push(`${Patch.me}${Patch.feeds}`);
-  };
 
   const logOut = async (): Promise<void> => {
     await signOut({ callbackUrl: '/' });
-  };
-
-  const redirectToContacts = (): void => {
-    push(`${Patch.contacts}`);
   };
 
   return (
@@ -79,44 +58,37 @@ const NavigationUser = (): JSX.Element => {
           borderWidth: '1',
         }}
       >
-        <Menu.Item
-          icon={<IconUserEdit size={30} strokeWidth="1" />}
-          sx={{ fontSize: '1.5rem' }}
-          onClick={redirectToProfile}
-        >
-          Profile
-        </Menu.Item>
-        <Menu.Item
-          icon={<IconWritingSign size={30} strokeWidth="1" />}
-          sx={{ fontSize: '1.5rem' }}
-          onClick={redirectToPublications}
-        >
-          Publications
-        </Menu.Item>
-        <Menu.Item
-          icon={<IconBookmarks size={30} strokeWidth="1" />}
-          sx={{ fontSize: '1.5rem' }}
-          onClick={redirectToBookmarks}
-        >
-          Bookmarks
-        </Menu.Item>
-        <Menu.Item
-          icon={<IconUsers size={30} strokeWidth="1" />}
-          sx={{ fontSize: '1.5rem' }}
-          onClick={redirectToFeeds}
-        >
-          Feeds
-        </Menu.Item>
+        <Link href={`${Patch.me}${Patch.profile}`} className={styles.backButton}>
+          <Menu.Item icon={<IconUserEdit size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
+            Profile
+          </Menu.Item>
+        </Link>
+        <Link href={`${Patch.me}${Patch.publications}`} className={styles.backButton}>
+          <Menu.Item
+            icon={<IconWritingSign size={30} strokeWidth="1" />}
+            sx={{ fontSize: '1.5rem' }}
+          >
+            Publications
+          </Menu.Item>
+        </Link>
+        <Link href={`${Patch.me}${Patch.bookmarks}`} className={styles.backButton}>
+          <Menu.Item icon={<IconBookmarks size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
+            Bookmarks
+          </Menu.Item>
+        </Link>
+        <Link href={`${Patch.me}${Patch.feeds}`} className={styles.backButton}>
+          <Menu.Item icon={<IconUsers size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
+            Feeds
+          </Menu.Item>
+        </Link>
 
         <Menu.Divider sx={{ borderTopColor: '#ADB5BD' }} />
+        <Link href={`${Patch.contacts}`} className={styles.backButton}>
+          <Menu.Item icon={<IconHelp size={30} strokeWidth="1" />} sx={{ fontSize: '1.5rem' }}>
+            Сontact us
+          </Menu.Item>
+        </Link>
 
-        <Menu.Item
-          icon={<IconHelp size={30} strokeWidth="1" />}
-          sx={{ fontSize: '1.5rem' }}
-          onClick={redirectToContacts}
-        >
-          Сontact us
-        </Menu.Item>
         <Menu.Item
           className={classes.item}
           icon={<IconLogout size={30} strokeWidth="1" />}
