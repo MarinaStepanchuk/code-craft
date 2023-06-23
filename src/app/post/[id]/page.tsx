@@ -4,6 +4,7 @@ import { IPostWithUser } from '@/types/interfaces';
 import getFirstParagraph from '@/utils/getFirstParagraph';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next/types';
+import ProgressBarProvider from '@/providers/progressBar';
 
 interface IPageProps {
   params: { id: string };
@@ -52,7 +53,11 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
       notFound();
     }
 
-    return <ExpandedPost data={data} />;
+    return (
+      <ProgressBarProvider>
+        <ExpandedPost data={data} />
+      </ProgressBarProvider>
+    );
   } catch (error) {
     notFound();
   }

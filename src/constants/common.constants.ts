@@ -65,7 +65,7 @@ const initialChatValue = [
   },
 ];
 
-const baseUrl = 'https://code-craft-app.vercel.app/';
+const baseUrl = 'http://localhost:3000/api';
 
 const rootMetadata = {
   title: 'Code Craft',

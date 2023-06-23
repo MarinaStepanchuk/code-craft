@@ -2,6 +2,7 @@ import PostCreator from '@/components/PostEditor/PostCreator/PostCreator';
 import { rootMetadata } from '@/constants/common.constants';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import ProgressBarProvider from '@/providers/progressBar';
 
 interface IPageProps {
   params: { id: string };
@@ -21,14 +22,16 @@ const EditPostPage = async ({ params: { id } }: IPageProps): Promise<JSX.Element
     }
 
     return (
-      <PostCreator
-        initialBanner={banner || ''}
-        initialTitle={title || ''}
-        initialContent={content || ''}
-        initialTags={tags || []}
-        type={'edit'}
-        postId={id}
-      />
+      <ProgressBarProvider>
+        <PostCreator
+          initialBanner={banner || ''}
+          initialTitle={title || ''}
+          initialContent={content || ''}
+          initialTags={tags || []}
+          type={'edit'}
+          postId={id}
+        />
+      </ProgressBarProvider>
     );
   } catch (error) {
     notFound();

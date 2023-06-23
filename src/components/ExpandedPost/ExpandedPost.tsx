@@ -14,8 +14,6 @@ const ExpandedPost = ({ data }: { data: IPostWithUser }): JSX.Element => {
   const { user: userData } = useAppSelector((state) => state.userReducer);
   const { tags } = data;
 
-  console.log(data);
-
   const [visitPost] = useVisitPostMutation();
 
   useEffect(() => {

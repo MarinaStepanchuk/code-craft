@@ -48,7 +48,7 @@ const Topic = (): JSX.Element => {
           ))}
         </div>
       )}
-      <Link href={`${Patch.me}${Patch.feeds}`} className={styles.linkMore}>
+      <Link href={`${Patch.searchPublications}?search=`} className={styles.linkMore}>
         See more
       </Link>
     </div>

@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import AuthorPublications from '@/components/Author/AuthorPublications/AuthorPublications';
 import { Metadata } from 'next/types';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
+import ProgressBarProvider from '@/providers/progressBar';
 import styles from './author.module.scss';
 
 interface IPageProps {
@@ -52,13 +53,15 @@ export default async function EditPostPage({ params: { id } }: IPageProps): Prom
     }
 
     return (
-      <div className={styles.mainContainer}>
-        <div className={styles.userContainer}>
-          <AuthorBio userId={user.id} postsCount={user.countPosts} />
-          <AuthorPublications authorId={id} />
+      <ProgressBarProvider>
+        <div className={styles.mainContainer}>
+          <div className={styles.userContainer}>
+            <AuthorBio userId={user.id} postsCount={user.countPosts} />
+            <AuthorPublications authorId={id} />
+          </div>
+          <Aside />
         </div>
-        <Aside />
-      </div>
+      </ProgressBarProvider>
     );
   } catch (error) {
     notFound();

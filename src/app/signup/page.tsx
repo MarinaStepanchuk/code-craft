@@ -3,6 +3,7 @@ import { Session, getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
 import { Metadata } from 'next/types';
+import ProgressBarProvider from '@/providers/progressBar';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const checkSession = async (): Promise<Session | null> => {
@@ -30,7 +31,11 @@ const SignUp = async (): Promise<JSX.Element> => {
     redirect('/');
   }
 
-  return <FormAuthorization registration={true} />;
+  return (
+    <ProgressBarProvider>
+      <FormAuthorization registration={true} />{' '}
+    </ProgressBarProvider>
+  );
 };
 
 export default SignUp;

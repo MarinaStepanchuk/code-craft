@@ -1,9 +1,8 @@
 import { Metadata } from 'next/types';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
-import Image from 'next/image';
 import { IconBrandFacebook, IconBrandTwitter, IconBrandLinkedin } from '@tabler/icons-react';
 import { amatic } from '@/app/layout';
-import banner from '@/assets/contacts.png';
+import ProgressBarProvider from '@/providers/progressBar';
 import styles from './contacts.page.module.scss';
 
 export const metadata: Metadata = {
@@ -20,24 +19,26 @@ export const metadata: Metadata = {
 };
 
 const ContactsPage = (): JSX.Element => (
-  <div className={styles.contacts}>
-    <div>
-      <p>We are happy to help you with any question.</p>
-      <p>Contact us!</p>
-    </div>
-    <div className={styles.contactItem}>
-      <p className={styles.title}>EMAIL</p>
-      <p className={`${styles.email} ${amatic.className}`}>code-craft-app@gmail.com</p>
-    </div>
-    <div className={styles.contactItem}>
-      <p className={styles.title}>SOCIAL</p>
-      <div className={styles.social}>
-        <IconBrandTwitter size="3rem" strokeWidth="1.2" />
-        <IconBrandFacebook size="3rem" strokeWidth="1.2" />
-        <IconBrandLinkedin size="3rem" strokeWidth="1.2" />
+  <ProgressBarProvider>
+    <div className={styles.contacts}>
+      <div>
+        <p>We are happy to help you with any question.</p>
+        <p>Contact us!</p>
+      </div>
+      <div className={styles.contactItem}>
+        <p className={styles.title}>EMAIL</p>
+        <p className={`${styles.email} ${amatic.className}`}>code-craft-app@gmail.com</p>
+      </div>
+      <div className={styles.contactItem}>
+        <p className={styles.title}>SOCIAL</p>
+        <div className={styles.social}>
+          <IconBrandTwitter size="3rem" strokeWidth="1.2" />
+          <IconBrandFacebook size="3rem" strokeWidth="1.2" />
+          <IconBrandLinkedin size="3rem" strokeWidth="1.2" />
+        </div>
       </div>
     </div>
-  </div>
+  </ProgressBarProvider>
 );
 
 export default ContactsPage;

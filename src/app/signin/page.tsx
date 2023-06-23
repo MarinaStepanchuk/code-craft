@@ -1,6 +1,7 @@
 import FormAuthorization from '@/components/FormAuthorization/FormAuthorization';
 import { baseUrl, rootMetadata } from '@/constants/common.constants';
 import { Metadata } from 'next/types';
+import ProgressBarProvider from '@/providers/progressBar';
 
 export const metadata: Metadata = {
   ...rootMetadata,
@@ -15,6 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-const SignIn = async (): Promise<JSX.Element> => <FormAuthorization registration={false} />;
-
+const SignIn = async (): Promise<JSX.Element> => (
+  <ProgressBarProvider>
+    <FormAuthorization registration={false} />{' '}
+  </ProgressBarProvider>
+);
 export default SignIn;
