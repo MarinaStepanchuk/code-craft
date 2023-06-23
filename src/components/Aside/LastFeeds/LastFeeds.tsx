@@ -1,34 +1,25 @@
 import PostPreview from '@/components/PostPreview/PostPreview';
-import { ErrorMessages, Patch } from '@/constants/common.constants';
+import { Patch } from '@/constants/common.constants';
 import { useAppSelector } from '@/hooks/redux';
 import { useGetFeedsQuery } from '@/redux/services/subscribersApi';
-import { notifications } from '@mantine/notifications';
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { amatic } from '@/app/layout';
 import Link from 'next/link';
 import styles from './lastFeeds.module.scss';
 
-const LastFeeds = (): JSX.Element => {
+const LastFeeds = ({
+  setShowLastFeeds,
+}: {
+  setShowLastFeeds: Dispatch<SetStateAction<boolean>>;
+}): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
   const { data: result, isError } = useGetFeedsQuery({ userId: user.id, page: 0 });
 
   useEffect(() => {
     if (isError) {
-      notifications.show({
-        message: ErrorMessages.errorResponse,
-        color: 'red',
-        autoClose: 3000,
-        withBorder: true,
-        styles: () => ({
-          description: { fontSize: '1.4rem' },
-        }),
-      });
+      setShowLastFeeds(false);
     }
-  }, [isError]);
-
-  if (isError) {
-    return <></>;
-  }
+  }, [isError, setShowLastFeeds]);
 
   return (
     <div className={styles.container}>
