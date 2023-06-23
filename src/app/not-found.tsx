@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import errorPhoto from '@/assets/404page.png';
-import Link from 'next/link';
 import styles from './not-found.module.scss';
 
 const NotFoundPage = (): JSX.Element => (
@@ -11,9 +10,9 @@ const NotFoundPage = (): JSX.Element => (
       <p>
         The page you are looking for doesn’t exist or an other error occurred, go back to home page.
       </p>
-      <Link href="/" className={styles.backButton}>
+      <a href="/" className={styles.backButton}>
         Go Back
-      </Link>
+      </a>
     </div>
     <div className={styles.containerImage}>
       <Image

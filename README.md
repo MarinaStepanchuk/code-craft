@@ -7,7 +7,7 @@
 
 ### 🛠️ Run project
 
-- Go to develop branch
+- Before launching the application, please start the server [Code-craft-server](https://github.com/MarinaStepanchuk/code-craft-server)
 
 - "npm install": for install required packages
 - "npm run dev": for start project in developer mode
