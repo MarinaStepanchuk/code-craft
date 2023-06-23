@@ -11,22 +11,22 @@ export const searchApi = createApi({
   endpoints: (build) => ({
     getSearchPublications: build.query<IPostsWithUser, { text: string; page: number }>({
       query: ({ text, page }) => ({
-        url: `/search?text=${text}&type=publications&page=${page || 0}`,
+        url: `/search?text=${text}&type=publications&page=${page}`,
       }),
     }),
     getSearchUsers: build.query<IUsers, { text: string; page: number }>({
       query: ({ text, page }) => ({
-        url: `/search?text=${text}&type=users&page=${page || 0}`,
+        url: `/search?text=${text}&type=users&page=${page}`,
       }),
     }),
     getSearchTags: build.query<ITags, { text: string; page: number }>({
       query: ({ text, page }) => ({
-        url: `/search?text=${text}&type=tags&page=${page || 0}`,
+        url: `/search?text=${text}&type=tags&page=${page}`,
       }),
     }),
     getPostsByTag: build.query<IPostsWithUser, { name: string; page: number }>({
       query: ({ name, page }) => ({
-        url: `/posts/tag/${name}?page=${page || 0}`,
+        url: `/posts/tag/${name}?page=${page}`,
       }),
     }),
   }),
