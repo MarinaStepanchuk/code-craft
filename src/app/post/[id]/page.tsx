@@ -12,7 +12,7 @@ interface IPageProps {
 
 export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<Metadata> => {
   const response = await fetch(`${process.env.API_URL}/post/${id}`, {
-    cache: 'reload',
+    cache: 'no-cache',
   });
   const post: IPostWithUser = await response.json();
   const description = `${getFirstParagraph(post.content as string).slice(0, 200)}...`;
@@ -36,18 +36,12 @@ export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<
   };
 };
 
-export const getPost = async (id: string): Promise<IPostWithUser> => {
-  const response = await fetch(`${process.env.API_URL}/post/${id}`, {
-    cache: 'reload',
-  });
-  const data = await response.json();
-
-  return data;
-};
-
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
-    const data = await getPost(id);
+    const response = await fetch(`${process.env.API_URL}/post/${id}`, {
+      cache: 'no-cache',
+    });
+    const data = await response.json();
 
     if (!data) {
       notFound();

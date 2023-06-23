@@ -7,12 +7,15 @@ import {
 import { IconChecks } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import PaginationContainer from '@/components/PaginationContainer/PaginationContainer';
-
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Notification from '../Notification/Notification';
 import styles from './notificationList.module.scss';
 
-const NotificationList = (): JSX.Element => {
+const NotificationList = ({
+  setNotificationCount,
+}: {
+  setNotificationCount: Dispatch<SetStateAction<number>>;
+}): JSX.Element => {
   const { user } = useAppSelector((state) => state.userReducer);
   const [currentPage, setCurrentPage] = useState(0);
   const [removeAllNotification, resultDeleteComment] = useRemoveAllNotificationMutation();
@@ -31,6 +34,10 @@ const NotificationList = (): JSX.Element => {
   };
 
   useEffect(() => {
+    if (notificationList) {
+      setNotificationCount(notificationList.amountNotifications);
+    }
+
     if (isError || resultDeleteComment.isError) {
       notifications.show({
         message: ErrorMessages.unknown,

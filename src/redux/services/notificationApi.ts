@@ -7,7 +7,7 @@ interface IAllNotificationsResponce {
   notifications: INotification[];
   page: number;
   amountPages: number;
-  amountPosts: number;
+  amountNotifications: number;
 }
 
 export const notificationApi = createApi({
