@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 import GreetingAnimation from './GreetingAnimation/GreetingAnimation';
 import styles from './greetingSection.module.scss';
 
@@ -31,9 +32,15 @@ const GreetingSection = (): JSX.Element => {
             Whether you are a beginner or an experienced programmer, our articles will help you stay
             on top of the latest trends and developments in the field.
           </p>
-          <button onClick={redirectToSiginPage}>
-            {status === 'unauthenticated' ? 'START READING' : 'START WRITING'}
-          </button>
+          {status === 'unauthenticated' ? (
+            <Link href={Patch.signIn} className={styles.greetingButton}>
+              START READING
+            </Link>
+          ) : (
+            <Link href={`/me${Patch.newPost}`} className={styles.greetingButton}>
+              START WRITING
+            </Link>
+          )}
         </div>
       </div>
       <div className={styles.animationContainer}>

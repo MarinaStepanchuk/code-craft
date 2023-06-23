@@ -46,8 +46,9 @@
       margin: 0.5rem;
     }
 
-    button {
+    .greetingButton {
       @include button($w: 16rem, $h: 5rem);
+      padding: 0;
       background-color: $secondary-dark;
       margin-top: 1rem;
 
