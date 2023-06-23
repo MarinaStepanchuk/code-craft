@@ -61,8 +61,8 @@ export const commentsApi = createApi({
       invalidatesTags: ['Comments'],
     }),
     getResponses: build.query<IResponseComments, { userId: string; page?: number }>({
-      query: ({ userId, page = 0 }) => ({
-        url: `/responses?userId=${userId || ''}&page=${page || 0}`,
+      query: ({ userId = '', page }) => ({
+        url: `/responses?userId=${userId}&page=${page}`,
       }),
     }),
   }),

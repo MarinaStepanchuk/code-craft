@@ -5,9 +5,9 @@ import getNameFromEmail from '@/utils/getNameFromEmail';
 import { ActiveComment } from '@/types/types';
 import { useAppSelector } from '@/hooks/redux';
 import { amatic } from '@/app/layout';
-import { useRouter } from 'next/navigation';
 import { Patch } from '@/constants/common.constants';
 import getFormattedDate from '@/utils/getFormattedDate';
+import Link from 'next/link';
 import styles from './comment.module.scss';
 import CommentsForm from '../CommentsForm/CommentsForm';
 
@@ -46,34 +46,33 @@ const Comment = ({
   const canReply = !!userId;
   const canEdit = userId === user.id;
   const replyId = parentId || id;
-  const { push } = useRouter();
-
-  const goToUserPage = (): void => {
-    push(`${Patch.author}/${user.id}`);
-  };
 
   return (
     <div className={styles.comment}>
-      <div className={styles.avatar} onClick={goToUserPage}>
-        {user.avatarUrl ? (
-          <Image
-            src={user.avatarUrl}
-            width={60}
-            height={60}
-            alt="author photo"
-            style={{ borderRadius: '50%' }}
-          />
-        ) : (
-          <div className={styles.userIcon}>
-            {user.name?.at(0)?.toUpperCase() || user.email.at(0)?.toUpperCase()}
-          </div>
-        )}
-      </div>
+      <Link href={`${Patch.author}/${user.id}`}>
+        <div className={styles.avatar}>
+          {user.avatarUrl ? (
+            <Image
+              src={user.avatarUrl}
+              width={60}
+              height={60}
+              alt="author photo"
+              style={{ borderRadius: '50%' }}
+            />
+          ) : (
+            <div className={styles.userIcon}>
+              {user.name?.at(0)?.toUpperCase() || user.email.at(0)?.toUpperCase()}
+            </div>
+          )}
+        </div>
+      </Link>
       <div className={styles.commentContent}>
         <div className={styles.details}>
-          <p className={`${styles.name} ${amatic.className}`} onClick={goToUserPage}>
-            {user.name || getNameFromEmail(user.email)}
-          </p>
+          <Link href={`${Patch.author}/${user.id}`}>
+            <p className={`${styles.name} ${amatic.className}`}>
+              {user.name || getNameFromEmail(user.email)}
+            </p>
+          </Link>
           <div className={styles.dot}></div>
           {new Date(updatedDate).getTime() !== new Date(createdDate).getTime() && (
             <p className={styles.author}>edited on</p>

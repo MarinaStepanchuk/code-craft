@@ -10,8 +10,8 @@ export const likeApi = createApi({
   }),
   endpoints: (build) => ({
     checkLike: build.query<boolean, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like?userId=${userId || ''}&postId=${postId}`,
+      query: ({ userId = '', postId }) => ({
+        url: `/like?userId=${userId}&postId=${postId}`,
       }),
       providesTags: ['Like'],
     }),
@@ -22,8 +22,8 @@ export const likeApi = createApi({
       providesTags: ['Like'],
     }),
     addLike: build.mutation<object, { userId: string; postId: number }>({
-      query: ({ userId, postId }) => ({
-        url: `/like?userId=${userId || ''}&postId=${postId}`,
+      query: ({ userId = '', postId }) => ({
+        url: `/like?userId=${userId}&postId=${postId}`,
         method: 'POST',
       }),
       invalidatesTags: ['Like'],

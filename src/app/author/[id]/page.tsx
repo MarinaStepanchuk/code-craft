@@ -13,7 +13,7 @@ interface IPageProps {
 }
 
 export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<Metadata> => {
-  const responseUser = await fetch(`${process.env.API_URL}/user/${id}`, { cache: 'reload' });
+  const responseUser = await fetch(`${process.env.API_URL}/user/${id}`, { cache: 'no-cache' });
   const user: IFullUser = await responseUser.json();
   return {
     ...rootMetadata,
@@ -45,7 +45,7 @@ export const generateMetadata = async ({ params: { id } }: IPageProps): Promise<
 
 export default async function EditPostPage({ params: { id } }: IPageProps): Promise<JSX.Element> {
   try {
-    const responseUser = await fetch(`${process.env.API_URL}/user/${id}`, { cache: 'reload' });
+    const responseUser = await fetch(`${process.env.API_URL}/user/${id}`, { cache: 'no-cache' });
     const user: IFullUser = await responseUser.json();
 
     if (!user) {

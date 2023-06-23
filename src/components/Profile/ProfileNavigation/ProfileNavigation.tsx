@@ -42,6 +42,7 @@ const useStyles = createStyles((theme) => ({
 const ProfileNavigation = (): JSX.Element => {
   const { classes } = useStyles();
   const [subscribersCount, setSubscribersCount] = useState(0);
+  const [notificationCount, setNotificationCount] = useState(0);
 
   return (
     <Tabs defaultValue="profile" className={classes.container}>
@@ -58,7 +59,8 @@ const ProfileNavigation = (): JSX.Element => {
           icon={<IconBell size="1.8rem" strokeWidth="1.2" />}
           className={classes.listItem}
         >
-          Notifications
+          <span>Notifications </span>
+          <span>{`(${notificationCount})`}</span>
         </Tabs.Tab>
 
         <Tabs.Tab
@@ -76,7 +78,7 @@ const ProfileNavigation = (): JSX.Element => {
       </Tabs.Panel>
 
       <Tabs.Panel value="notifications" pt="xs">
-        <NotificationList />
+        <NotificationList setNotificationCount={setNotificationCount} />
       </Tabs.Panel>
 
       <Tabs.Panel value="followers" pt="xs">
